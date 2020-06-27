@@ -243,7 +243,7 @@ class DashboardController extends Controller
 			if($insert){
 				Session::forget('dataSession');
 				Session::save();
-				echo json_encode(array('success'=>true, 'message'=>'Feedback submit Successfully'));
+				echo json_encode(array('success'=>true, 'message'=>'Feedback submitted Successfully'));
 				exit;
 			}else{
 				echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
