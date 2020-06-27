@@ -50,7 +50,9 @@ class DashboardController extends Controller
 		$Uploadgallery = Uploadgallery::where(array('IsDelete' => 0))->orderBy('orders_by', 'ASC')->take(6)->get();
 		$Birthday = Birthday::where(array('IsDelete' => 0))->whereBetween(DB::raw('DATE_FORMAT(dateofbirth, "%m-%d")'), array($dt, $dt2))->orderBy('orders_by', 'ASC')->take(7)->get();
 		$Syllabusmaster = Syllabusmaster::SyllabusClassList();
-		return view('welcome',compact('UploadflashList','Noticeboard','Uploadgallery','Birthday','Syllabusmaster'));
+		$Feedback = Feedback::where(array('isPublished'=>1,'IsDelete' => 0))->get();
+		//pr($Feedback);die;
+		return view('welcome',compact('UploadflashList','Noticeboard','Uploadgallery','Birthday','Syllabusmaster','Feedback'));
 	}
 	
 	public function about(Request $request){

@@ -236,7 +236,7 @@
                     <div class="col-md-6">
                         <div class="birthday">
                             <div class="text-center">
-                                <img src="{{asset('public/assets/img/Great-Feedback.png')}}" height="180" alt="">
+                                <img src="{{asset('public/assets/img/happy-birthday.png')}}" alt="">
                             </div>
                             <div class="clearfix"></div>
                             <div class="slide-area">
@@ -245,16 +245,18 @@
                                 <div id="birthday" class="carousel slide" data-ride="carousel">
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner" role="listbox">
-                                            <?php if ($Feedback) {
-                                                foreach ($Feedback as $k => $val) { ?>
+                                            <?php if ($Birthday) {
+                                                foreach ($Birthday as $k => $val) { ?>
                                                 <div class="item <?php if ($k == 0) {
                                                         echo 'active';
                                                     } ?>">
+        <?php if (!empty($val['images'])) { ?>
+                                                        <img src="{{img_src_path()}}birthday/photo/{{$val['images']}}" alt="<?= $val['title'] ?>">
+                                                <?php } else { ?>
                                                         <img src="{{asset('public/assets/img/birthday-girl-no.png')}}" alt="">
+        <?php } ?>
                                                     <div class="detail">
-                                                        <h4>{{$val->student_name}} <span>{{$val->comments}}</span></h4>
-														
-														<span>{{$val->suggestion}}</span>
+                                                        <h4><?= $val['title'] ?><span>BIRTHDAY : <?= date('D M j', strtotime($val['dateofbirth'])) ?></span><span>CLASS : <?= $val['classes'] ?></span></h4>
                                                     </div>
                                                 </div>
     <?php }
