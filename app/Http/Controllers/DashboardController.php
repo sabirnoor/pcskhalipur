@@ -235,6 +235,7 @@ class DashboardController extends Controller
                 'comments' => $post['comments'],
                 'technical_issue' => !empty($post['technical_issue'])?$post['technical_issue']:'',
                 'suggestion' => $post['suggestion'],
+                'IsSubmit' => 1,
                 'updated_at' => date('Y-m-d H:i:s')
 			);
 			$insert = Feedback::where('id', $dataSession['id'])->update($data);
