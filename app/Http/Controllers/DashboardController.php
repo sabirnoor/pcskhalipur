@@ -9,6 +9,7 @@ use App\Noticeboard;
 use App\Uploadgallery;
 use App\Birthday;
 use App\Staticcontent;
+use App\Feedback;
 use Session;
 use DB;
 use Illuminate\Support\Facades\Input;
@@ -180,6 +181,80 @@ class DashboardController extends Controller
 	{
 		$request->session()->flush();
 		return redirect(url('login'))->with('msg', 'Logout successfully!');
+	}
+	function di2(Request $request,$id=null)
+	{
+		$result = Feedback::where('shortCode', $id)->first()->toArray();
+		//pr($result);die; IsClicked
+		if($result){
+			$data = array(
+                'IsClicked' => 1,
+                'updated_at' => date('Y-m-d H:i:s')
+			);
+			Feedback::where('id', $result['id'])->update($data);
+			Session::put('dataSession',$result);
+			Session::save();
+			return redirect(url('feedback'));
+		}
+		//return redirect(url('login'))->with('msg', 'Logout successfully!');
+	}
+
+	public function feedback(Request $request){
+		$dataSession = Session::get('dataSession');
+		if ($request->isMethod('post') && $dataSession){
+			$post = $request->all();
+			if(empty(trim($post['student_name']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter student name'));
+				exit;
+			}
+			if(empty(trim($post['admission_no']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter admission no'));
+				exit;
+			}
+			if(empty(trim($post['roll_no_previous']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter roll no previous'));
+				exit;
+			}
+			if(empty(trim($post['present_class']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter present class'));
+				exit;
+			}
+			if(empty(trim($post['contact_no']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter contact no'));
+				exit;
+			}
+			if(empty(trim($post['whatsapp_no']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter whatsapp no'));
+				exit;
+			}
+			if(empty(trim($post['suggestion']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter your suggestion'));
+				exit;
+			}
+			$data = array(
+                'comments' => $post['comments'],
+                'technical_issue' => !empty($post['technical_issue'])?$post['technical_issue']:'',
+                'suggestion' => $post['suggestion'],
+                'updated_at' => date('Y-m-d H:i:s')
+			);
+			$insert = Feedback::where('id', $dataSession['id'])->update($data);
+			//$insert = Feedback::insert($data);
+			if($insert){
+				Session::forget('dataSession');
+				Session::save();
+				echo json_encode(array('success'=>true, 'message'=>'Feedback submit Successfully'));
+				exit;
+			}else{
+				echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
+				exit;
+			}
+			//return view('staticpages/photogallerydetail',compact('Uploadgallery'));
+		}
+		
+		if(!$dataSession){
+			return redirect(url('/'));
+		}
+		return view('staticpages/feedback',compact('dataSession'));
 	}
 		
 	

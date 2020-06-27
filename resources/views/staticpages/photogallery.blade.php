@@ -49,7 +49,7 @@
       <div class="col-md-12">
 	  <?php if($Uploadgallery){ foreach($Uploadgallery as $val){ ?>
           <div class="col-md-4 ">
-            <div class="Photo-GalleryCont"><a href="photo-gallery-detail.html"><img src="{{img_src_path()}}uploadgallery/{{$val->images}}" alt="" title=""></a>
+            <div class="Photo-GalleryCont"><a href="javascript::void(0);" id="<?=$val->categoryid?>" class="getdetails"><img src="{{img_src_path()}}uploadgallery/{{$val->images}}" alt="" title=""></a>
               <h1><?=$val->categoriesname?></h1>
               <h3>Event Date :<span><?=date('d-M-Y',strtotime($val->event_date))?> </span></h3>
               <h3>Total Photos : <span><?=$val->countTotal?></span> </h3>
