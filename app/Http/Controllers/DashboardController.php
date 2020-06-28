@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Cart;
 use Carbon\Carbon;
+use App\Quiz;
+use App\Question;
+use App\Quizresult;
+use App\Quizanswer;
 class DashboardController extends Controller
 {
 	
@@ -259,9 +263,144 @@ class DashboardController extends Controller
 		}
 		return view('staticpages/feedback',compact('dataSession'));
 	}
+	
+	
+	public function playquiz(Request $request){
 		
-	
-	
-	
-	
-}
+		/* Session::forget('Session_Result_Id');
+					Session::forget('Session_Offset');
+					Session::save();
+					$Session_Offset = Session::get('Session_Offset');
+					var_dump($Session_Offset);
+					exit; */
+		$quizid = 32;
+		$quiz_details = Quiz::where(array('id' => $quizid))->first();
+		$total_question = $quiz_details['quiz_total_question'];
+		
+		$Session_Offset = Session::get('Session_Offset');		
+		
+		if(!$Session_Offset)
+		{			
+			Session::put('Session_Offset',0); 
+			Session::save();
+		}
+		if($Session_Offset>=$total_question){
+			$Session_Offset = $total_question-1;
+			
+			Session::forget('Session_Offset');
+			Session::save();
+			Session::put('Session_Offset',$Session_Offset); 
+			Session::save();
+		}
+			
+		$offset = $Session_Offset;		
+		$question_list = Question::where(array('quizid' => $quizid))->orderBy('id', 'ASC')->offset($offset)->limit(1)->get()->toArray();
+
+		
+		//echo $Session_Offset; exit;
+		//print_r($Session_Vars);exit;
+		
+		if ($request->isMethod('post')){  //&& $dataSession
+			$post = $request->all(); //print_r($post);exit;
+			
+			if(isset($post['submit']) && $post['submit']=='Prev'){
+				$Session_Offset = $Session_Offset - 1;
+				if($Session_Offset<0){
+					$Session_Offset = 0;
+				}
+				
+				Session::forget('Session_Offset');
+			    Session::save();
+				Session::put('Session_Offset',$Session_Offset); 
+			    Session::save();
+				return redirect('quiz/'.$quizid);
+			}
+			
+			if(isset($post['submit']) &&  ($post['submit']=='Next' || $post['submit']=='Finish')){ //exit;
+				$Session_Offset = $Session_Offset + 1;	
+				
+				Session::forget('Session_Offset');
+			    Session::save();
+				Session::put('Session_Offset',$Session_Offset); 
+				Session::save();
+				$question_id = $post['question_id'];
+				$user_answer = isset($post['user_answer'])?$post['user_answer']:0;	
+				
+				
+				if(!$Session_Result_Id){				
+					
+					$data = array(
+						'userid' => 123,
+						'quizid' => $quizid,
+						'created_at' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s')
+					);
+					
+					$insertid = Quizresult::insert($data);
+					
+					Session::put('Session_Result_Id',$insertid); 
+					Session::save();
+				}	
+				
+				
+				if(isset($post['answer_id']) && $post['answer_id']<>''){					
+					
+					$data = array(
+						'optionchosen' => $post['user_answer'],
+						'created_at' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s')
+					);
+					$insertid = Quizanswer::where('answer_id', $post['answer_id'])->update($data);					
+				}else{
+					
+					$data = array(
+						'resultid' => $Session_Result_Id,
+						'userid' => 123,
+						'quizid' => $quizid,
+						'questionid' => $question_list[0]['id'],
+						'optionchosen' => $post['user_answer'],
+						'created_at' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s')
+					);
+					$insertid = Quizanswer::insert($data);
+				}	
+				
+				if($post['submit']=='Finish' || $post['timeup']==1){	
+					
+					Session::forget('Session_Result_Id');
+					Session::forget('Session_Offset');
+					Session::save();
+					
+					return redirect('quiz-result/'.$quizid.'/'.$Session_Result_Id);
+					
+				}else{
+					return redirect('quiz/'.$quizid);
+				}
+			}
+			
+			/* if($insert){				
+				echo json_encode(array('success'=>true, 'message'=>'Feedback submitted Successfully'));
+				exit;
+			}else{
+				echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
+				exit;
+			} */
+			
+		}//post ends
+		
+		$Session_Result_Id = Session::get('Session_Result_Id');
+		$answer_info = array();
+		if(isset($Session_Result_Id) && $Session_Result_Id<>''){			
+			$answer_info = Quizanswer::where(array('resultid' => $Session_Result_Id,'quizid' => $quizid,'questionid' => $question_list[0]['id']))->first()->toArray();
+		}
+		
+		$Session_Vars = array(
+                'Session_Offset' => $Session_Offset,
+                'Session_Result_Id' => $Session_Result_Id                
+		);
+		
+		
+		return view('quiz/quiz',compact('quizid','quiz_details','total_question','question_list','Session_Vars'));
+	}
+		
+}	
