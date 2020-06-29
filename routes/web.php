@@ -36,6 +36,7 @@ Route::get('/photo-gallery', 'DashboardController@photogallery');
 Route::match(['get', 'post'],'/photo-gallery-detail', array('uses' => 'DashboardController@photogallerydetail'));
 Route::get('/principal-desk', 'DashboardController@principaldesk');
 Route::match(['get', 'post'],'/feedback', array('uses' => 'DashboardController@feedback'));
+Route::match(['get', 'post'],'/feedbackform', array('uses' => 'DashboardController@feedbackform'));
 Route::match(['get', 'post'],'/di2/{id?}', array('uses' => 'DashboardController@di2'));
 
 //Quiz(Online Exam) Section

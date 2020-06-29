@@ -204,7 +204,80 @@ class DashboardController extends Controller
 		}
 		//return redirect(url('login'))->with('msg', 'Logout successfully!');
 	}
-
+	public function feedbackform(Request $request){
+		if ($request->isMethod('post')){
+			$post = $request->all();
+			//pr($post);die;
+			if(empty(trim($post['student_name']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter student name'));
+				exit;
+			}
+			if(empty(trim($post['Father_Name']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter father name'));
+				exit;
+			}
+			if(empty(trim($post['roll_no_previous']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter roll no previous'));
+				exit;
+			}
+			if(empty(trim($post['present_class']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter present class'));
+				exit;
+			}
+			if(empty(trim($post['contact_no']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter contact no'));
+				exit;
+			}
+			if(empty(trim($post['whatsapp_no']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter whatsapp no'));
+				exit;
+			}
+			if(empty(trim($post['suggestion']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter your suggestion'));
+				exit;
+			}
+			$dataStudent = array(
+                'student_name' => $post['student_name'],
+                'Father_Name' => $post['Father_Name'],
+                'roll_no_previous' => $post['roll_no_previous'],
+                'present_class' => $post['present_class'],
+                'contact_no' => $post['contact_no'],
+                'whatsapp_no' => $post['whatsapp_no'],
+                'admission_no' => '',
+                'IsWebsite' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+			);
+			$insertGetId = DB::table('student_master')->insertGetId($dataStudent);
+			if($insertGetId){
+				$data = array(
+					'student_master_id' => $insertGetId,
+					'student_name' => $post['student_name'],
+					'admission_no' => '',
+					'roll_no_previous' => $post['roll_no_previous'],
+					'present_class' => $post['present_class'],
+					'contact_no' => $post['contact_no'],
+					'whatsapp_no' => $post['whatsapp_no'],
+					'comments' => $post['comments'],
+					'technical_issue' => !empty($post['technical_issue'])?$post['technical_issue']:'',
+					'suggestion' => $post['suggestion'],
+					'IsSubmit' => 1,
+					'created_at' => date('Y-m-d H:i:s'),
+					'updated_at' => date('Y-m-d H:i:s')
+				);
+				$insert = Feedback::insert($data);
+			}
+			if($insert || $insertGetId){
+				echo json_encode(array('success'=>true, 'message'=>'Feedback submitted Successfully'));
+				exit;
+			}else{
+				echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
+				exit;
+			}
+			//return view('staticpages/photogallerydetail',compact('Uploadgallery'));
+		}
+		return view('staticpages/feedbackform');
+	}
 	public function feedback(Request $request){
 		$dataSession = Session::get('dataSession');
 		if ($request->isMethod('post') && $dataSession){

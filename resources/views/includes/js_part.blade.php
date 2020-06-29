@@ -19,6 +19,14 @@
 
 $(document).ready(function(){
 
+$('.numbers').keyup(function(e)
+                                {
+  if (/\D/g.test(this.value))
+  {
+    // Filter non-digits from input value.
+    this.value = this.value.replace(/\D/g, '');
+  }
+});
 	var dd = $('.vticker').easyTicker({
 
 		direction: 'up',
