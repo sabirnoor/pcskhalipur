@@ -266,15 +266,24 @@ class DashboardController extends Controller
 	
 	public function startquiz(Request $request)
     {        
-        $quiz_details = Quiz::where(array('IsDelete' => 0))->first();
-		//print_r($quiz_details); exit;
-		$quizid = $quiz_details['id'];
+        if ($request->isMethod('post')) {
+			
+			$post = $request->all();
+			$quizid = $post['quizid'];  
+			
+			if(isset($post['quizid']) && $post['quizid']<>''){
+				Session::put('Session_Quiz_Id',$quizid); 
+				Session::save();
+				return redirect('quiz');
+			}else{
+				return redirect('startquiz');
+			}
+		}
 		
-		Session::put('Session_Quiz_Id',$quizid); 
-		Session::save();
-		return redirect('quiz');
-
-        //return view('result/result-list', compact('QuizresultList', 'id'));
+		$quiz_details = Quiz::where(array('IsDelete' => 0))->first();
+		//print_r($quiz_details); exit;
+		return view('quiz/start-quiz', compact('quiz_details'));
+		
     }
 	
 	public function playquiz(Request $request){
@@ -285,13 +294,13 @@ class DashboardController extends Controller
 			$quizid = Session::get('Session_Quiz_Id');
 		}else{
 			echo "You are not authorised to visit this page."; exit;
-		}	
+			return redirect(url('/'));	
+		}			
 		
 		$post = $request->all(); //print_r($post);exit;		
 		
 		$quiz_details = Quiz::where(array('id' => $quizid))->first();
-		$total_question = $quiz_details['quiz_total_question'];
-		
+		$total_question = $quiz_details['quiz_total_question'];		
 		
 		
 		if(Session::get('Session_Offset')){

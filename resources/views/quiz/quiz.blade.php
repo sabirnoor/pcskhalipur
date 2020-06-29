@@ -64,7 +64,7 @@
 	  <h2><?php echo $question_list[0]['question_title']; ?></h2>
 	 
 	  
-          <form id="quiz-form" name="quiz-form" action="{{url('quiz/'.$quizid)}}" method="POST" autocomplete="off">
+          <form id="quiz-form" name="quiz-form" action="{{url('quiz')}}" method="POST" autocomplete="off">
             {{csrf_field()}}
               
 			<input type="hidden" name="question_id" value="<?php echo $question_list[0]['id']; ?>" />
