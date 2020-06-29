@@ -7,8 +7,8 @@ use DB;
 class Quizanswer extends Model {
 	
 	protected $table = 'quiz_answer';
-	protected $primaryKey = 'id';
-	protected $fillable = ['id','timestamp'];
+	protected $primaryKey = 'answer_id';
+	protected $fillable = ['answer_id'];
 	
 	
   
