@@ -6,6 +6,7 @@
 			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="{{url('contact')}}">  Contact Us </a></span></li>
 			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="{{url('photo-gallery')}}"> Photo Gallery </a></span></li>
 			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="#"> Work With Us </a></span></li>
+			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="{{url('feedbackform')}}"> Feedback </a></span></li>
 		</ul>         
 	</div>
 	<div class="col-lg-3 col-md-6 text-center res-margin remain main">
