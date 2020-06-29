@@ -337,26 +337,53 @@ class DashboardController extends Controller
 		return view('staticpages/feedback',compact('dataSession'));
 	}
 	
+	public function startquiz(Request $request)
+    {        
+        if ($request->isMethod('post')) {
+			
+			$post = $request->all();
+			$quizid = $post['quizid'];  
+			
+			if(isset($post['quizid']) && $post['quizid']<>''){
+				Session::put('Session_Quiz_Id',$quizid); 
+				Session::save();
+				return redirect('quiz');
+			}else{
+				return redirect('startquiz');
+			}
+		}
+		
+		$quiz_details = Quiz::where(array('IsDelete' => 0))->first();
+		//print_r($quiz_details); exit;
+		return view('quiz/start-quiz', compact('quiz_details'));
+		
+    }
 	
 	public function playquiz(Request $request){
 		
-		/* Session::forget('Session_Result_Id');
-					Session::forget('Session_Offset');
-					Session::save();
-					$Session_Offset = Session::get('Session_Offset');
-					var_dump($Session_Offset);
-					exit; */
-		$quizid = 32;
+		//var_dump(Session::get('Session_Quiz_Id')); exit;
+		
+		if(Session::get('Session_Quiz_Id')){
+			$quizid = Session::get('Session_Quiz_Id');
+		}else{
+			echo "You are not authorised to visit this page."; exit;
+			return redirect(url('/'));	
+		}			
+		
+		$post = $request->all(); //print_r($post);exit;		
+		
 		$quiz_details = Quiz::where(array('id' => $quizid))->first();
-		$total_question = $quiz_details['quiz_total_question'];
+		$total_question = $quiz_details['quiz_total_question'];		
 		
-		$Session_Offset = Session::get('Session_Offset');		
 		
-		if(!$Session_Offset)
-		{			
-			Session::put('Session_Offset',0); 
+		if(Session::get('Session_Offset')){
+			$Session_Offset = Session::get('Session_Offset'); 
+		}else{
+			$Session_Offset = 0;
+			Session::put('Session_Offset',$Session_Offset); 
 			Session::save();
-		}
+		}		
+		
 		if($Session_Offset>=$total_question){
 			$Session_Offset = $total_question-1;
 			
@@ -369,24 +396,25 @@ class DashboardController extends Controller
 		$offset = $Session_Offset;		
 		$question_list = Question::where(array('quizid' => $quizid))->orderBy('id', 'ASC')->offset($offset)->limit(1)->get()->toArray();
 
-		
-		//echo $Session_Offset; exit;
-		//print_r($Session_Vars);exit;
+		if(Session::get('Session_Result_Id')){
+			$Session_Result_Id = Session::get('Session_Result_Id'); 
+		}else{
+			$Session_Result_Id = -1;
+		}
+				
 		
 		if ($request->isMethod('post')){  //&& $dataSession
-			$post = $request->all(); //print_r($post);exit;
-			
+						
 			if(isset($post['submit']) && $post['submit']=='Prev'){
 				$Session_Offset = $Session_Offset - 1;
 				if($Session_Offset<0){
 					$Session_Offset = 0;
 				}
-				
 				Session::forget('Session_Offset');
 			    Session::save();
 				Session::put('Session_Offset',$Session_Offset); 
 			    Session::save();
-				return redirect('quiz/'.$quizid);
+				return redirect('quiz');
 			}
 			
 			if(isset($post['submit']) &&  ($post['submit']=='Next' || $post['submit']=='Finish')){ //exit;
@@ -400,19 +428,21 @@ class DashboardController extends Controller
 				$user_answer = isset($post['user_answer'])?$post['user_answer']:0;	
 				
 				
-				if(!$Session_Result_Id){				
+				if($Session_Result_Id==-1){				
 					
 					$data = array(
-						'userid' => 123,
+						'userid' => 1439,
 						'quizid' => $quizid,
+						'IsDelete' => 0,
 						'created_at' => date('Y-m-d H:i:s'),
 						'updated_at' => date('Y-m-d H:i:s')
 					);
 					
-					$insertid = Quizresult::insert($data);
+					$insertid = Quizresult::insertGetId($data);
 					
 					Session::put('Session_Result_Id',$insertid); 
 					Session::save();
+					$Session_Result_Id = Session::get('Session_Result_Id'); 
 				}	
 				
 				
@@ -428,52 +458,93 @@ class DashboardController extends Controller
 					
 					$data = array(
 						'resultid' => $Session_Result_Id,
-						'userid' => 123,
+						'userid' => 1439,
 						'quizid' => $quizid,
 						'questionid' => $question_list[0]['id'],
 						'optionchosen' => $post['user_answer'],
 						'created_at' => date('Y-m-d H:i:s'),
 						'updated_at' => date('Y-m-d H:i:s')
 					);
-					$insertid = Quizanswer::insert($data);
+					$insertid = Quizanswer::insertGetId($data);
 				}	
 				
-				if($post['submit']=='Finish' || $post['timeup']==1){	
+				if($post['submit']=='Finish'){	//|| $post['timeup']==1
 					
 					Session::forget('Session_Result_Id');
 					Session::forget('Session_Offset');
 					Session::save();
 					
-					return redirect('quiz-result/'.$quizid.'/'.$Session_Result_Id);
+					return redirect('quiz-result/'.$Session_Result_Id);
 					
 				}else{
-					return redirect('quiz/'.$quizid);
+					return redirect('quiz');
 				}
 			}
 			
-			/* if($insert){				
-				echo json_encode(array('success'=>true, 'message'=>'Feedback submitted Successfully'));
-				exit;
-			}else{
-				echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
-				exit;
-			} */
-			
-		}//post ends
+		}
 		
-		$Session_Result_Id = Session::get('Session_Result_Id');
 		$answer_info = array();
-		if(isset($Session_Result_Id) && $Session_Result_Id<>''){			
-			$answer_info = Quizanswer::where(array('resultid' => $Session_Result_Id,'quizid' => $quizid,'questionid' => $question_list[0]['id']))->first()->toArray();
+		if(isset($Session_Result_Id) && $Session_Result_Id!=-1){
+			$answer_info = Quizanswer::where(array('resultid' => $Session_Result_Id,'quizid' => $quizid,'questionid' => $question_list[0]['id']))->first();
 		}
 		
 		$Session_Vars = array(
                 'Session_Offset' => $Session_Offset,
                 'Session_Result_Id' => $Session_Result_Id                
+			);
+		
+		return view('quiz/quiz',compact('quizid','quiz_details','total_question','question_list','Session_Vars','answer_info'));
+	}
+	
+	public function showquizresult(Request $request, $id = null)
+    {
+        
+		$resultid = $id;
+		
+		$details = Quizresult::where(array('result_id' => $id))->first();
+		$quizid = $details->quizid;		
+		
+		$result_data = Quizresult::get_result_data($resultid);
+		
+		$quiz_details = Quiz::where(array('id' => $quizid))->first();
+		
+		$correct_answer = 0; $wrong_answer = 0; $user_score = 0;$quiz_full_marks = 0; $percentage = 0;
+		$final_status = '';
+		
+		if($result_data){
+			foreach ($result_data as $value) {
+			$value = (array) $value;
+				if($value['optionchosen']==$value['correct_answer']){
+					$correct_answer++;
+					$user_score += $value['score'];
+				}
+		   }
+        }
+        
+        $quiz_full_marks = $quiz_details['quiz_max_marks'];
+		$quiz_total_question = $quiz_details['quiz_total_question'];
+
+		$wrong_answer = $quiz_total_question-$correct_answer;
+
+		if($quiz_full_marks>0){
+			$percentage = round($user_score*100/$quiz_full_marks);
+		}
+		if($percentage>=40){
+			$final_status = 'Pass';
+		}else{
+			$final_status = 'Fail';
+		}		
+		        
+		$result_params = array(
+                'final_status' => $final_status,
+                'user_score' => $user_score,                
+                'quiz_full_marks' => $quiz_full_marks,                
+                'percentage' => $percentage,                
+                'correct_answer' => $correct_answer,                  
+                'wrong_answer' => $wrong_answer                
 		);
 		
-		
-		return view('quiz/quiz',compact('quizid','quiz_details','total_question','question_list','Session_Vars'));
-	}
+        return view('quiz/quiz-result', compact('result_params'));
+    } 
 		
 }	

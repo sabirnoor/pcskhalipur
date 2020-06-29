@@ -57,17 +57,20 @@
       <!--Grid column-->
       <div class="col-md-12 mb-md-0 mb-5">
 	  
-	  <div id="quiz-time-left"></div>
+	 <!-- <div id="quiz-time-left"></div>-->
+	  
+	  <h3>Question: <?php echo $Session_Vars['Session_Offset']+1; ?></h3>
 	  
 	  <h2><?php echo $question_list[0]['question_title']; ?></h2>
+	 
 	  
-          <form id="quiz-form" name="quiz-form" action="{{url('quiz/'.$quizid)}}" method="POST" autocomplete="off">
+          <form id="quiz-form" name="quiz-form" action="{{url('quiz')}}" method="POST" autocomplete="off">
             {{csrf_field()}}
               
 			<input type="hidden" name="question_id" value="<?php echo $question_list[0]['id']; ?>" />
-			<input type="hidden" name="answer_id" value="<?php echo isset($answer_info[0]['answer_id'])?$answer_info[0]['answer_id']:''; ?>" />
+			<input type="hidden" name="answer_id" value="<?php echo isset($answer_info['answer_id'])?$answer_info['answer_id']:''; ?>" />
 			
-			<input type="hidden" id="quiz_total_time" value="<?php echo $quiz_details[0]['quiz_max_time']; ?>" />
+			<input type="hidden" id="quiz_total_time" value="<?php echo $quiz_details['quiz_max_time']; ?>" />
 			
 			<input type="hidden" name="timeup" id="timeup" value="" />
 
@@ -75,7 +78,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="1" <?php echo(isset($answer_info[0]['answer_optionchosen']) && $answer_info[0]['answer_optionchosen']==1)?'checked="checked"':''; ?>><?php echo $question_list[0]['option1']; ?></label>
+							  <label><input type="radio" name="user_answer" value="1" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==1)?'checked="checked"':''; ?>><?php echo $question_list[0]['option1']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -85,7 +88,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="2" <?php echo(isset($answer_info[0]['answer_optionchosen']) && $answer_info[0]['answer_optionchosen']==2)?'checked="checked"':''; ?>><?php echo $question_list[0]['option2']; ?></label>
+							  <label><input type="radio" name="user_answer" value="2" <?php echo(isset($answer_info['answer_optionchosen']) && $answer_info['answer_optionchosen']==2)?'checked="checked"':''; ?>><?php echo $question_list[0]['option2']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -95,7 +98,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="3" <?php echo(isset($answer_info[0]['answer_optionchosen']) && $answer_info[0]['answer_optionchosen']==3)?'checked="checked"':''; ?>><?php echo $question_list[0]['option3']; ?></label>
+							  <label><input type="radio" name="user_answer" value="3" <?php echo(isset($answer_info['answer_optionchosen']) && $answer_info['answer_optionchosen']==3)?'checked="checked"':''; ?>><?php echo $question_list[0]['option3']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -105,12 +108,12 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="4" <?php echo(isset($answer_info[0]['answer_optionchosen']) && $answer_info[0]['answer_optionchosen']==4)?'checked="checked"':''; ?>><?php echo $question_list[0]['option4']; ?></label>
+							  <label><input type="radio" name="user_answer" value="4" <?php echo(isset($answer_info['answer_optionchosen']) && $answer_info['answer_optionchosen']==4)?'checked="checked"':''; ?>><?php echo $question_list[0]['option4']; ?></label>
 					  </div>					  
                   </div>
               </div>
               <!--Grid row-->
-			  
+			
 			 <?php if(isset($Session_Vars['Session_Offset']) && $Session_Vars['Session_Offset']>0){?>
 			<div class="col-md-2">
 				<input class="btn btn-primary"  type="submit" name="submit" value="Prev" />
@@ -154,8 +157,8 @@
     <div class="col-sm-3">
 
       <div class="col-md-12" style="padding:0;">
-	        @include('includes.latest_news')
-			@show
+	       <!-- @include('includes.latest_news')
+			@show-->
 		</div>
 
   <div class="clearfix">&nbsp;</div>
