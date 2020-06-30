@@ -198,7 +198,7 @@
 
                         <h2><i>Welcome</i> Public Central School</h2>
 
-                        <p class="lead">'Public Central School' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam aliquam sed est sit amet scelerisque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis efficitur tempus luctus. Nulla eu dui pretium, consequat sapien vitae, vehicula lorem. Vivamus malesuada a felis non pretium. Cras a mauris in magna auctor pellentesque.Ut commodo sem eget velit feugiat mollis.Proin congue erat a dolor bibendum accumsan.</p>
+                        <p class="lead">The Public Central School had been started far from the madding crowd in the year 2007 by the young, dynamic, innovative, successful professionals, educationists & energetic entrepreneurs on the demand of the people of this locality with an aim to impart proper education to the children. In fact education is that which helps an individual to blossom completely, The Public Central School is our heartiest tributes to those prominent persons whose names are the identity of our society. The Public Central School had been nothing more than a "Good Idea". We are trying our best to originate moral, cultural, National and spiritual values in our students. We impart education "TO BUILD" and education "TO PAY".</p>
 
                         <a href="{{url('about')}}" class="btn btn-primary pull-right">Read More..</a>
 
@@ -376,61 +376,114 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title" style="text-align: center;">Covid-19 Not to affect your study</h4>
+                            <h4 class="modal-title" style="text-align: center;">Feedback</h4>
                         </div>
                         <div class="modal-body con-area">
-                            <p>E-Book are now available</p>
-                            <div class="panel-group" id="accordion">
-                            <?php
-                            if ($Syllabusmaster) {
-                                foreach ($Syllabusmaster as $k => $val) {
-                                    ?>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?= $k ?>">
-                                                    <h4 class="panel-title">
-                                                        <i class="fa fa-plus"></i> <?= $val['SC']->name ?>
-                                                    </h4>
-                                                </a>
-                                            </div>
-                                            <div id="collapseOne_<?= $k ?>" class="panel-collapse collapse <?= ($k == 0) ? 'in' : '' ?>">
-                                                <div class="panel-body">
-                                                    <div class="panel-body whbg table-responsive nopadding">
-                                                        <div class="clearfix"></div>
-                                                        <table class="responsive" width="100%">
-                                                            <tr>
-                                                              <!-- <th class="heading-tabl">Download Class Wise </th> -->
-                                                                <th class="heading-tabl">Form Name</th>
-                                                                <!-- <th class="heading-tabl">View </th> -->
-                                                                <th class="heading-tabl" style="text-align:right;">Download <span class="caret"></span></th>
-                                                            </tr>
-                                                            <?php
-                                                            if ($val['SM']) {
-                                                                foreach ($val['SM'] as $ke => $value) {
-                                                                    ?>
-                                                                    <tr>
-                                                                        <td><?= $value->name ?></td>
-                                                                        <td align="right"><a href="{{img_src_path()}}syllabus/{{$value->filesname}}" target="_blank" class="fa fa-download btn btn-primary right"></a></td>
-                                                                    </tr>
-                                                                    <?php
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </table>
-                                                        <p>&nbsp;</p>
-                                                    </div>
+                            <form id="feedback-form" name="feedback-form" action="{{url('feedbackform')}}" method="POST" autocomplete="on">
+							{{csrf_field()}}
+							  <!--Grid row-->
+							  <div class="row">
+								  <!--Grid column-->
+								  <div class="col-md-6">
+									  <div class="md-form mb-0">
+										<label for="student_name" class="">Student name <span style="font-size:15px;color: red;">*</span></label></label>
+										  <input type="text" id="student_name" name="student_name" class="form-control" value="" autocomplete="off">
+										  
+									  </div>
+								  </div>
+								  <!--Grid column-->
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
+								  <!--Grid column-->
+								  <div class="col-md-6">
+									  <div class="md-form mb-0">
+										<label for="Father_Name" class="">Father Name <span style="font-size:15px;color: red;">*</span></label></label>
+										  <input type="text" id="Father_Name" name="Father_Name" class="form-control" value="" autocomplete="off">
+										  
+									  </div>
+								  </div>
+								  <div class="col-md-6">
+									  <div class="md-form mb-0">
+										<label for="roll_no_previous" class="">Roll No Previous Class <span style="font-size:15px;color: red;">*</span></label></label>
+										  <input type="text" id="roll_no_previous" name="roll_no_previous" class="form-control" value="" autocomplete="off">
+									  </div>
+								  </div>
+								  <div class="col-md-6">
+									  <div class="md-form mb-0">
+										<label for="present_class" class="">Present Class <span style="font-size:15px;color: red;">*</span></label></label>
+										  <input type="text" id="present_class" name="present_class" class="form-control" value="" autocomplete="off">
+									  </div>
+								  </div>
+								  <div class="col-md-6">
+									  <div class="md-form mb-0">
+										<label for="contact_no" class="">Contact No <span style="font-size:15px;color: red;">*</span></label></label>
+										  <input type="text" id="contact_no" name="contact_no" class="form-control numbers" maxlength="10" value="" autocomplete="off">
+									  </div>
+								  </div>
+								  <div class="col-md-6">
+									  <div class="md-form mb-0">
+										<label for="whatsapp_no" class="">Whatsapp No <span style="font-size:15px;color: red;">*</span></label></label>
+										  <input type="text" id="whatsapp_no" name="whatsapp_no"  class="form-control numbers" maxlength="10" value="" autocomplete="off">
+									  </div>
+								  </div>
+								  <div class="col-md-12">
+									  <div class="md-form mb-0">
+										<label for="email" class="">On Online Class (Please tick) <span style="font-size:15px;color: red;">*</span></label></label><br>
+										<label class="radio-inline" for="comments-0">
+										  <input type="radio" name="comments" id="comments-0" value="Satisfied" checked="checked">
+										  Satisfied
+										</label> 
+										<label class="radio-inline" for="comments-1">
+										  <input type="radio" name="comments" id="comments-1" value="Not Satisfied">
+										  Not Satisfied
+										</label> 
+										<label class="radio-inline" for="comments-2">
+										  <input type="radio" name="comments" id="comments-2" value="Need Improvement">
+										  Need Improvement
+										</label> 
+										<label class="radio-inline" for="comments-3">
+										  <input type="radio" name="comments" id="comments-3" value="Overall Ok">
+										  Overall Ok
+										</label> 
+									  </div>
+								  </div>
+								  <!--Grid column-->
 
-                            </div>
+							  </div>
+							  <!--Grid row-->
+
+							  <!--Grid row-->
+							  <div class="row">
+								  <div class="col-md-12">
+									  <div class="md-form mb-0">
+										<label for="subject" class="">Any Technical Issue</label>
+										<textarea type="text" id="technical_issue" name="technical_issue" rows="2" class="form-control md-textarea"></textarea>
+										  
+									  </div>
+								  </div>
+							  </div>
+							  <!--Grid row-->
+
+							  <!--Grid row-->
+							  <div class="row">
+
+								  <!--Grid column-->
+								  <div class="col-md-12">
+
+									  <div class="md-form">
+										<label for="message">Your Suggestion <span style="font-size:15px;color: red;">*</span></label>
+										  <textarea type="text" id="suggestion" name="suggestion" rows="2" class="form-control md-textarea"></textarea>
+										  
+									  </div>
+
+								  </div>
+							  </div>
+							  <!--Grid row-->
+
+						  </form>
+						  <div class="status" style="text-align:center;font-size:16px; color:green;"></div>
                         </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-primary submitfeedback" >Submit</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -448,6 +501,76 @@
             {
                 $('#myModal').modal('show');
             });
+			$('.submitfeedback').on('click', function(event){
+        event.preventDefault();
+        var student_name = $('#student_name').val();
+        if($.trim(student_name) === ''){
+          alert('Please enter student name');
+          $( "#student_name" ).focus();
+          return false;
+        }
+        var Father_Name = $('#Father_Name').val();
+        if($.trim(Father_Name) === ''){
+          alert('Please enter father name');
+          $( "#Father_Name" ).focus();
+          return false;
+        }
+        var roll_no_previous = $('#roll_no_previous').val();
+        if($.trim(roll_no_previous) === ''){
+          alert('Please enter roll no previous class');
+          $( "#roll_no_previous" ).focus();
+          return false;
+        }
+        var present_class = $('#present_class').val();
+        if($.trim(present_class) === ''){
+          alert('Please enter present class');
+          $( "#present_class" ).focus();
+          return false;
+        }
+        var contact_no = $('#contact_no').val();
+        if($.trim(contact_no) === ''){
+          alert('Please enter contact no.');
+          $( "#contact_no" ).focus();
+          return false;
+        }
+        var whatsapp_no = $('#whatsapp_no').val();
+        if($.trim(whatsapp_no) === ''){
+          alert('Please enter whatsapp no.');
+          $( "#whatsapp_no" ).focus();
+          return false;
+        }
+        var suggestion = $('#suggestion').val();
+        if($.trim(suggestion) === ''){
+          alert('Please enter your suggestion');
+          $( "#suggestion" ).focus();
+          return false;
+        }
+        
+        var PostData = $('#feedback-form').serialize();
+        $.ajax({
+            type: "POST",
+            url: $('#feedback-form').attr('action'),
+            dataType: 'json',
+            data: PostData,
+            beforeSend: function() {
+                $('.submitfeedback').html('Please wait...');
+            },
+            success: function(data) {
+                if (data.success) {
+                  $('#feedback-form').hide();
+                  $('.submitdiv').hide();
+                  $('.submitfeedback').hide();
+                  $('.status').html(data.message);
+                  $('.submitfeedback').html('Submit');
+                } else {
+                    alert(data.message);
+                    $('.submitfeedback').html('Submit');
+                }
+            }
+        });
+        //$('#feedback-form').submit();
+        
+      });
         </script>
     </body>
 

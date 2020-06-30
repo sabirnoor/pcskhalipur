@@ -161,7 +161,7 @@
           <div class="text-lrft text-md-left submitdiv">
               <a class="btn btn-primary submitfeedback" >Submit</a>
           </div>
-          <div class="status"></div>
+          <div class="status" style="text-align:center;font-size:18px; color:green;"></div>
       </div>
       <!--Grid column-->
 

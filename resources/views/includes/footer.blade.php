@@ -1,6 +1,6 @@
 <div class="container">
 	<!-- Newsletter -->
-	<div class="col-lg-3 col-md-6 text-center res-margin remain main">
+	<div class="col-lg-3 col-md-6 text-center res-margin remain main" style="z-index: 999999;">
 		<h6 class="text-light fristdivfoot">Explore </h6>
 		<ul>
 			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="{{url('contact')}}">  Contact Us </a></span></li>
