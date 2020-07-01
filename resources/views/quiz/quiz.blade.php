@@ -57,7 +57,7 @@
       <!--Grid column-->
       <div class="col-md-12 mb-md-0 mb-5">
 	  
-	 <!-- <div id="quiz-time-left"></div>-->
+	  <div id="end_counter"></div>
 	  
 	  <h3>Question: <?php echo $Session_Vars['Session_Offset']+1; ?></h3>
 	  
@@ -70,7 +70,15 @@
 			<input type="hidden" name="question_id" value="<?php echo $question_list[0]['id']; ?>" />
 			<input type="hidden" name="answer_id" value="<?php echo isset($answer_info['answer_id'])?$answer_info['answer_id']:''; ?>" />
 			
-			<input type="hidden" id="quiz_total_time" value="<?php echo $quiz_details['quiz_max_time']; ?>" />
+			<?php
+			  $quiz_end_date = '';
+			   if(isset($quiz_details['quiz_end_date'])){
+				$quiz_end_date = date('F d, Y',strtotime($quiz_details['quiz_end_date']));
+			  }			  
+              $quiz_end_time = $quiz_details['quiz_end_time'];
+			  ?>
+			
+			<input type="hidden" name="qend" id="qend" value="<?php echo $quiz_end_date.' '.$quiz_end_time; ?>" /><!--June 30, 2020 20:35:00-->
 			
 			<input type="hidden" name="timeup" id="timeup" value="" />
 
@@ -123,6 +131,7 @@
 			<?php if(isset($Session_Vars['Session_Offset']) && $Session_Vars['Session_Offset']==$total_question-1){?>
 			<div class="col-md-2">
 				<input class="btn btn-primary"  type="submit" name="submit" value="Finish" />
+				<!--<button class="btn btn-primary finalsubmit"  type="submit" name="submit">Finish</button>-->
 			</div>
 			<?php }else{?>
 			<div class="col-md-2">
@@ -186,40 +195,42 @@
 <script>
 $(document).ready(function() {	
 	
-if(sessionStorage.getItem("total_seconds")==null || sessionStorage.getItem("total_seconds")=="null" || sessionStorage.getItem("total_seconds")==""){
-	
-	var total_seconds = $('#quiz_total_time').val() * 60;
-	var c_minutes = parseInt(total_seconds / 60);
-	var c_seconds = parseInt(total_seconds % 60);
-	var timer;
-	var remaining_time;
-	//set session
-	sessionStorage.setItem("total_seconds", total_seconds);
-}
+// Set the date we're counting down to
 
-function CheckTime() {
-  document.getElementById("quiz-time-left").innerHTML = 'Time Left: ' + c_minutes + ' minutes ' + c_seconds + ' seconds ';
-  remaining_time = sessionStorage.getItem("total_seconds");
-  if (remaining_time <= 0) {
-    
-	sessionStorage.setItem("total_seconds","");
-	
-	// stop timer
-	clearInterval(timer);
-	
-	//alert('Time up');
-	$('#timeup').val(1);
-	$('#quiz_form').submit();
+qend = document.getElementById("qend").value;
+
+var quizEndDate = new Date(qend).getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();    
+  // Find the distance between now and the count down date
   
-  } else {
-    total_seconds = remaining_time - 1;
-    sessionStorage.setItem("total_seconds",total_seconds);
-    c_minutes = parseInt(total_seconds / 60);
-    c_seconds = parseInt(total_seconds % 60);
-    timer = setTimeout(CheckTime, 1000);
+  var timetoend = quizEndDate - now;    
+  
+  // Time calculations for days, hours, minutes and seconds
+  var days2 = Math.floor(timetoend / (1000 * 60 * 60 * 24));
+  var hours2 = Math.floor((timetoend % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes2 = Math.floor((timetoend % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds2 = Math.floor((timetoend % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="end_counter"
+  document.getElementById("end_counter").innerHTML = "Exam ends in: " + days2 + "d " + hours2 + "h "
+  + minutes2 + "m " + seconds2 + "s ";
+    
+  // If the count down is over, write some text 
+  if (timetoend < 0) {
+			clearInterval(x);
+			document.getElementById("end_counter").innerHTML = "Exam Ended.";			
+			
+			$('#timeup').val(1);
+			$('.finalsubmit').submit();
+			//$('.startbtn').css('display','none')
   }
-}
-timer = setTimeout(CheckTime, 1000);
+}, 1000);
+
  
  });
 

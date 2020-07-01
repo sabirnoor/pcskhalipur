@@ -57,7 +57,7 @@
       <!--Grid column-->
       <div class="col-md-4 mb-md-0 mb-5">
 	  
-	  
+	  <p id="start_counter"></p><p id="end_counter"></p>
 	  
 	  <table class="table table-striped table-bordered">
 							<thead>
@@ -74,7 +74,7 @@
 								
 								<tr class="footableOdd">								
 									<td class="text-right">Time:</td>
-									<td><?php echo $quiz_details['quiz_max_time']; ?> Minutes</td>
+									<td><?php echo $quiz_details['quiz_max_time']; ?></td>
 								</tr>
 								
 								<tr class="footableOdd">								
@@ -88,11 +88,27 @@
 	  
           <form id="quiz-form" name="quiz-form" action="{{url('startquiz')}}" method="POST" autocomplete="off">
             {{csrf_field()}}
-              
+              <?php
+			  $quiz_start_date = '';			  
+			  if(isset($quiz_details['quiz_start_date'])){
+				$quiz_start_date = date('F d, Y',strtotime($quiz_details['quiz_start_date']));
+			  }
+			  $quiz_start_time = $quiz_details['quiz_start_time'];
+			  
+			  $quiz_end_date = '';
+			   if(isset($quiz_details['quiz_end_date'])){
+				$quiz_end_date = date('F d, Y',strtotime($quiz_details['quiz_end_date']));
+			  }			  
+              $quiz_end_time = $quiz_details['quiz_end_time'];
+			  ?>
+			  
 			<input type="hidden" name="quizid" value="<?php echo $quiz_details['id']; ?>" />
 			
+			<input type="hidden" name="qstart" id="qstart" value="<?php echo $quiz_start_date.' '.$quiz_start_time; ?>" />
+			<input type="hidden" name="qend" id="qend" value="<?php echo $quiz_end_date.' '.$quiz_end_time; ?>" /><!--June 30, 2020 20:35:00-->
 			
-			<div class="col-md-2">
+			
+			<div class="col-md-2 startbtn" style="display:none">
 				<input class="btn btn-primary" type="submit" name="submit" value="Start" />
 			</div>
 
@@ -149,7 +165,63 @@
         @include('includes.js_part')
     @show
     
+<script>
+// Set the date we're counting down to
+qstart = document.getElementById("qstart").value;
+qend = document.getElementById("qend").value;
 
+var quizStartDate = new Date(qstart).getTime();
+var quizEndDate = new Date(qend).getTime();
+
+
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var timetostart = quizStartDate - now;
+  var timetoend = quizEndDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(timetostart / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((timetostart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((timetostart % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((timetostart % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="start_counter"
+  document.getElementById("start_counter").innerHTML = "Exam starts in: " + days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+  
+  // Time calculations for days, hours, minutes and seconds
+  var days2 = Math.floor(timetoend / (1000 * 60 * 60 * 24));
+  var hours2 = Math.floor((timetoend % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes2 = Math.floor((timetoend % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds2 = Math.floor((timetoend % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="end_counter"
+  document.getElementById("end_counter").innerHTML = "Exam ends in: " + days2 + "d " + hours2 + "h "
+  + minutes2 + "m " + seconds2 + "s ";
+    
+  // If the count down is over, write some text 
+  if (timetostart < 0) {		
+		
+		document.getElementById("start_counter").innerHTML = "";	
+		
+		if (timetoend < 0) {
+			clearInterval(x);
+			document.getElementById("end_counter").innerHTML = "Exam Ended.";			
+			$('.startbtn').css('display','none')
+		}else{
+			$('.startbtn').css('display','block')
+		}
+  }else{
+	  document.getElementById("end_counter").innerHTML = "";
+  }
+}, 1000);
+</script>
 
     </body>
 

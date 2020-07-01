@@ -21,6 +21,8 @@ use App\Quiz;
 use App\Question;
 use App\Quizresult;
 use App\Quizanswer;
+use App\Quizinvitation;
+use App\Studentmaster;
 class DashboardController extends Controller
 {
 	
@@ -337,23 +339,81 @@ class DashboardController extends Controller
 		return view('staticpages/feedback',compact('dataSession'));
 	}
 	
+	public function quizinvitation(Request $request, $link=null)
+    {        
+        
+		$quiz_invitation_details = Quizinvitation::where(array('invitation_link' => $link,'IsDelete' => 0))->first();
+		
+		$quizid = $quiz_invitation_details->quiz_id;  
+		$student_master_id = $quiz_invitation_details->student_master_id;  
+		
+		$quiz_details = Quiz::where(array('id'=>$quizid,'IsDelete' => 0))->first();
+		$student_details = Studentmaster::where(array('id'=>$student_master_id,'IsDelete' => 0))->first();
+		//print_r($quiz_details); exit;
+		if($quiz_invitation_details->isVerified==1){ //echo 1;exit;
+				Session::put('Session_Quiz_Id',$quizid); 
+				Session::save();
+				Session::put('Session_Student_Id',$student_master_id); 
+				Session::save();
+				return redirect('quiz');
+		}
+		if ($request->isMethod('post')) { //exit;
+			
+			$post = $request->all();
+			$otp = $post['otp'];
+			if($otp == $quiz_invitation_details->otp){
+				$data = array(
+						'isVerified' => 1,						
+						'updated_at' => date('Y-m-d H:i:s')
+					);
+				
+				$insert = Quizinvitation::where('invitation_link', $link)->update($data);
+					
+				Session::put('Session_Quiz_Id',$quizid); 
+				Session::save();
+				Session::put('Session_Student_Id',$student_master_id); 
+				Session::save();
+				return redirect('quiz');
+			}else{
+				return redirect('exam-invitation/'.$link);
+			}
+			
+		}		
+		
+		return view('quiz/quiz-invitation', compact('quiz_invitation_details','quiz_details','student_details','link'));
+		
+    }
+	
 	public function startquiz(Request $request)
     {        
         if ($request->isMethod('post')) {
 			
 			$post = $request->all();
-			$quizid = $post['quizid'];  
+			$quizid = 0; $studentid = 0;  
+			if(Session::get('Session_Quiz_Id')){
+				$quizid = Session::get('Session_Quiz_Id');
+			}
+			if(Session::get('Session_Student_Id')){
+				$studentid = Session::get('Session_Student_Id');
+			}
+			if($quizid>0 && $studentid>0){
+				return redirect('quiz');
+			}else{
+				return redirect('startquiz');
+			}			
 			
+			
+			/* 
 			if(isset($post['quizid']) && $post['quizid']<>''){
 				Session::put('Session_Quiz_Id',$quizid); 
 				Session::save();
 				return redirect('quiz');
 			}else{
 				return redirect('startquiz');
-			}
+			} */
 		}
 		
-		$quiz_details = Quiz::where(array('IsDelete' => 0))->first();
+		$quiz_details = Quiz::where(array('id' => $quizid,'IsDelete' => 0))->first();
 		//print_r($quiz_details); exit;
 		return view('quiz/start-quiz', compact('quiz_details'));
 		
@@ -369,6 +429,13 @@ class DashboardController extends Controller
 			echo "You are not authorised to visit this page."; exit;
 			return redirect(url('/'));	
 		}			
+		if(Session::get('Session_Student_Id')){
+				$Session_Student_Id = Session::get('Session_Student_Id');
+		}else{
+			echo "You are not authorised to visit this page."; exit;
+			return redirect(url('/'));	
+		}
+		
 		
 		$post = $request->all(); //print_r($post);exit;		
 		
@@ -404,7 +471,7 @@ class DashboardController extends Controller
 				
 		
 		if ($request->isMethod('post')){  //&& $dataSession
-						
+						//var_dump($post['submit']);exit;
 			if(isset($post['submit']) && $post['submit']=='Prev'){
 				$Session_Offset = $Session_Offset - 1;
 				if($Session_Offset<0){
@@ -431,7 +498,7 @@ class DashboardController extends Controller
 				if($Session_Result_Id==-1){				
 					
 					$data = array(
-						'userid' => 1439,
+						'userid' => $Session_Student_Id,
 						'quizid' => $quizid,
 						'IsDelete' => 0,
 						'created_at' => date('Y-m-d H:i:s'),
@@ -458,7 +525,7 @@ class DashboardController extends Controller
 					
 					$data = array(
 						'resultid' => $Session_Result_Id,
-						'userid' => 1439,
+						'userid' => $Session_Student_Id,
 						'quizid' => $quizid,
 						'questionid' => $question_list[0]['id'],
 						'optionchosen' => $post['user_answer'],
