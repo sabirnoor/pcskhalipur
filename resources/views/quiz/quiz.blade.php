@@ -97,7 +97,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="2" <?php echo(isset($answer_info['answer_optionchosen']) && $answer_info['answer_optionchosen']==2)?'checked="checked"':''; ?>><?php echo $question_list[0]['option2']; ?></label>
+							  <label><input type="radio" name="user_answer" value="2" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==2)?'checked="checked"':''; ?>><?php echo $question_list[0]['option2']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -107,7 +107,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="3" <?php echo(isset($answer_info['answer_optionchosen']) && $answer_info['answer_optionchosen']==3)?'checked="checked"':''; ?>><?php echo $question_list[0]['option3']; ?></label>
+							  <label><input type="radio" name="user_answer" value="3" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==3)?'checked="checked"':''; ?>><?php echo $question_list[0]['option3']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -117,7 +117,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="4" <?php echo(isset($answer_info['answer_optionchosen']) && $answer_info['answer_optionchosen']==4)?'checked="checked"':''; ?>><?php echo $question_list[0]['option4']; ?></label>
+							  <label><input type="radio" name="user_answer" value="4" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==4)?'checked="checked"':''; ?>><?php echo $question_list[0]['option4']; ?></label>
 					  </div>					  
                   </div>
               </div>

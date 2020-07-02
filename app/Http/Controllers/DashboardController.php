@@ -341,7 +341,12 @@ class DashboardController extends Controller
 	
 	public function quizinvitation(Request $request, $link=null)
     {        
-        
+        Session::forget('Session_Result_Id');
+		Session::forget('Session_Offset');
+		Session::forget('Session_Quiz_Id');
+		Session::forget('Session_Student_Id');
+		Session::save();
+		
 		$quiz_invitation_details = Quizinvitation::where(array('invitation_link' => $link,'IsDelete' => 0))->first();
 		if(!isset($quiz_invitation_details->quiz_id)){
 			echo "Invalid link"; exit;
@@ -539,13 +544,9 @@ class DashboardController extends Controller
 					$insertid = Quizanswer::insertGetId($data);
 				}	
 				
-				if($post['submit']=='Finish'){	
+				if($post['submit']=='Finish'){
 					
-					//Session::forget('Session_Result_Id');
-					//Session::forget('Session_Offset');
-					//Session::save();
-					
-					return redirect('quiz-result/'.$Session_Result_Id);
+					return redirect('quiz-result');
 					
 				}else{
 					return redirect('quiz');
@@ -574,8 +575,13 @@ class DashboardController extends Controller
 			$Session_Result_Id = Session::get('Session_Result_Id'); 
 		}
 		//$Session_Result_Id = $id;
-		
+		if(!$Session_Result_Id){
+			return redirect(url('/'));
+		}
 		$details = Quizresult::where(array('result_id' => $Session_Result_Id))->first();
+		if(!isset($details->quizid)){
+			return redirect(url('/'));
+		}
 		$quizid = $details->quizid;		
 		
 		$result_data = Quizresult::get_result_data($Session_Result_Id);
