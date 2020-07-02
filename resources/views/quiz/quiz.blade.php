@@ -69,6 +69,7 @@
               
 			<input type="hidden" name="question_id" value="<?php echo $question_list[0]['id']; ?>" />
 			<input type="hidden" name="answer_id" value="<?php echo isset($answer_info['answer_id'])?$answer_info['answer_id']:''; ?>" />
+			<input type="hidden" id="resultid" value="<?php echo $Session_Vars['Session_Result_Id']; ?>" />
 			
 			<?php
 			  $quiz_end_date = '';
@@ -123,18 +124,18 @@
               <!--Grid row-->
 			
 			 <?php if(isset($Session_Vars['Session_Offset']) && $Session_Vars['Session_Offset']>0){?>
-			<div class="col-md-2">
+			<div class="col-md-2 quizbuttons" style="display:none">
 				<input class="btn btn-primary"  type="submit" name="submit" value="Prev" />
 			</div>
 			<?php } ?>
 			
 			<?php if(isset($Session_Vars['Session_Offset']) && $Session_Vars['Session_Offset']==$total_question-1){?>
-			<div class="col-md-2">
+			<div class="col-md-2 quizbuttons" style="display:none">
 				<input class="btn btn-primary"  type="submit" name="submit" value="Finish" />
 				<!--<button class="btn btn-primary finalsubmit"  type="submit" name="submit">Finish</button>-->
 			</div>
 			<?php }else{?>
-			<div class="col-md-2">
+			<div class="col-md-2 quizbuttons" style="display:none">
 				<input class="btn btn-primary" type="submit" name="submit" value="Next" />
 			</div>
 			<?php }?>
@@ -143,10 +144,10 @@
 
           </form>
 
-           <!--<div class="text-lrft text-md-left submitdiv">
-              <a class="btn btn-primary submitfeedback" >Submit</a>
+           <div class="text-lrft text-md-left resultdiv" style="display:none">
+              <a href="<?=url('quiz-result')?>" class="btn btn-primary">Result</a>
           </div>
-          <div class="status"></div>-->
+          <div class="status"></div>
 		  
       </div>
       <!--Grid column-->
@@ -224,10 +225,12 @@ var x = setInterval(function() {
   if (timetoend < 0) {
 			clearInterval(x);
 			document.getElementById("end_counter").innerHTML = "Exam Ended.";			
+			$resultid = $('#resultid').val(); //alert('Time Up');
 			
-			$('#timeup').val(1);
-			$('.finalsubmit').submit();
-			//$('.startbtn').css('display','none')
+			$('.resultdiv').css('display','block');
+			
+  }else{
+	  $('.quizbuttons').css('display','block');
   }
 }, 1000);
 

@@ -85,6 +85,9 @@
 							</tbody>
 						</table>
 	 
+	 <?php if($already_played==1){?>
+	 <div>You have finished this exam.</div>
+	 <?php }else{?>
 	  
           <form id="quiz-form" name="quiz-form" action="{{url('startquiz')}}" method="POST" autocomplete="off">
             {{csrf_field()}}
@@ -102,6 +105,7 @@
               $quiz_end_time = $quiz_details['quiz_end_time'];
 			  ?>
 			  
+			
 			<input type="hidden" name="quizid" value="<?php echo $quiz_details['id']; ?>" />
 			
 			<input type="hidden" name="qstart" id="qstart" value="<?php echo $quiz_start_date.' '.$quiz_start_time; ?>" />
@@ -115,6 +119,8 @@
               
 
           </form>
+		  
+		   <?php }?>
 
            <!--<div class="text-lrft text-md-left submitdiv">
               <a class="btn btn-primary submitfeedback" >Submit</a>

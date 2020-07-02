@@ -343,21 +343,25 @@ class DashboardController extends Controller
     {        
         
 		$quiz_invitation_details = Quizinvitation::where(array('invitation_link' => $link,'IsDelete' => 0))->first();
+		if(!isset($quiz_invitation_details->quiz_id)){
+			echo "Invalid link"; exit;
+		}
 		
 		$quizid = $quiz_invitation_details->quiz_id;  
 		$student_master_id = $quiz_invitation_details->student_master_id;  
 		
 		$quiz_details = Quiz::where(array('id'=>$quizid,'IsDelete' => 0))->first();
 		$student_details = Studentmaster::where(array('id'=>$student_master_id,'IsDelete' => 0))->first();
-		//print_r($quiz_details); exit;
-		if($quiz_invitation_details->isVerified==1){ //echo 1;exit;
+		
+		//redirect to start quiz page if already verified
+		if($quiz_invitation_details->isVerified==1){ 
 				Session::put('Session_Quiz_Id',$quizid); 
 				Session::save();
 				Session::put('Session_Student_Id',$student_master_id); 
 				Session::save();
-				return redirect('quiz');
+				return redirect('startquiz');
 		}
-		if ($request->isMethod('post')) { //exit;
+		if ($request->isMethod('post')) { 
 			
 			$post = $request->all();
 			$otp = $post['otp'];
@@ -373,7 +377,7 @@ class DashboardController extends Controller
 				Session::save();
 				Session::put('Session_Student_Id',$student_master_id); 
 				Session::save();
-				return redirect('quiz');
+				return redirect('startquiz');
 			}else{
 				return redirect('exam-invitation/'.$link);
 			}
@@ -386,43 +390,43 @@ class DashboardController extends Controller
 	
 	public function startquiz(Request $request)
     {        
-        if ($request->isMethod('post')) {
+        $quizid = 0; $studentid = 0;  
+		if(Session::get('Session_Quiz_Id')){
+			$quizid = Session::get('Session_Quiz_Id');
+		}
+		if(Session::get('Session_Student_Id')){
+			$studentid = Session::get('Session_Student_Id');
+		}
+		
+		if ($request->isMethod('post')) {
 			
-			$post = $request->all();
-			$quizid = 0; $studentid = 0;  
-			if(Session::get('Session_Quiz_Id')){
-				$quizid = Session::get('Session_Quiz_Id');
-			}
-			if(Session::get('Session_Student_Id')){
-				$studentid = Session::get('Session_Student_Id');
-			}
+			$post = $request->all();			
 			if($quizid>0 && $studentid>0){
 				return redirect('quiz');
 			}else{
 				return redirect('startquiz');
 			}			
-			
-			
-			/* 
-			if(isset($post['quizid']) && $post['quizid']<>''){
-				Session::put('Session_Quiz_Id',$quizid); 
-				Session::save();
-				return redirect('quiz');
-			}else{
-				return redirect('startquiz');
-			} */
 		}
 		
-		$quiz_details = Quiz::where(array('id' => $quizid,'IsDelete' => 0))->first();
-		//print_r($quiz_details); exit;
-		return view('quiz/start-quiz', compact('quiz_details'));
+		$already_played = 0;
+		$rs_details = Quizresult::where(array('quizid' => $quizid,'userid' => $studentid))->first();
+		if(isset($rs_details->result_id)){
+			$already_played = 1;
+		}
+		if($quizid){
+					
+			$quiz_details = Quiz::where(array('id' => $quizid,'IsDelete' => 0))->first();
+			return view('quiz/start-quiz', compact('quiz_details','already_played'));
+		}else{
+			return url('/');
+		}
+		
 		
     }
 	
 	public function playquiz(Request $request){
 		
-		//var_dump(Session::get('Session_Quiz_Id')); exit;
-		
+		//check quiz and user ids are set or not
 		if(Session::get('Session_Quiz_Id')){
 			$quizid = Session::get('Session_Quiz_Id');
 		}else{
@@ -437,7 +441,7 @@ class DashboardController extends Controller
 		}
 		
 		
-		$post = $request->all(); //print_r($post);exit;		
+		$post = $request->all(); 	
 		
 		$quiz_details = Quiz::where(array('id' => $quizid))->first();
 		$total_question = $quiz_details['quiz_total_question'];		
@@ -470,8 +474,8 @@ class DashboardController extends Controller
 		}
 				
 		
-		if ($request->isMethod('post')){  //&& $dataSession
-						//var_dump($post['submit']);exit;
+		if ($request->isMethod('post')){  
+						
 			if(isset($post['submit']) && $post['submit']=='Prev'){
 				$Session_Offset = $Session_Offset - 1;
 				if($Session_Offset<0){
@@ -484,7 +488,8 @@ class DashboardController extends Controller
 				return redirect('quiz');
 			}
 			
-			if(isset($post['submit']) &&  ($post['submit']=='Next' || $post['submit']=='Finish')){ //exit;
+			if(isset($post['submit']) &&  ($post['submit']=='Next' || $post['submit']=='Finish')){ 
+			//print_r($post);exit;
 				$Session_Offset = $Session_Offset + 1;	
 				
 				Session::forget('Session_Offset');
@@ -510,8 +515,7 @@ class DashboardController extends Controller
 					Session::put('Session_Result_Id',$insertid); 
 					Session::save();
 					$Session_Result_Id = Session::get('Session_Result_Id'); 
-				}	
-				
+				}					
 				
 				if(isset($post['answer_id']) && $post['answer_id']<>''){					
 					
@@ -535,11 +539,11 @@ class DashboardController extends Controller
 					$insertid = Quizanswer::insertGetId($data);
 				}	
 				
-				if($post['submit']=='Finish'){	//|| $post['timeup']==1
+				if($post['submit']=='Finish'){	
 					
-					Session::forget('Session_Result_Id');
-					Session::forget('Session_Offset');
-					Session::save();
+					//Session::forget('Session_Result_Id');
+					//Session::forget('Session_Offset');
+					//Session::save();
 					
 					return redirect('quiz-result/'.$Session_Result_Id);
 					
@@ -563,15 +567,18 @@ class DashboardController extends Controller
 		return view('quiz/quiz',compact('quizid','quiz_details','total_question','question_list','Session_Vars','answer_info'));
 	}
 	
-	public function showquizresult(Request $request, $id = null)
+	public function showquizresult(Request $request)
     {
         
-		$resultid = $id;
+		if(Session::get('Session_Result_Id')){
+			$Session_Result_Id = Session::get('Session_Result_Id'); 
+		}
+		//$Session_Result_Id = $id;
 		
-		$details = Quizresult::where(array('result_id' => $id))->first();
+		$details = Quizresult::where(array('result_id' => $Session_Result_Id))->first();
 		$quizid = $details->quizid;		
 		
-		$result_data = Quizresult::get_result_data($resultid);
+		$result_data = Quizresult::get_result_data($Session_Result_Id);
 		
 		$quiz_details = Quiz::where(array('id' => $quizid))->first();
 		
