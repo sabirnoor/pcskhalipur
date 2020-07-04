@@ -122,8 +122,7 @@
     <div class="col-sm-3">
 
       <div class="col-md-12" style="padding:0;">
-	         <!--@include('includes.latest_news')
-			@show-->
+	         
 		</div>
 
   <div class="clearfix">&nbsp;</div>

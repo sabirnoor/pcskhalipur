@@ -123,11 +123,6 @@
               
 
           </form>
-
-           <!--<div class="text-lrft text-md-left submitdiv">
-              <a class="btn btn-primary submitfeedback" >Submit</a>
-          </div>
-          <div class="status"></div>-->
 		  
       </div>
       <!--Grid column-->
@@ -147,13 +142,13 @@
     <div class="col-sm-3">
 
       <div class="col-md-12" style="padding:0;">
-	       <!-- @include('includes.latest_news')
-			@show-->
+	       
 		</div>
 
   <div class="clearfix">&nbsp;</div>
   </div>
    <div class="clearfix">&nbsp;</div>
+   
 </div>
 
   </div>
