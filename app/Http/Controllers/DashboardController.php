@@ -359,7 +359,7 @@ class DashboardController extends Controller
 		$student_details = Studentmaster::where(array('id'=>$student_master_id,'IsDelete' => 0))->first();
 		
 		//redirect to start quiz page if already verified
-		if($quiz_invitation_details->isVerified==1){ 
+		if($quiz_invitation_details->isVerified==1 || $quiz_invitation_details->isVerified==0){ 
 				Session::put('Session_Quiz_Id',$quizid); 
 				Session::save();
 				Session::put('Session_Student_Id',$student_master_id); 
