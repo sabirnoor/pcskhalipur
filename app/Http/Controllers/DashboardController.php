@@ -368,7 +368,15 @@ class DashboardController extends Controller
 		}
 		if ($request->isMethod('post')) { 
 			
-			$post = $request->all();
+			$post = $request->all(); 
+			
+			if(Session::get('captcha')){
+				$sess_captcha = Session::get('captcha');
+			}
+			if($post['user_captcha'] != $sess_captcha){ 
+				return redirect('exam-invitation/'.$link)->with('msgerror', 'Wrong Captcha. Try again!');
+			}
+			//var_dump($post); exit;
 			$otp = $post['otp'];
 			if($otp == $quiz_invitation_details->otp){
 				$data = array(
@@ -384,12 +392,20 @@ class DashboardController extends Controller
 				Session::save();
 				return redirect('startquiz');
 			}else{
-				return redirect('exam-invitation/'.$link);
+				 	
+				return redirect('exam-invitation/'.$link)->with('msgerror', 'Wrong OTP. Try again!');				
 			}
 			
-		}		
+		}
+		$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
-		return view('quiz/quiz-invitation', compact('quiz_invitation_details','quiz_details','student_details','link'));
+		$captcha = substr(str_shuffle($permitted_chars), 0, 6);
+		
+		Session::forget('captcha');
+		Session::put('captcha',$captcha); 
+		Session::save();
+		
+		return view('quiz/quiz-invitation', compact('quiz_invitation_details','quiz_details','student_details','link','captcha'));
 		
     }
 	
@@ -403,6 +419,21 @@ class DashboardController extends Controller
 			$studentid = Session::get('Session_Student_Id');
 		}
 		
+		$already_played = 0;
+		$result_details = Quizresult::where(array('quizid' => $quizid,'userid' => $studentid))->first();
+		if(isset($result_details->result_id) && isset($result_details->isFinished) && $result_details->isFinished==1){
+			$already_played = 1;
+		}
+		
+		// if quiz is restarted for any reason, pick that result_id and set in session to continue
+		if(isset($result_details->result_id) && isset($result_details->isFinished) && $result_details->isFinished==0){
+			
+			Session::forget('Session_Result_Id');
+			Session::put('Session_Result_Id',$result_details->result_id); 
+			Session::save();
+			
+		}		
+		
 		if ($request->isMethod('post')) {
 			
 			$post = $request->all();			
@@ -413,13 +444,8 @@ class DashboardController extends Controller
 			}			
 		}
 		
-		$already_played = 0;
-		$rs_details = Quizresult::where(array('quizid' => $quizid,'userid' => $studentid))->first();
-		if(isset($rs_details->result_id)){
-			$already_played = 1;
-		}
-		if($quizid){
-					
+		
+		if($quizid){					
 			$quiz_details = Quiz::where(array('id' => $quizid,'IsDelete' => 0))->first();
 			return view('quiz/start-quiz', compact('quiz_details','already_played'));
 		}else{
@@ -510,6 +536,7 @@ class DashboardController extends Controller
 					$data = array(
 						'userid' => $Session_Student_Id,
 						'quizid' => $quizid,
+						'isFinished' => 0,
 						'IsDelete' => 0,
 						'created_at' => date('Y-m-d H:i:s'),
 						'updated_at' => date('Y-m-d H:i:s')
@@ -546,6 +573,13 @@ class DashboardController extends Controller
 				
 				if($post['submit']=='Finish'){
 					
+					//set flag isFinished when quiz completed
+					$data = array(						
+						'isFinished' => 1,						
+						'updated_at' => date('Y-m-d H:i:s')
+					);
+					$insertid = Quizresult::where('result_id', $Session_Result_Id)->update($data);	
+										
 					return redirect('quiz-result');
 					
 				}else{

@@ -56,7 +56,15 @@
 
       <!--Grid column-->
       <div class="col-md-4 mb-md-0 mb-5">	
-	 
+		<?php //var_dump(session); ?>
+		
+		@if (session('msgerror'))
+		<div class="alert alert-danger light no-margin">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<i class="icon-cross2"></i> {{ session('msgerror') }}
+		</div>
+		<hr>
+		@endif
 	  
           <form id="quiz-form" name="quiz-form" action="{{url('exam-invitation/'.$link)}}" method="POST" autocomplete="off">
             {{csrf_field()}}
@@ -73,8 +81,29 @@
 			<!--Grid column-->
                   <div class="col-md-12">
                       <div class="md-form mb-0">
-                        <label for="otp" class="">OTP <span style="font-size:15px;color: red;">*</span></label></label>
-                          <input type="text" name="otp" value="" Placeholder="Enter Otp" />                          
+                        <label for="otp" class="">OTP <span style="font-size:15px;color: red;">*</span></label>
+                          <input type="password" name="otp" value="" Placeholder="Enter Otp" maxlength="6" required />                         
+                      </div>
+                  </div><br /><br />
+                  <!--Grid column-->
+				  
+				  <!--Grid column-->
+                  <div class="col-md-12">
+                      <div class="md-form mb-0">
+					  
+                       <div style="width:200px;  padding:3px; background-color:#ccc; border:1px solid #000;"><?=$captcha?></div>
+                                                    
+                                               
+                      </div>
+                  </div><br /><br />
+                  <!--Grid column-->
+				  
+				  <!--Grid column-->
+                  <div class="col-md-12">
+                      <div class="md-form mb-0">
+                        <label for="Captcha" class="">Captcha <span style="font-size:15px;color: red;">*</span></label>
+                                                    
+                          <input type="text" name="user_captcha" value="" Placeholder="Enter Captcha" maxlength="6" />                          
                       </div>
                   </div><br /><br />
                   <!--Grid column-->
