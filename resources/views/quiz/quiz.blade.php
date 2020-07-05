@@ -10,27 +10,23 @@
         @show
 
     </head>
-
-    <!-- NAVBAR
     
-    ================================================== -->
 
     <body>
-
-        <div class="navbar-wrapper">
+    {{--<div class="navbar-wrapper">
 			@include('includes.menu_nav')
 			@show  
-        </div>    
+	</div>  --}}  
 
         <!-- Carousel
     
         ================================================== -->
 
-<div class="banner">
+{{--<div class="banner">
 
   <img src="{{asset('public/assets/img/about_banner.jpg')}}" alt="..." class="img-responsive">
 
-</div>
+</div>--}}    
 
 <div class="pencil-bg">
 
@@ -87,7 +83,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="1" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==1)?'checked="checked"':''; ?>><?php echo $question_list[0]['option1']; ?></label>
+							  <label><input type="radio" name="user_answer" id="user_answer1" value="1" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==1)?'checked="checked"':''; ?>><?php echo $question_list[0]['option1']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -97,7 +93,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="2" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==2)?'checked="checked"':''; ?>><?php echo $question_list[0]['option2']; ?></label>
+							  <label><input type="radio" name="user_answer" id="user_answer2" value="2" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==2)?'checked="checked"':''; ?>><?php echo $question_list[0]['option2']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -107,7 +103,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="3" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==3)?'checked="checked"':''; ?>><?php echo $question_list[0]['option3']; ?></label>
+							  <label><input type="radio" name="user_answer" id="user_answer3" value="3" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==3)?'checked="checked"':''; ?>><?php echo $question_list[0]['option3']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -117,7 +113,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" value="4" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==4)?'checked="checked"':''; ?>><?php echo $question_list[0]['option4']; ?></label>
+							  <label><input type="radio" name="user_answer" id="user_answer4" value="4" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==4)?'checked="checked"':''; ?>><?php echo $question_list[0]['option4']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -228,13 +224,17 @@ var x = setInterval(function() {
 			
 			$('.resultdiv').css('display','block');
 			
+			$("#user_answer1").attr('disabled','disabled');			
+			$("#user_answer2").attr('disabled','disabled');			
+			$("#user_answer3").attr('disabled','disabled');			
+			$("#user_answer4").attr('disabled','disabled');			
+			
   }else{
 	  $('.quizbuttons').css('display','block');
   }
 }, 1000);
 
- 
- });
+});
 
 </script>
 

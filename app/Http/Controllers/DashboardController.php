@@ -623,7 +623,7 @@ class DashboardController extends Controller
 		$quiz_details = Quiz::where(array('id' => $quizid))->first();
 		
 		$correct_answer = 0; $wrong_answer = 0; $user_score = 0;$quiz_full_marks = 0; $percentage = 0;
-		$final_status = '';
+		$final_status = ''; $question_attempted = 0;
 		
 		if($result_data){
 			foreach ($result_data as $value) {
@@ -632,18 +632,20 @@ class DashboardController extends Controller
 					$correct_answer++;
 					$user_score += $value['score'];
 				}
+				$question_attempted++;
 		   }
         }
         
         $quiz_full_marks = $quiz_details['quiz_max_marks'];
 		$quiz_total_question = $quiz_details['quiz_total_question'];
 
-		$wrong_answer = $quiz_total_question-$correct_answer;
+		//$wrong_answer = $quiz_total_question-$correct_answer;
+		$wrong_answer = $question_attempted-$correct_answer;
 
 		if($quiz_full_marks>0){
 			$percentage = round($user_score*100/$quiz_full_marks);
 		}
-		if($percentage>=40){
+		if($percentage>=33){
 			$final_status = 'Pass';
 		}else{
 			$final_status = 'Fail';
@@ -653,6 +655,8 @@ class DashboardController extends Controller
                 'final_status' => $final_status,
                 'user_score' => $user_score,                
                 'quiz_full_marks' => $quiz_full_marks,                
+                'quiz_total_question' => $quiz_total_question,                
+                'question_attempted' => $question_attempted,                
                 'percentage' => $percentage,                
                 'correct_answer' => $correct_answer,                  
                 'wrong_answer' => $wrong_answer                

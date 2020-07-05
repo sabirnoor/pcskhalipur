@@ -17,20 +17,20 @@
 
     <body>
 
-        <div class="navbar-wrapper">
+        {{--<div class="navbar-wrapper">
 			@include('includes.menu_nav')
 			@show  
-        </div>    
+	</div>  --}}  
 
         <!-- Carousel
     
         ================================================== -->
 
-<div class="banner">
+{{--<div class="banner">
 
   <img src="{{asset('public/assets/img/about_banner.jpg')}}" alt="..." class="img-responsive">
 
-</div>
+</div>--}} 
 
 <div class="pencil-bg">
 
@@ -71,7 +71,12 @@
 								
 								<tr class="footableOdd">								
 									<td class="text-right">Total Questions:</td>
-									<td><?php echo $result_params['quiz_full_marks']; ?></td>
+									<td><?php echo $result_params['quiz_total_question']; ?></td>
+								</tr>
+								
+								<tr class="footableOdd">								
+									<td class="text-right">Questions Attempted:</td>
+									<td><?php echo $result_params['question_attempted']; ?></td>
 								</tr>
 								
 								<tr class="footableOdd">								
