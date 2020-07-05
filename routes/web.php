@@ -40,7 +40,7 @@ Route::match(['get', 'post'],'/feedbackform', array('uses' => 'DashboardControll
 Route::match(['get', 'post'],'/di2/{id?}', array('uses' => 'DashboardController@di2'));
 
 //Quiz(Online Exam) Section
-Route::match(['get', 'post'],'/invitation/{link?}', array('uses' => 'DashboardController@quizinvitation'));
+Route::match(['get', 'post'],'/din/{link?}', array('uses' => 'DashboardController@quizinvitation'));
 Route::match(['get', 'post'],'/startquiz', array('uses' => 'DashboardController@startquiz'));
 Route::match(['get', 'post'],'/quiz', array('uses' => 'DashboardController@playquiz'));
 Route::match(['get', 'post'],'/quiz-result', array('uses' => 'DashboardController@showquizresult'));
