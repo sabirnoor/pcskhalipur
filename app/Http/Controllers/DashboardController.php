@@ -476,8 +476,8 @@ class DashboardController extends Controller
 		$post = $request->all(); 	
 		
 		$quiz_details = Quiz::where(array('id' => $quizid))->first();
-		$total_question = $quiz_details['quiz_total_question'];		
-		
+		$total_question = Question::where(array('quizid' => $quizid,'IsDelete' => 0))->get()->count();		
+		//echo $total_question; exit;
 		
 		if(Session::get('Session_Offset')){
 			$Session_Offset = Session::get('Session_Offset'); 
@@ -497,7 +497,7 @@ class DashboardController extends Controller
 		}
 			
 		$offset = $Session_Offset;		
-		$question_list = Question::where(array('quizid' => $quizid))->orderBy('id', 'ASC')->offset($offset)->limit(1)->get()->toArray();
+		$question_list = Question::where(array('quizid' => $quizid,'IsDelete' => 0))->orderBy('id', 'ASC')->offset($offset)->limit(1)->get()->toArray();
 		if(empty($question_list)){
 			return redirect('startquiz')->with('msgerror', 'oops there is no question added by the school');
 		}
@@ -640,7 +640,8 @@ class DashboardController extends Controller
         }
         
         $quiz_full_marks = $quiz_details['quiz_max_marks'];
-		$quiz_total_question = $quiz_details['quiz_total_question'];
+		$quiz_total_question = Question::where(array('quizid' => $quizid,'IsDelete' => 0))->get()->count();
+		
 
 		//$wrong_answer = $quiz_total_question-$correct_answer;
 		$wrong_answer = $question_attempted-$correct_answer;
