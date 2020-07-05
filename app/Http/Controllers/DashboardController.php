@@ -421,6 +421,7 @@ class DashboardController extends Controller
 		
 		$already_played = 0;
 		$result_details = Quizresult::where(array('quizid' => $quizid,'userid' => $studentid))->first();
+
 		if(isset($result_details->result_id) && isset($result_details->isFinished) && $result_details->isFinished==1){
 			$already_played = 1;
 		}
@@ -497,7 +498,9 @@ class DashboardController extends Controller
 			
 		$offset = $Session_Offset;		
 		$question_list = Question::where(array('quizid' => $quizid))->orderBy('id', 'ASC')->offset($offset)->limit(1)->get()->toArray();
-
+		if(empty($question_list)){
+			return redirect('startquiz')->with('msgerror', 'oops there is no question added by the school');
+		}
 		if(Session::get('Session_Result_Id')){
 			$Session_Result_Id = Session::get('Session_Result_Id'); 
 		}else{
