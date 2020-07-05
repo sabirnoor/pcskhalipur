@@ -118,25 +118,25 @@
                   </div>
               </div>
               <!--Grid row-->
-			
+			<div class="row">
 			 <?php if(isset($Session_Vars['Session_Offset']) && $Session_Vars['Session_Offset']>0){?>
 			<div class="col-md-2 quizbuttons" style="display:none">
-				<input class="btn btn-primary"  type="submit" name="submit" value="Prev" />
+				<input class="btn btn-primary form-control" style="margin: 5px 0px;" type="submit" name="submit" value="Prev" />
 			</div>
 			<?php } ?>
 			
 			<?php if(isset($Session_Vars['Session_Offset']) && $Session_Vars['Session_Offset']==$total_question-1){?>
 			<div class="col-md-2 quizbuttons" style="display:none">
-				<input class="btn btn-primary"  type="submit" name="submit" value="Finish" />
+				<input class="btn btn-primary form-control" style="margin: 5px 0px;" type="submit" name="submit" value="Finish" />
 				<!--<button class="btn btn-primary finalsubmit"  type="submit" name="submit">Finish</button>-->
 			</div>
 			<?php }else{?>
 			<div class="col-md-2 quizbuttons" style="display:none">
-				<input class="btn btn-primary" type="submit" name="submit" value="Next" />
+				<input class="btn btn-primary form-control" style="margin: 5px 0px;" type="submit" name="submit" value="Next" />
 			</div>
 			<?php }?>
 
-              
+              </div>
 
           </form>
 

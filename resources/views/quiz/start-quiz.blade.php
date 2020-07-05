@@ -111,9 +111,10 @@
 			<input type="hidden" name="qstart" id="qstart" value="<?php echo $quiz_start_date.' '.$quiz_start_time; ?>" />
 			<input type="hidden" name="qend" id="qend" value="<?php echo $quiz_end_date.' '.$quiz_end_time; ?>" /><!--June 30, 2020 20:35:00-->
 			
-			
-			<div class="col-md-2 startbtn" style="display:none">
-				<input class="btn btn-primary" type="submit" name="submit" value="Start" />
+			<div class="row">
+			<div class="col-md-6 startbtn" style="display:none">
+				<input class="btn btn-primary form-control " style="margin: 5px 0px;" type="submit" name="submit" value="Start" />
+			</div>
 			</div>
 
               
