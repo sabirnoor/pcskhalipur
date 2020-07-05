@@ -562,16 +562,18 @@ class DashboardController extends Controller
 					$insertid = Quizanswer::where('answer_id', $post['answer_id'])->update($data);					
 				}else{
 					
-					$data = array(
-						'resultid' => $Session_Result_Id,
-						'userid' => $Session_Student_Id,
-						'quizid' => $quizid,
-						'questionid' => $question_list[0]['id'],
-						'optionchosen' => $post['user_answer'],
-						'created_at' => date('Y-m-d H:i:s'),
-						'updated_at' => date('Y-m-d H:i:s')
-					);
-					$insertid = Quizanswer::insertGetId($data);
+					if(isset($post['user_answer']) && $post['user_answer']<>''){					
+						$data = array(
+							'resultid' => $Session_Result_Id,
+							'userid' => $Session_Student_Id,
+							'quizid' => $quizid,
+							'questionid' => $question_list[0]['id'],
+							'optionchosen' => $post['user_answer'],
+							'created_at' => date('Y-m-d H:i:s'),
+							'updated_at' => date('Y-m-d H:i:s')
+						);
+						$insertid = Quizanswer::insertGetId($data);
+					}
 				}	
 				
 				if($post['submit']=='Finish'){
@@ -628,14 +630,16 @@ class DashboardController extends Controller
 		$correct_answer = 0; $wrong_answer = 0; $user_score = 0;$quiz_full_marks = 0; $percentage = 0;
 		$final_status = ''; $question_attempted = 0;
 		
-		if($result_data){
+		if(isset($result_data)){ 
 			foreach ($result_data as $value) {
 			$value = (array) $value;
-				if($value['optionchosen']==$value['correct_answer']){
-					$correct_answer++;
-					$user_score += $value['score'];
+				if(isset($value['optionchosen'])){
+					if($value['optionchosen']==$value['correct_answer']){
+						$correct_answer++;
+						$user_score += $value['score'];
+					}
+					$question_attempted++;
 				}
-				$question_attempted++;
 		   }
         }
         
