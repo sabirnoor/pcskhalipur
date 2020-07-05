@@ -55,7 +55,7 @@
 	  
 	  <div id="end_counter"></div>
 	  
-	  <h3>Question: <?php echo $Session_Vars['Session_Offset']+1; ?></h3>
+	  <h3>Question: <?php echo $Session_Vars['Session_Offset']+1; ?> Of <?=$total_question?></h3>
 	  
 	  <h2><?php echo $question_list[0]['question_title']; ?></h2>
 	 
@@ -145,6 +145,19 @@
           </div>
           <div class="status"></div>
 		  
+		  <div class="row jumpquesdiv" style="display:none">
+		  <table class="table table-striped table-bordered">
+							
+			<tbody>
+				<tr class="footableOdd">
+					<?php for($i=1;$i<=$total_question;$i++){?>
+					<td class="text-right"><a href="<?=url('jump-question/'.$i)?>"><?=$i?></a></td><?php } ?>
+				</tr>
+				</tbody>
+		  </table>
+			
+		  </div>
+		  
       </div>
       <!--Grid column-->
 
@@ -220,17 +233,21 @@ var x = setInterval(function() {
   if (timetoend < 0) {
 			clearInterval(x);
 			document.getElementById("end_counter").innerHTML = "Exam Ended.";			
-			$resultid = $('#resultid').val(); //alert('Time Up');
+			$resultid = $('#resultid').val(); 			
 			
-			$('.resultdiv').css('display','block');
+			$('.quizbuttons').css('display','none');
+			$('.jumpquesdiv').css('display','none');
 			
 			$("#user_answer1").attr('disabled','disabled');			
 			$("#user_answer2").attr('disabled','disabled');			
 			$("#user_answer3").attr('disabled','disabled');			
-			$("#user_answer4").attr('disabled','disabled');			
+			$("#user_answer4").attr('disabled','disabled');	
+			
+			$('.resultdiv').css('display','block');		
 			
   }else{
 	  $('.quizbuttons').css('display','block');
+	  $('.jumpquesdiv').css('display','block');
   }
 }, 1000);
 

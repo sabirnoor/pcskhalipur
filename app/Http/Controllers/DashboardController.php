@@ -456,6 +456,17 @@ class DashboardController extends Controller
 		
     }
 	
+	public function jumpquestion(Request $request,$ques_no){ 
+		$ques_no = (int)$ques_no;
+		if(isset($ques_no) && $ques_no<>''){
+			Session::forget('Session_Offset');
+			Session::save();
+			$offset = $ques_no-1;
+			Session::put('Session_Offset',$offset); 
+			Session::save();
+		}
+		return redirect('quiz');
+	}
 	public function playquiz(Request $request){
 		
 		//check quiz and user ids are set or not

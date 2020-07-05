@@ -44,6 +44,7 @@ Route::match(['get', 'post'],'/din/{link?}', array('uses' => 'DashboardControlle
 Route::match(['get', 'post'],'/startquiz', array('uses' => 'DashboardController@startquiz'));
 Route::match(['get', 'post'],'/quiz', array('uses' => 'DashboardController@playquiz'));
 Route::match(['get', 'post'],'/quiz-result', array('uses' => 'DashboardController@showquizresult'));
+Route::match(['get', 'post'],'/jump-question/{ques_no?}', array('uses' => 'DashboardController@jumpquestion'));
 //Route::get('/logout', 'DashboardController@logout');
 
 /*
