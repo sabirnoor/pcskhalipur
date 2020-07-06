@@ -150,8 +150,13 @@
 							
 			<tbody>
 				<tr class="footableOdd">
-					<?php for($i=1;$i<=$total_question;$i++){?>
-					<td class="text-right"><a href="<?=url('jump-question/'.$i)?>"><?=$i?></a></td><?php } ?>
+					<?php for($i=1;$i<=$total_question;$i++){
+						
+						?>
+					<td class="text-center"><a href="<?=url('jump-question/'.$i)?>"><?=$i?></a></td>
+					<?php 
+					if($i%12==0){echo '</tr><tr class="footableOdd">';}
+					} ?>
 				</tr>
 				</tbody>
 		  </table>
