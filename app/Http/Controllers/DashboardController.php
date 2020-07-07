@@ -654,15 +654,15 @@ class DashboardController extends Controller
 		   }
         }
         
-        $quiz_full_marks = $quiz_details['quiz_max_marks'];
+        
 		$quiz_total_question = Question::where(array('quizid' => $quizid,'IsDelete' => 0))->get()->count();
-		
+		$quiz_full_marks = $quiz_total_question * 1; // each question has 1 mark
 
 		//$wrong_answer = $quiz_total_question-$correct_answer;
 		$wrong_answer = $question_attempted-$correct_answer;
 
 		if($quiz_full_marks>0){
-			$percentage = round($user_score*100/$quiz_full_marks);
+			$percentage = round(($user_score*100/$quiz_full_marks),2);
 		}
 		if($percentage>=33){
 			$final_status = 'Pass';
