@@ -669,7 +669,9 @@ class DashboardController extends Controller
 		}else{
 			$final_status = 'Fail';
 		}		
-		        
+		
+		if($percentage>100){$percentage = 100;} // percentage cannot be grater than 100%
+		
 		$result_params = array(
                 'final_status' => $final_status,
                 'user_score' => $user_score,                
