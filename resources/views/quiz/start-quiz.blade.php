@@ -82,6 +82,22 @@
 									<td><?php echo $quiz_details['quiz_total_question']; ?></td>
 								</tr>
 								
+								<tr class="footableOdd">								
+									<td class="text-right">Student Name:</td>
+									<td><?php echo $student_details['student_name']; ?></td>
+								</tr>
+								
+								<tr class="footableOdd">								
+									<td class="text-right">Class:</td>
+									<td><?php echo $student_details['present_class']; ?></td>
+								</tr>
+								
+								
+								<tr class="footableOdd">								
+									<td class="text-right">Roll No:</td>
+									<td><?php echo $student_details['Roll_No']; ?></td>
+								</tr>
+								
 							</tbody>
 						</table>
 	 

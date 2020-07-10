@@ -448,7 +448,8 @@ class DashboardController extends Controller
 		
 		if($quizid){					
 			$quiz_details = Quiz::where(array('id' => $quizid,'IsDelete' => 0))->first();
-			return view('quiz/start-quiz', compact('quiz_details','already_played'));
+			$student_details = Studentmaster::where(array('id'=>$studentid))->first();
+			return view('quiz/start-quiz', compact('quiz_details','student_details','already_played'));
 		}else{
 			return url('/');
 		}
