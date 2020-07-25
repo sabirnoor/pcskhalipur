@@ -56,3 +56,6 @@ Route::match(['get', 'post'],'/jump-question/{ques_no?}', array('uses' => 'Dashb
 */
 Route::match(['get', 'post'],'/OneApi', array('uses' => 'ApiController@index'));
 Route::match(['get', 'post'],'/OneApi/bussearch', array('uses' => 'ApiController@bussearch'));
+
+//Admission Form
+Route::match(['get', 'post'],'/admission', array('uses' => 'DashboardController@admissionform'));

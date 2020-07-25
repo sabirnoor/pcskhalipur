@@ -685,6 +685,14 @@ class DashboardController extends Controller
 		);
 		
         return view('quiz/quiz-result', compact('result_params'));
-    } 
+    }
+
+    public function admissionform(Request $request){
+		
+		 
+		
+		
+		return view('staticpages/admissionform',compact('kkk'));
+	}	
 		
 }	
