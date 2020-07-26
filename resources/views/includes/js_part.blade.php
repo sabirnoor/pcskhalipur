@@ -5,6 +5,7 @@
 <script src="{{asset('public/assets/js/bootstrap-dropdownhover.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/assets/js/jquery.easing.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/assets/js/jquery.easy-ticker.js')}}"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.9/datepicker.min.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function () {

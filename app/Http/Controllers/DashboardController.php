@@ -359,7 +359,7 @@ class DashboardController extends Controller
 		$student_details = Studentmaster::where(array('id'=>$student_master_id,'IsDelete' => 0))->first();
 		
 		//redirect to start quiz page if already verified
-		if($quiz_invitation_details->isVerified==1 || $quiz_invitation_details->isVerified==0){ 
+		if($quiz_invitation_details->isVerified==1){ 
 				Session::put('Session_Quiz_Id',$quizid); 
 				Session::save();
 				Session::put('Session_Student_Id',$student_master_id); 
@@ -688,11 +688,229 @@ class DashboardController extends Controller
     }
 
     public function admissionform(Request $request){
-		
-		 
-		
-		
-		return view('staticpages/admissionform',compact('kkk'));
-	}	
+		if ($request->isMethod('post')){
+			$post = $request->all();
+			//pr($post);die;
+			
+			if(empty(trim($post['present_class']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter present class.'));
+				exit;
+			}
+			if(empty(trim($post['student_name']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter student name.'));
+				exit;
+			}
+			if(empty(trim($post['dob']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter date of birth.'));
+				exit;
+			}
+			if(empty(trim($post['dob_in_words']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter date of birth in words.'));
+				exit;
+			}
+			if(empty(trim($post['nationality']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter nationality.'));
+				exit;
+			}
+			if(empty(trim($post['aadharno']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter aadhar no.'));
+				exit;
+			}
+			if(empty(trim($post['religion']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter religion.'));
+				exit;
+			}
+			if(empty(trim($post['sex']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter gender.'));
+				exit;
+			}
+			if(empty(trim($post['social_category']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter social category.'));
+				exit;
+			}	
+			if(empty(trim($post['blood_group']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter blood group.'));
+				exit;
+			}	
+			if(empty(trim($post['permanent_address']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter permanent address.'));
+				exit;
+			}
+			if(empty(trim($post['student_mobile']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter mobile no.'));
+				exit;
+			}
+			if(empty(trim($post['email']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter email.'));
+				exit;
+			}	
+			if(empty(trim($post['present_address']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter present address.'));
+				exit;
+			}
+			if(empty(trim($post['father_name']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter father name.'));
+				exit;
+			}
+			if(empty(trim($post['father_qualification']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter father qualification.'));
+				exit;
+			}
+			if(empty(trim($post['father_occupation']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter father occupation.'));
+				exit;
+			}
+			if(empty(trim($post['father_mobile']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter father mobile.'));
+				exit;
+			}
+			if(empty(trim($post['mother_name']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter mother name.'));
+				exit;
+			}
+			if(empty(trim($post['mother_qualification']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter mother qualification.'));
+				exit;
+			}
+			if(empty(trim($post['mother_occupation']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter mother occupation.'));
+				exit;
+			}
+			if(empty(trim($post['mother_mobile']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter mother mobile.'));
+				exit;
+			}
+			if(empty(trim($post['family_income']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter family income.'));
+				exit;
+			}
+			if(empty(trim($post['last_school_name_address']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter last school name & address.'));
+				exit;
+			}			
+			if(empty(trim($post['board_name']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter board name.'));
+				exit;
+			}
+			if(empty(trim($post['board_registration_no']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter board registration no.'));
+				exit;
+			}
+			if(empty(trim($post['board_roll_no']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter board roll no.'));
+				exit;
+			}
+			if(empty(trim($post['passing_year']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter passing year.'));
+				exit;
+			}
+			if(empty(trim($post['english_marks']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter english marks.'));
+				exit;
+			}
+			if(empty(trim($post['science_marks']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter science marks.'));
+				exit;
+			}
+			if(empty(trim($post['math_marks']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter math marks.'));
+				exit;
+			}
+			if(empty(trim($post['marks_percentage']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter marks percentage.'));
+				exit;
+			}
+			if(empty(trim($post['exam_medium']))){
+				echo json_encode(array('success'=>false, 'message'=>'Please enter exam medium.'));
+				exit;
+			}
+			
+			//print_r($request->file('student_photo')); exit;
+			$dt = explode('/',$post['dob']);
+		    $dob = $dt[2].'-'.$dt[0].'-'.$dt[1];
+			
+			$selected_subjects = implode(',',$post['selected_subjects']);
+			
+			
+			$dataStudent = array(
+                'present_class' => $post['present_class'],                
+                'student_name' => $post['student_name'],                
+				'Date_of_Birth' => $dob,
+				'dob_in_words' => $post['dob_in_words'],
+				'nationality' => $post['nationality'],
+				'aadharno' => $post['aadharno'],
+				'religion' => $post['religion'],
+				'Sex' => $post['sex'],
+				'social_category' => $post['social_category'],
+				'blood_group' => $post['blood_group'],
+				'permanent_address' => $post['permanent_address'],
+				'contact_no' => $post['student_mobile'],
+				'email' => $post['email'],
+				'Address' => $post['present_address'],
+				'Father_Name' => $post['father_name'],
+				'father_qualification' => $post['father_qualification'],
+				'father_occupation' => $post['father_occupation'],
+				'father_mobile' => $post['father_mobile'],
+				'Mother_Name' => $post['mother_name'],
+				'mother_qualification' => $post['mother_qualification'],
+				'mother_occupation' => $post['mother_occupation'],
+				'mother_mobile' => $post['mother_mobile'],
+				'family_income' => $post['family_income'],
+				'last_school_name_address' => $post['last_school_name_address'],
+				'board_name' => $post['board_name'],
+				'board_registration_no' => $post['board_registration_no'],
+				'board_roll_no' => $post['board_roll_no'],
+				'passing_year' => $post['passing_year'],
+				'english_marks' => $post['english_marks'],
+				'science_marks' => $post['science_marks'],
+				'math_marks' => $post['math_marks'],
+				'marks_percentage' => $post['marks_percentage'],
+				'exam_medium' => $post['exam_medium'],
+				'selected_subjects' => $selected_subjects,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+			);
+			
+			if ($request->has('student_photo')) { //docx,doc,pdf,PDF
+                $rules = array(
+                    'student_photo' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:900000',
+                );
+                $validator = Validator::make($post, $rules);
+                if($validator->fails()) {
+                    echo json_encode(array('success'=>false, 'message'=>'file should be jpg/png.'));
+					exit;
+                }
+                if(!is_dir("public/upload/student_photo/")) {
+                    mkdir("public/upload/student_photo/", 0777, true);
+                }
+                $image = $request->file('student_photo');
+                $imageName = $image->getClientOriginalName();
+				
+                $file = explode('.', $imageName);
+                $imageName = $file[0]. '_' . md5(microtime()) . '.' . end($file);
+				$imageName = str_replace(' ','_',$imageName);
+                if (!file_exists(upload_path() . 'student_photo/'. $imageName)) {
+                    $path = upload_path() . 'student_photo/';
+                    $image->move($path, $imageName);
+                }
+            }
+            
+            if(!empty($imageName)){
+                $data['student_photo'] = $imageName;
+            }
+			
+			$insertGetId = DB::table('student_master')->insertGetId($dataStudent);
+			
+			if($insertGetId){
+				echo json_encode(array('success'=>true, 'message'=>'Form submitted Successfully'));
+				exit;
+			}else{
+				echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
+				exit;
+			}
+			
+		}
+		return view('staticpages/admissionform');
+	}
 		
 }	
