@@ -825,7 +825,7 @@ class DashboardController extends Controller
 				exit;
 			}
 			
-			//print_r($request->file('student_photo')); exit;
+			
 			$dt = explode('/',$post['dob']);
 		    $dob = $dt[2].'-'.$dt[0].'-'.$dt[1];
 			
@@ -871,6 +871,7 @@ class DashboardController extends Controller
                 'updated_at' => date('Y-m-d H:i:s')
 			);
 			
+			$imageName='';
 			if ($request->has('student_photo')) { //docx,doc,pdf,PDF
                 $rules = array(
                     'student_photo' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:900000',
@@ -897,6 +898,35 @@ class DashboardController extends Controller
             
             if(!empty($imageName)){
                 $data['student_photo'] = $imageName;
+            }
+			
+			$imageName='';
+			if ($request->has('student_marksheet')) { 
+                $rules = array(
+                    'student_marksheet' => 'required | mimes:docx,doc,pdf,PDF | max:900000',
+                );
+                $validator = Validator::make($post, $rules);
+                if($validator->fails()) {
+                    echo json_encode(array('success'=>false, 'message'=>'file should be jpg/png.'));
+					exit;
+                }
+                if(!is_dir("public/upload/student_marksheet/")) {
+                    mkdir("public/upload/student_marksheet/", 0777, true);
+                }
+                $image = $request->file('student_marksheet');
+                $imageName = $image->getClientOriginalName();
+				
+                $file = explode('.', $imageName);
+                $imageName = $file[0]. '_' . md5(microtime()) . '.' . end($file);
+				$imageName = str_replace(' ','_',$imageName);
+                if (!file_exists(upload_path() . 'student_marksheet/'. $imageName)) {
+                    $path = upload_path() . 'student_marksheet/';
+                    $image->move($path, $imageName);
+                }
+            }
+            
+            if(!empty($imageName)){
+                $data['student_marksheet'] = $imageName;
             }
 			
 			$insertGetId = DB::table('student_master')->insertGetId($dataStudent);
