@@ -96,7 +96,7 @@
 				 
                       <div class="md-form mb-0">
                         <label for="dob" class="">Date of Birth (As per document to be uploaded) <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" data-toggle="datepicker" id="dob" name="dob" class="form-control date_with_slash" value="" placeholder="mm/dd/yyyy" autocomplete="off" maxlength="10">
+                          <input type="text" data-toggle="datepicker" id="dob" name="dob" class="form-control date_with_slash" value="" placeholder="dd-mm-yyyy" autocomplete="off" maxlength="10">
                           
                       </div>
                   </div>
@@ -782,12 +782,16 @@ Before pressing the submit button, please ensure that the all information is cor
 <script type="text/javascript">
            				
                $("#dob").datepicker({
-					showOtherMonths: true,
-					dateFormat: 'dd-mm-yyyy',
+					dateFormat: 'dd-mm-yy',
+					//showOtherMonths: true,
 					changeMonth: true,
 					changeYear: true,
-					maxDate:0
+					maxDate:0,
+					yearRange: '1990:' + new Date().getFullYear().toString()
 				}); 
+				/*
+				
+				*/
 
 				//$('[data-toggle="datepicker"]').datepicker();
 
