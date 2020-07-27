@@ -194,8 +194,6 @@
                           <input type="email" id="email" name="email"  class="form-control email" value="" autocomplete="off" maxlength="40">
                       </div>
                   </div>
-				  
-					
 				   
 					  <div class="col-md-12">
 						  <div class="md-form mb-0">
@@ -204,8 +202,6 @@
 							  
 						  </div>
 					  </div>
-				  
-				  
                   
 				  </div>
 				  
@@ -339,7 +335,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="english_marks" class="">English<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="english_marks" name="english_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3>
+                          <input type="number" id="english_marks" name="english_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3">
                       </div>
                   </div>
 				  
@@ -429,7 +425,7 @@
 				
 				<div class="row">
 				  
-				  <h4> VI. List of Documents to be uploaded</h4> 
+				  <h4> VII. List of Documents to be uploaded</h4> 
 				 
 				
 				
