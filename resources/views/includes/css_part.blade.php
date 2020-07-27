@@ -12,6 +12,6 @@
 <?php } ?>
 <link rel="icon" type="image/png" sizes="32x32" href="{{asset('public/assets/img/favicon-32x32.png')}}">
 <link rel="stylesheet" href="{{ asset('public/assets/css/jquery-ui.min.css') }}" />
-  
+   
 
 

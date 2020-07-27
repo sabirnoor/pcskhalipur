@@ -827,7 +827,7 @@ class DashboardController extends Controller
 			
 			
 			$dt = explode('-',$post['dob']);
-		    $dob = $dt[2].'-'.$dt[1].'-'.$dt[0];
+		    $dob = $dt[2].'-'.$dt[1].'-'.$dt[0]; 
 			
 			$selected_subjects = implode(',',$post['selected_subjects']);
 			
