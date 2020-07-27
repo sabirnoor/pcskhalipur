@@ -102,6 +102,16 @@ class DashboardController extends Controller
 		return view('staticpages/contact');
 	}
 	
+	public function termandcondition(Request $request){
+		return view('staticpages/termandcondition');
+	}
+	public function privacypolicy(Request $request){
+		return view('staticpages/privacypolicy');
+	}
+	public function refundpolicy(Request $request){
+		return view('staticpages/refundpolicy');
+	}
+	
 	public function Syllabus(Request $request){
 		$Syllabusmaster = Syllabusmaster::SyllabusClassList();
 		//echo '<pre>';print_r($Syllabusmaster);die;

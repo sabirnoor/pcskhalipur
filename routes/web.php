@@ -59,3 +59,6 @@ Route::match(['get', 'post'],'/OneApi/bussearch', array('uses' => 'ApiController
 
 //Admission Form
 Route::match(['get', 'post'],'/admission', array('uses' => 'DashboardController@admissionform'));
+Route::get('/term-cond', 'DashboardController@termandcondition');
+Route::get('/privacy-policy', 'DashboardController@privacypolicy');
+Route::get('/refund-policy', 'DashboardController@refundpolicy');
