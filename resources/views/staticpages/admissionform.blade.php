@@ -69,7 +69,7 @@
 
       <!--Grid column-->
       <div class="col-md-12 mb-md-0 mb-5">
-          <form id="admission-form" name="admission-form" action="{{url('admission')}}" method="POST" autocomplete="off" enctype="multipart/form-data" onsubmit = "return(validate());">
+          <form id="admission-form" name="admission-form" action="{{url('admission')}}" method="POST" autocomplete="off" enctype="multipart/form-data" onsubmit = "return validate(this);">
             {{csrf_field()}}
             
 			  <h4>I. Personal Information</h4>
@@ -437,7 +437,7 @@
 				<div class="col-md-12">
                       <div class="md-form mb-0">
                         <label for="student_photo" class="">1. Please Upload Child Photograph: (Maximum Size 200kb)<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="file" id="student_photo" name="student_photo" class="form-control" value="" autocomplete="off">
+                          <input type="file" id="student_photo" name="student_photo" class="form-control" value="" autocomplete="off" required>
                       </div>
                   </div>
 				  
@@ -445,7 +445,7 @@
                       <div class="md-form mb-0">
                         <label for="student_marksheet" class="">2. Please upload Board Mark sheet: (Maximum Size 200kb)  <span style="font-size:15px;color: red;">*</span></label>
                           
-						  <input type="file" id="student_marksheet" name="student_marksheet" class="form-control" value="" autocomplete="off">
+						  <input type="file" id="student_marksheet" name="student_marksheet" class="form-control" value="" autocomplete="off" required>
                       </div>
                   </div>
 				  
@@ -470,6 +470,7 @@ Before pressing the submit button, please ensure that the all information is cor
 
          
 		 <div class="text-lrft text-md-left">
+              <!--<button type="submit" class="btn btn-lg btn-primary" > Submit</button>-->
               <input type="submit" name="submit" value="Submit" class="btn btn-lg btn-primary" />
           </div>
 		
@@ -522,10 +523,10 @@ Before pressing the submit button, please ensure that the all information is cor
     @show
     
     <script>
-     function validate() {
-        
+      function validate() {
+        alert('hi');
 		var present_class = $('#present_class').val();
-        if($.trim(present_class) === ''){
+        if($.trim(present_class) === ''){  
           alert('Please enter present class');
           $( "#present_class" ).focus();
           return false;
@@ -538,7 +539,7 @@ Before pressing the submit button, please ensure that the all information is cor
           return false;
         }
 		
-		/*var dob = $('#dob').val();
+		var dob = $('#dob').val();
 		if($.trim(dob) === ''){
 		  alert('Please enter date of birth.');
 		  $( "#dob" ).focus();
@@ -753,11 +754,11 @@ Before pressing the submit button, please ensure that the all information is cor
 		  alert('Please enter exam medium');
 		  $( "#exam_medium" ).focus();
 		  return false;
-		}*/
-
-        return true;
+		}
+		
+		return true;
         
-      });
+      }
       </script>
 
 	

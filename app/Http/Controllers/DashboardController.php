@@ -712,7 +712,7 @@ class DashboardController extends Controller
 			if(empty(trim($post['dob']))){
 				return redirect('admission')->with('msgerror', 'Please enter date of birth.');
 			}
-			/*if(empty(trim($post['dob_in_words']))){
+			if(empty(trim($post['dob_in_words']))){
 				return redirect('admission')->with('msgerror', 'Please enter date of birth in words.');
 				
 			}
@@ -802,7 +802,7 @@ class DashboardController extends Controller
 			}
 			if(empty(trim($post['exam_medium']))){
 				return redirect('admission')->with('msgerror', 'Please enter exam medium.');
-			}*/
+			}
 			
 			$selected_subjects = @implode(',',$post['selected_subjects']);
 			
