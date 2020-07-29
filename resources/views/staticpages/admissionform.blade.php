@@ -524,7 +524,7 @@ Before pressing the submit button, please ensure that the all information is cor
     
     <script>
       function validate() {
-        alert('hi');
+        //alert('hi');
 		var present_class = $('#present_class').val();
         if($.trim(present_class) === ''){  
           alert('Please enter present class');

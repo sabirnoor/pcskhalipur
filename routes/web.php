@@ -59,7 +59,7 @@ Route::match(['get', 'post'],'/OneApi/bussearch', array('uses' => 'ApiController
 
 //Admission Form
 Route::match(['get', 'post'],'/admission', array('uses' => 'DashboardController@admissionform'));
-Route::match(['get', 'post'],'/admission-success', array('uses' => 'DashboardController@admissionsuccess'));
+Route::match(['get', 'post'],'/admission-success/{id?}', array('uses' => 'DashboardController@admissionsuccess'));
 
 Route::get('/term-cond', 'DashboardController@termandcondition');
 Route::get('/privacy-policy', 'DashboardController@privacypolicy');

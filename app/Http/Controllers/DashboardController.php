@@ -703,7 +703,7 @@ class DashboardController extends Controller
 			$post = $request->all();
 			//pr($post);die;
 			
-			if(empty(trim($post['present_class']))){
+			/*if(empty(trim($post['present_class']))){
 				return redirect('admission')->with('msgerror', 'Please enter present class.');
 			}
 			if(empty(trim($post['student_name']))){
@@ -802,13 +802,13 @@ class DashboardController extends Controller
 			}
 			if(empty(trim($post['exam_medium']))){
 				return redirect('admission')->with('msgerror', 'Please enter exam medium.');
-			}
+			}*/
 			
 			$selected_subjects = @implode(',',$post['selected_subjects']);
 			
-			if(empty($selected_subjects)){
+			/*if(empty($selected_subjects)){
 				return redirect('admission')->with('msgerror', 'Please select subjects.');
-			}
+			}*/
 			
 			$dt = @explode('-',$post['dob']);
 		    $dob = $dt[2].'-'.$dt[1].'-'.$dt[0]; 
@@ -917,7 +917,7 @@ class DashboardController extends Controller
 			
 			if($insertGetId){
 				
-				return redirect(url('admission-success'))->with('msg', "Congrats! Registration form submitted successfully with reference no:$admission_ref_no.");
+				return redirect(url('admission-success/'.$admission_ref_no));
 				
 			}else{
 				//echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
@@ -928,8 +928,9 @@ class DashboardController extends Controller
 		return view('staticpages/admissionform');
 	}
 	
-	public function admissionsuccess(Request $request){
-		return view('staticpages/admissionsuccess');
+	public function admissionsuccess(Request $request,$ref_no){
+		//echo $ref_no; exit;
+		return view('staticpages/admissionsuccess',compact('ref_no'));
 	}
 		
 }	
