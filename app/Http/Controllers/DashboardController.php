@@ -703,7 +703,7 @@ class DashboardController extends Controller
 			$post = $request->all();
 			//pr($post);die;
 			
-			/*if(empty(trim($post['present_class']))){
+			if(empty(trim($post['present_class']))){
 				return redirect('admission')->with('msgerror', 'Please enter present class.');
 			}
 			if(empty(trim($post['student_name']))){
@@ -802,13 +802,13 @@ class DashboardController extends Controller
 			}
 			if(empty(trim($post['exam_medium']))){
 				return redirect('admission')->with('msgerror', 'Please enter exam medium.');
-			}*/
+			}
 			
 			$selected_subjects = @implode(',',$post['selected_subjects']);
 			
-			/*if(empty($selected_subjects)){
+			if(empty($selected_subjects)){
 				return redirect('admission')->with('msgerror', 'Please select subjects.');
-			}*/
+			}
 			
 			$dt = @explode('-',$post['dob']);
 		    $dob = $dt[2].'-'.$dt[1].'-'.$dt[0]; 
@@ -821,6 +821,7 @@ class DashboardController extends Controller
                 'student_name' => $post['student_name'],                
 				'Date_of_Birth' => $dob,
 				'dob_in_words' => $post['dob_in_words'],
+				'Admission_Date' => date('Y-m-d'),
 				'nationality' => $post['nationality'],
 				'aadharno' => $post['aadharno'],
 				'religion' => $post['religion'],
