@@ -79,7 +79,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="present_class" class="">Class <span style="font-size:15px;color: red;">*</span></label>
-                          <select id="present_class" name="present_class"  class="form-control" value="" autocomplete="off">
+                          <select id="present_class" name="present_class"  class="form-control" value="" autocomplete="off" required>
 						  <option value="XI">XI</option>
 						  </select>
                           
@@ -91,7 +91,7 @@
 				  
                       <div class="md-form mb-0">
                         <label for="student_name" class="">Name Of the Candidate ( As per record in Birth Certificate / T.C. / Marksheet) <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="student_name" name="student_name" class="form-control alpha" value="" autocomplete="off" maxlength="30">
+                          <input type="text" id="student_name" name="student_name" class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -101,7 +101,7 @@
 				 
                       <div class="md-form mb-0">
                         <label for="dob" class="">Date of Birth (As per document to be uploaded) <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" data-toggle="datepicker" id="dob" name="dob" class="form-control date_with_slash" value="" placeholder="dd-mm-yyyy" autocomplete="off" maxlength="10">
+                          <input type="text" data-toggle="datepicker" id="dob" name="dob" class="form-control date_with_slash" value="" placeholder="dd-mm-yyyy" autocomplete="off" maxlength="10" required>
                           
                       </div>
                   </div>
@@ -109,7 +109,7 @@
 				   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="dob_in_words" class="">Date Of Birth (in words) <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="dob_in_words" name="dob_in_words" class="form-control alpha" value="" autocomplete="off" maxlength="150">
+                          <input type="text" id="dob_in_words" name="dob_in_words" class="form-control alpha" value="" autocomplete="off" maxlength="150" required>
                           
                       </div>
                   </div>
@@ -117,28 +117,28 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="nationality" class="">Nationality<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="nationality" name="nationality"  class="form-control alpha" value="" autocomplete="off" maxlength="15">
+                          <input type="text" id="nationality" name="nationality"  class="form-control alpha" value="" autocomplete="off" maxlength="15" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="aadharno" class="">Aadhar No.<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="aadharno" name="aadharno"  class="form-control numeric" value="" autocomplete="off" maxlength="16">
+                          <input type="number" id="aadharno" name="aadharno"  class="form-control numeric" value="" autocomplete="off" maxlength="16" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="religion" class="">Religion<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="religion" name="religion"  class="form-control alpha" value="" autocomplete="off" maxlength="15">
+                          <input type="text" id="religion" name="religion"  class="form-control alpha" value="" autocomplete="off" maxlength="15" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="sex" class="">Gender <span style="font-size:15px;color: red;">*</span></label>
-                          <select id="sex" name="sex"  class="form-control" value="" autocomplete="off">
+                          <select id="sex" name="sex"  class="form-control" value="" autocomplete="off" required>
 								<option value="">Select Gender</option>								
 								<option value="M">Male</option>								
 								<option value="F">Female</option>
@@ -151,7 +151,7 @@
 				 <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="social_category" class="">Social Category <span style="font-size:15px;color: red;">*</span></label>
-                          <select id="social_category" name="social_category"  class="form-control" value="" autocomplete="off">
+                          <select id="social_category" name="social_category"  class="form-control" value="" autocomplete="off" required>
 								<option value="">Social Category</option>								
 								<option value="GN">GN</option>								
 								<option value="OBC">OBC</option>
@@ -167,7 +167,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="blood_group" class="">Blood Group<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="blood_group" name="blood_group" class="form-control" value="" autocomplete="off" maxlength="15">
+                          <input type="text" id="blood_group" name="blood_group" class="form-control" value="" autocomplete="off" maxlength="15" required>
                       </div>
                   </div>
 				  
@@ -180,7 +180,7 @@
 					  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<label for="permanent_address" class="">Permanent Address</label>
-							<textarea type="text" id="permanent_address" name="permanent_address" rows="2" class="form-control md-textarea address" autocomplete="off" maxlength="250"></textarea>
+							<textarea type="text" id="permanent_address" name="permanent_address" rows="2" class="form-control md-textarea address" autocomplete="off" maxlength="250" required></textarea>
 							  
 						  </div>
 					  </div>
@@ -189,21 +189,21 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="student_mobile" class="">Mobile<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="student_mobile" name="student_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10">
+                          <input type="text" id="student_mobile" name="student_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="email" class="">Email<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="email" id="email" name="email"  class="form-control email" value="" autocomplete="off" maxlength="40">
+                          <input type="email" id="email" name="email"  class="form-control email" value="" autocomplete="off" maxlength="40" required>
                       </div>
                   </div>
 				   
 					  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<label for="present_address" class="">Present Address</label>
-							<textarea type="text" id="present_address" name="present_address" rows="2" class="form-control md-textarea address" autocomplete="off" maxlength="250"></textarea>
+							<textarea type="text" id="present_address" name="present_address" rows="2" class="form-control md-textarea address" autocomplete="off" maxlength="250" required></textarea>
 							  
 						  </div>
 					  </div>
@@ -217,7 +217,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="father_name" class="">Father's Name <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="father_name" name="father_name"  class="form-control alpha" value="" autocomplete="off" maxlength="30">
+                          <input type="text" id="father_name" name="father_name"  class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -225,7 +225,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="father_qualification" class="">Father's Education Qualification <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="father_qualification" name="father_qualification"  class="form-control" value="" autocomplete="off" maxlength="30">
+                          <input type="text" id="father_qualification" name="father_qualification"  class="form-control" value="" autocomplete="off" maxlength="30"required>
                           
                       </div>
                   </div>
@@ -233,7 +233,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="father_occupation" class="">Father's Occupation <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="father_occupation" name="father_occupation"  class="form-control alpha" value="" autocomplete="off" maxlength="30">
+                          <input type="text" id="father_occupation" name="father_occupation"  class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -241,7 +241,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="father_mobile" class="">Father's Mobile No. <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="father_mobile" name="father_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10">
+                          <input type="text" id="father_mobile" name="father_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10" required>
                           
                       </div>
                   </div>
@@ -249,7 +249,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="mother_name" class="">Mother's Name <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="mother_name" name="mother_name"  class="form-control alpha" value="" autocomplete="off" maxlength="30">
+                          <input type="text" id="mother_name" name="mother_name"  class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -257,7 +257,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="mother_qualification" class="">Mother's Education Qualification <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="mother_qualification" name="mother_qualification"  class="form-control" value="" autocomplete="off" maxlength="30">
+                          <input type="text" id="mother_qualification" name="mother_qualification"  class="form-control" value="" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -265,7 +265,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="mother_occupation" class="">Mother's Occupation <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="mother_occupation" name="mother_occupation"  class="form-control alpha" value="" autocomplete="off" maxlength="30">
+                          <input type="text" id="mother_occupation" name="mother_occupation"  class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -273,7 +273,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="mother_mobile" class="">Mother's Mobile No. <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="mother_mobile" name="mother_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10">
+                          <input type="text" id="mother_mobile" name="mother_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10" required>
                           
                       </div>
                   </div>
@@ -283,7 +283,7 @@
                   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="family_income" class="">Annual Family Income<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="family_income" name="family_income" class="form-control numeric" value="" autocomplete="off" maxlength="10">
+                          <input type="text" id="family_income" name="family_income" class="form-control numeric" value="" autocomplete="off" maxlength="10" required>
                       </div>
                   </div>
                   
@@ -297,7 +297,7 @@
 				  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<label for="last_school_name_address" class="">Name of the School Last Attended with Address</label>
-							<textarea type="text" id="last_school_name_address" name="last_school_name_address" rows="2" class="form-control md-textarea address" autocomplete="off"></textarea>
+							<textarea type="text" id="last_school_name_address" name="last_school_name_address" rows="2" class="form-control md-textarea address" autocomplete="off" required></textarea>
 							  
 						  </div>
 				  </div>
@@ -305,28 +305,28 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="board_name" class="">Name of the Board<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="board_name" name="board_name" class="form-control" value="" autocomplete="off" maxlength="100">
+                          <input type="text" id="board_name" name="board_name" class="form-control" value="" autocomplete="off" maxlength="100" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="board_registration_no" class="">Registration No<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="board_registration_no" name="board_registration_no" class="form-control" value="" autocomplete="off" maxlength="50">
+                          <input type="text" id="board_registration_no" name="board_registration_no" class="form-control" value="" autocomplete="off" maxlength="50" required>
                       </div>
                   </div>
 				  
 				   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="board_roll_no" class="">Board  Roll No<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="board_roll_no" name="board_roll_no" class="form-control" value="" autocomplete="off" maxlength="30">
+                          <input type="text" id="board_roll_no" name="board_roll_no" class="form-control" value="" autocomplete="off" maxlength="30" required>
                       </div>
                   </div>
 				   
 				   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="passing_year" class="">Year Of Passing<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="passing_year" name="passing_year" class="form-control numeric" value="" autocomplete="off" maxlength="4">
+                          <input type="number" id="passing_year" name="passing_year" class="form-control numeric" value="" autocomplete="off" maxlength="4" required>
                       </div>
                   </div>
                   
@@ -340,35 +340,35 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="english_marks" class="">English<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="english_marks" name="english_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3">
+                          <input type="number" id="english_marks" name="english_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="science_marks" class="">Science<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="science_marks" name="science_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3">
+                          <input type="number" id="science_marks" name="science_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="math_marks" class="">Maths<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="math_marks" name="math_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3">
+                          <input type="number" id="math_marks" name="math_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="marks_percentage" class="">Percentage<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="marks_percentage" name="marks_percentage" class="form-control decimal" value="" autocomplete="off" maxlength="5">
+                          <input type="number" id="marks_percentage" name="marks_percentage" class="form-control decimal" value="" autocomplete="off" maxlength="5" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="exam_medium" class="">Medium Of Exam<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="exam_medium" name="exam_medium" class="form-control alpha" value="" autocomplete="off" maxlength="15">
+                          <input type="text" id="exam_medium" name="exam_medium" class="form-control alpha" value="" autocomplete="off" maxlength="15" required>
                       </div>
                   </div>
                   
