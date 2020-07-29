@@ -124,7 +124,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="aadharno" class="">Aadhar No.<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="aadharno" name="aadharno"  class="form-control numeric" value="" autocomplete="off" maxlength="16" required>
+                          <input type="text" id="aadharno" name="aadharno"  class="form-control numeric" value="" autocomplete="off" maxlength="16" required>
                       </div>
                   </div>
 				  
@@ -326,7 +326,7 @@
 				   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="passing_year" class="">Year Of Passing<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="passing_year" name="passing_year" class="form-control numeric" value="" autocomplete="off" maxlength="4" required>
+                          <input type="text" id="passing_year" name="passing_year" class="form-control numeric" value="" autocomplete="off" maxlength="4" required>
                       </div>
                   </div>
                   
@@ -340,28 +340,28 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="english_marks" class="">English<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="english_marks" name="english_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
+                          <input type="text" id="english_marks" name="english_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="science_marks" class="">Science<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="science_marks" name="science_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
+                          <input type="text" id="science_marks" name="science_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="math_marks" class="">Maths<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="math_marks" name="math_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
+                          <input type="text" id="math_marks" name="math_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="marks_percentage" class="">Percentage<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="number" id="marks_percentage" name="marks_percentage" class="form-control decimal" value="" autocomplete="off" maxlength="5" required>
+                          <input type="text" id="marks_percentage" name="marks_percentage" class="form-control decimal" value="" autocomplete="off" maxlength="5" required>
                       </div>
                   </div>
 				  
