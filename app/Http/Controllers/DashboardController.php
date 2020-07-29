@@ -891,7 +891,7 @@ class DashboardController extends Controller
 			$imageName='';
 			if ($request->hasFile('student_marksheet')) { 
                 $rules = array(
-                    'student_marksheet' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:200'
+                    'student_marksheet' => 'required | mimes:jpg,jpeg,png,pdf,JPG,JPEG,PNG,PDF | max:200'
                 );
                 $validator = Validator::make($post, $rules);
                 if($validator->fails()) {

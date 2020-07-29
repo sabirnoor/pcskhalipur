@@ -442,7 +442,7 @@
 				
 				<div class="col-md-12">
                       <div class="md-form mb-0">
-                        <label for="student_photo" class="">1. Upload Student Photograph: (format: .jpg,.png, maximum size: 200kb)<span style="font-size:15px;color: red;">*</span></label>
+                        <label for="student_photo" class="">1. Upload Student Photograph: (format: .jpg/.jpeg/.png, maximum size: 200kb)<span style="font-size:15px;color: red;">*</span></label>
                           <input type="file" id="student_photo" name="student_photo" class="form-control" required>
                       </div>
                   </div>
@@ -451,7 +451,7 @@
 				  
 				<div class="col-md-12">
                       <div class="md-form mb-0">
-                        <label for="student_marksheet" class="">2. Upload Board Mark sheet: (format: .jpg,.png,.pdf maximum size :200kb)  <span style="font-size:15px;color: red;">*</span></label>
+                        <label for="student_marksheet" class="">2. Upload Board Mark sheet: (format: .jpg/.jpeg/.png/.pdf maximum size :200kb)  <span style="font-size:15px;color: red;">*</span></label>
                           
 						  <input type="file" id="student_marksheet" name="student_marksheet" class="form-control" required>
                       </div>
@@ -795,6 +795,7 @@ $("#dob").datepicker({
     }
 	
 	//size validation
+	$("#student_photo_size").html('');
 	const photo_file_size =  
 	   (this.files[0].size / 1024).toFixed(2); 
 
@@ -822,6 +823,7 @@ $('#student_marksheet').on('change', function() {
     }
 	
 	//size validation
+	$("#student_marksheet_size").html('');
 	const marksheet_file_size =  
 	   (this.files[0].size / 1024).toFixed(2); 
 
