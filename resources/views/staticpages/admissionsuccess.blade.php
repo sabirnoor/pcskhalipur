@@ -53,10 +53,8 @@
       
 	  
 
-		@if(Session::has('msg'))
-		<p>{{ Session::get('msg') }}</p>
-		@endif
-		<p>Please proceed to pay</p>
+		
+		<p>Congrats! Registration form submitted successfully with reference no: <?=$ref_no?>. Please proceed to pay</p>
  
 
 

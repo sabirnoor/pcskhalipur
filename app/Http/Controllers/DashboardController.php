@@ -821,6 +821,7 @@ class DashboardController extends Controller
                 'student_name' => $post['student_name'],                
 				'Date_of_Birth' => $dob,
 				'dob_in_words' => $post['dob_in_words'],
+				'Admission_Date' => date('Y-m-d'),
 				'nationality' => $post['nationality'],
 				'aadharno' => $post['aadharno'],
 				'religion' => $post['religion'],
@@ -917,7 +918,7 @@ class DashboardController extends Controller
 			
 			if($insertGetId){
 				
-				return redirect(url('admission-success'))->with('msg', "Congrats! Registration form submitted successfully with reference no:$admission_ref_no.");
+				return redirect(url('admission-success/'.$admission_ref_no));
 				
 			}else{
 				//echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
@@ -928,8 +929,9 @@ class DashboardController extends Controller
 		return view('staticpages/admissionform');
 	}
 	
-	public function admissionsuccess(Request $request){
-		return view('staticpages/admissionsuccess');
+	public function admissionsuccess(Request $request,$ref_no){
+		//echo $ref_no; exit;
+		return view('staticpages/admissionsuccess',compact('ref_no'));
 	}
 		
 }	
