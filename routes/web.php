@@ -67,6 +67,8 @@ Route::post('/payment-complete','PaymentController@Complete');
 
 //Admission Form
 Route::match(['get', 'post'],'/admission', array('uses' => 'DashboardController@admissionform'));
+Route::match(['get', 'post'],'/admission-success', array('uses' => 'DashboardController@admissionsuccess'));
+
 Route::get('/term-cond', 'DashboardController@termandcondition');
 Route::get('/privacy-policy', 'DashboardController@privacypolicy');
 Route::get('/refund-policy', 'DashboardController@refundpolicy');
