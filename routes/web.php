@@ -56,3 +56,11 @@ Route::match(['get', 'post'],'/jump-question/{ques_no?}', array('uses' => 'Dashb
 */
 Route::match(['get', 'post'],'/OneApi', array('uses' => 'ApiController@index'));
 Route::match(['get', 'post'],'/OneApi/bussearch', array('uses' => 'ApiController@bussearch'));
+
+
+Route::get('/payment-initiate',function(){
+    return view('payment/payment-initiate');
+});
+
+Route::post('/payment-initiate-request','PaymentController@Initiate');
+Route::post('/payment-complete','PaymentController@Complete');
