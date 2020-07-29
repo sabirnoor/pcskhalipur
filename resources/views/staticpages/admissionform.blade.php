@@ -91,7 +91,7 @@
 				  
                       <div class="md-form mb-0">
                         <label for="student_name" class="">Name Of the Candidate ( As per record in Birth Certificate / T.C. / Marksheet) <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="student_name" name="student_name" class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
+                          <input type="text" id="student_name" name="student_name" class="form-control alpha" value="{{ old('student_name') }}" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -101,7 +101,7 @@
 				 
                       <div class="md-form mb-0">
                         <label for="dob" class="">Date of Birth (As per document to be uploaded) <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" data-toggle="datepicker" id="dob" name="dob" class="form-control date_with_slash" value="" placeholder="dd-mm-yyyy" autocomplete="off" maxlength="10" required>
+                          <input type="text" data-toggle="datepicker" id="dob" name="dob" class="form-control date_with_slash" value="{{ old('dob') }}" placeholder="dd-mm-yyyy" autocomplete="off" maxlength="10">
                           
                       </div>
                   </div>
@@ -109,7 +109,7 @@
 				   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="dob_in_words" class="">Date Of Birth (in words) <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="dob_in_words" name="dob_in_words" class="form-control alpha" value="" autocomplete="off" maxlength="150" required>
+                          <input type="text" id="dob_in_words" name="dob_in_words" class="form-control alpha" value="{{ old('dob_in_words') }}" autocomplete="off" maxlength="150" required>
                           
                       </div>
                   </div>
@@ -117,48 +117,48 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="nationality" class="">Nationality<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="nationality" name="nationality"  class="form-control alpha" value="" autocomplete="off" maxlength="15" required>
+                          <input type="text" id="nationality" name="nationality"  class="form-control alpha" value="{{ old('nationality') }}" autocomplete="off" maxlength="15" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="aadharno" class="">Aadhar No.<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="aadharno" name="aadharno"  class="form-control numeric" value="" autocomplete="off" maxlength="16" required>
+                          <input type="text" id="aadharno" name="aadharno"  class="form-control numeric" value="{{ old('aadharno') }}" autocomplete="off" maxlength="16" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="religion" class="">Religion<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="religion" name="religion"  class="form-control alpha" value="" autocomplete="off" maxlength="15" required>
+                          <input type="text" id="religion" name="religion"  class="form-control alpha" value="{{ old('religion') }}" autocomplete="off" maxlength="15" required>
                       </div>
                   </div>
-				  
+				  <?php $old_sex=old('sex');?>
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="sex" class="">Gender <span style="font-size:15px;color: red;">*</span></label>
                           <select id="sex" name="sex"  class="form-control" value="" autocomplete="off" required>
 								<option value="">Select Gender</option>								
-								<option value="M">Male</option>								
-								<option value="F">Female</option>
+								<option value="M" <?php echo($old_sex=="M")?'selected="selected"':''?>>Male</option>								
+								<option value="F" <?php echo($old_sex=="F")?'selected="selected"':''?>>Female</option>
 						  </select>
                           
                       </div>
                   </div>
 				  
-				 
+				 <?php $old_social_category=old('social_category');?>
 				 <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="social_category" class="">Social Category <span style="font-size:15px;color: red;">*</span></label>
                           <select id="social_category" name="social_category"  class="form-control" value="" autocomplete="off" required>
 								<option value="">Social Category</option>								
-								<option value="GN">GN</option>								
-								<option value="OBC">OBC</option>
-								<option value="SC">SC</option>
-								<option value="ST">ST</option>
-								<option value="Minority">Minority</option>
-								<option value="EWS">EWS</option>
+								<option value="GN" <?php echo($old_social_category=="GN")?'selected="selected"':''?>>GN</option>								
+								<option value="OBC" <?php echo($old_social_category=="OBC")?'selected="selected"':''?>>OBC</option>
+								<option value="SC" <?php echo($old_social_category=="SC")?'selected="selected"':''?>>SC</option>
+								<option value="ST" <?php echo($old_social_category=="ST")?'selected="selected"':''?>>ST</option>
+								<option value="Minority" <?php echo($old_social_category=="Minority")?'selected="selected"':''?>>Minority</option>
+								<option value="EWS" <?php echo($old_social_category=="EWS")?'selected="selected"':''?>>EWS</option>
 						  </select>
                           
                       </div>
@@ -167,7 +167,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="blood_group" class="">Blood Group<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="blood_group" name="blood_group" class="form-control" value="" autocomplete="off" maxlength="15" required>
+                          <input type="text" id="blood_group" name="blood_group" class="form-control" value="{{ old('blood_group') }}" autocomplete="off" maxlength="15" required>
                       </div>
                   </div>
 				  
@@ -180,7 +180,7 @@
 					  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<label for="permanent_address" class="">Permanent Address</label>
-							<textarea type="text" id="permanent_address" name="permanent_address" rows="2" class="form-control md-textarea address" autocomplete="off" maxlength="250" required></textarea>
+							<textarea type="text" id="permanent_address" name="permanent_address" rows="2" class="form-control md-textarea address" autocomplete="off" maxlength="250" required>{{ old('permanent_address') }}</textarea>
 							  
 						  </div>
 					  </div>
@@ -189,21 +189,21 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="student_mobile" class="">Mobile<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="student_mobile" name="student_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10" required>
+                          <input type="text" id="student_mobile" name="student_mobile"  class="form-control numeric" value="{{ old('student_mobile') }}" autocomplete="off" maxlength="10" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="email" class="">Email<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="email" id="email" name="email"  class="form-control email" value="" autocomplete="off" maxlength="40" required>
+                          <input type="email" id="email" name="email"  class="form-control email" value="{{ old('email') }}" autocomplete="off" maxlength="40" required>
                       </div>
                   </div>
 				   
 					  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<label for="present_address" class="">Present Address</label>
-							<textarea type="text" id="present_address" name="present_address" rows="2" class="form-control md-textarea address" autocomplete="off" maxlength="250" required></textarea>
+							<textarea type="text" id="present_address" name="present_address" rows="2" class="form-control md-textarea address" autocomplete="off" maxlength="250" required>{{ old('present_address') }}</textarea>
 							  
 						  </div>
 					  </div>
@@ -217,7 +217,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="father_name" class="">Father's Name <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="father_name" name="father_name"  class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
+                          <input type="text" id="father_name" name="father_name"  class="form-control alpha" value="{{ old('father_name') }}" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -225,7 +225,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="father_qualification" class="">Father's Education Qualification <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="father_qualification" name="father_qualification"  class="form-control" value="" autocomplete="off" maxlength="30"required>
+                          <input type="text" id="father_qualification" name="father_qualification"  class="form-control" value="{{ old('father_qualification') }}" autocomplete="off" maxlength="30"required>
                           
                       </div>
                   </div>
@@ -233,7 +233,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="father_occupation" class="">Father's Occupation <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="father_occupation" name="father_occupation"  class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
+                          <input type="text" id="father_occupation" name="father_occupation"  class="form-control alpha" value="{{ old('father_occupation') }}" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -241,7 +241,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="father_mobile" class="">Father's Mobile No. <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="father_mobile" name="father_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10" required>
+                          <input type="text" id="father_mobile" name="father_mobile"  class="form-control numeric" value="{{ old('father_mobile') }}" autocomplete="off" maxlength="10" required>
                           
                       </div>
                   </div>
@@ -249,7 +249,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="mother_name" class="">Mother's Name <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="mother_name" name="mother_name"  class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
+                          <input type="text" id="mother_name" name="mother_name"  class="form-control alpha" value="{{ old('mother_name') }}" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -257,7 +257,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="mother_qualification" class="">Mother's Education Qualification <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="mother_qualification" name="mother_qualification"  class="form-control" value="" autocomplete="off" maxlength="30" required>
+                          <input type="text" id="mother_qualification" name="mother_qualification"  class="form-control" value="{{ old('mother_qualification') }}" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -265,7 +265,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="mother_occupation" class="">Mother's Occupation <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="mother_occupation" name="mother_occupation"  class="form-control alpha" value="" autocomplete="off" maxlength="30" required>
+                          <input type="text" id="mother_occupation" name="mother_occupation"  class="form-control alpha" value="{{ old('mother_occupation') }}" autocomplete="off" maxlength="30" required>
                           
                       </div>
                   </div>
@@ -273,7 +273,7 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="mother_mobile" class="">Mother's Mobile No. <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="mother_mobile" name="mother_mobile"  class="form-control numeric" value="" autocomplete="off" maxlength="10" required>
+                          <input type="text" id="mother_mobile" name="mother_mobile"  class="form-control numeric" value="{{ old('mother_mobile') }}" autocomplete="off" maxlength="10" required>
                           
                       </div>
                   </div>
@@ -283,7 +283,7 @@
                   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="family_income" class="">Annual Family Income<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="family_income" name="family_income" class="form-control numeric" value="" autocomplete="off" maxlength="10" required>
+                          <input type="text" id="family_income" name="family_income" class="form-control numeric" value="{{ old('family_income') }}" autocomplete="off" maxlength="10" required>
                       </div>
                   </div>
                   
@@ -297,7 +297,7 @@
 				  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<label for="last_school_name_address" class="">Name of the School Last Attended with Address</label>
-							<textarea type="text" id="last_school_name_address" name="last_school_name_address" rows="2" class="form-control md-textarea address" autocomplete="off" required></textarea>
+							<textarea type="text" id="last_school_name_address" name="last_school_name_address" rows="2" class="form-control md-textarea address" autocomplete="off" required>{{ old('present_address') }}</textarea>
 							  
 						  </div>
 				  </div>
@@ -305,28 +305,28 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="board_name" class="">Name of the Board<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="board_name" name="board_name" class="form-control" value="" autocomplete="off" maxlength="100" required>
+                          <input type="text" id="board_name" name="board_name" class="form-control" value="{{ old('board_name') }}" autocomplete="off" maxlength="100" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="board_registration_no" class="">Registration No<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="board_registration_no" name="board_registration_no" class="form-control" value="" autocomplete="off" maxlength="50" required>
+                          <input type="text" id="board_registration_no" name="board_registration_no" class="form-control" value="{{ old('board_registration_no') }}" autocomplete="off" maxlength="50" required>
                       </div>
                   </div>
 				  
 				   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="board_roll_no" class="">Board  Roll No<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="board_roll_no" name="board_roll_no" class="form-control" value="" autocomplete="off" maxlength="30" required>
+                          <input type="text" id="board_roll_no" name="board_roll_no" class="form-control" value="{{ old('board_roll_no') }}" autocomplete="off" maxlength="30" required>
                       </div>
                   </div>
 				   
 				   <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="passing_year" class="">Year Of Passing<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="passing_year" name="passing_year" class="form-control numeric" value="" autocomplete="off" maxlength="4" required>
+                          <input type="text" id="passing_year" name="passing_year" class="form-control numeric" value="{{ old('passing_year') }}" autocomplete="off" maxlength="4" required>
                       </div>
                   </div>
                   
@@ -340,35 +340,35 @@
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="english_marks" class="">English<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="english_marks" name="english_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
+                          <input type="text" id="english_marks" name="english_marks" class="form-control decimal" value="{{ old('english_marks') }}" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="science_marks" class="">Science<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="science_marks" name="science_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
+                          <input type="text" id="science_marks" name="science_marks" class="form-control decimal" value="{{ old('science_marks') }}" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="math_marks" class="">Maths<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="math_marks" name="math_marks" class="form-control decimal" value="" autocomplete="off" maxlength="3" required>
+                          <input type="text" id="math_marks" name="math_marks" class="form-control decimal" value="{{ old('math_marks') }}" autocomplete="off" maxlength="3" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="marks_percentage" class="">Percentage<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="marks_percentage" name="marks_percentage" class="form-control decimal" value="" autocomplete="off" maxlength="5" required>
+                          <input type="text" id="marks_percentage" name="marks_percentage" class="form-control decimal" value="{{ old('marks_percentage') }}" autocomplete="off" maxlength="5" required>
                       </div>
                   </div>
 				  
 				  <div class="col-md-6">
                       <div class="md-form mb-0">
                         <label for="exam_medium" class="">Medium Of Exam<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" id="exam_medium" name="exam_medium" class="form-control alpha" value="" autocomplete="off" maxlength="15" required>
+                          <input type="text" id="exam_medium" name="exam_medium" class="form-control alpha" value="{{ old('exam_medium') }}" autocomplete="off" maxlength="15" required>
                       </div>
                   </div>
                   
@@ -377,11 +377,17 @@
 				<div class="row">
 				  
 				  <h4> VI . Subject Selection </h4> 
-				  
+				  <?php $old_selected_subjects = array(); 
+				  if(old('selected_subjects')){
+					$old_selected_subjects=old('selected_subjects');
+				  }
+				  ?>
+
+
 				  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<div class="checkbox">
-							  <label><input type="checkbox" name="selected_subjects[]" value="2"><strong>1. English Core (301)</strong></label>
+							  <label><input type="checkbox" name="selected_subjects[]" value="2" <?php echo(in_array(2,$old_selected_subjects))?'checked="checked"':''?>><strong>1. English Core (301)</strong></label>
 							</div>
 						  </div>
 				  </div> 
@@ -389,7 +395,7 @@
 				  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<div class="checkbox">
-							  <label><input type="checkbox" name="selected_subjects[]" value="8"><strong>2. Physics (042)</strong></label>
+							  <label><input type="checkbox" name="selected_subjects[]" value="8" <?php echo(in_array(8,$old_selected_subjects))?'checked="checked"':''?>><strong>2. Physics (042)</strong></label>
 							</div>
 						  </div>
 				  </div> 
@@ -397,7 +403,7 @@
 				  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<div class="checkbox">
-							  <label><input type="checkbox" name="selected_subjects[]" value="9"><strong>3. Chemistry (043)</strong></label>
+							  <label><input type="checkbox" name="selected_subjects[]" value="9" <?php echo(in_array(9,$old_selected_subjects))?'checked="checked"':''?>><strong>3. Chemistry (043)</strong></label>
 							</div>
 						  </div>
 				  </div>
@@ -405,7 +411,7 @@
 				 <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<div class="checkbox">
-							  <label><input type="checkbox" name="selected_subjects[]" value="3"><strong>4. Math (041)</strong></label>
+							  <label><input type="checkbox" name="selected_subjects[]" value="3" <?php echo(in_array(3,$old_selected_subjects))?'checked="checked"':''?>><strong>4. Math (041)</strong></label>
 							</div>
 						  </div>
 				  </div>
@@ -413,7 +419,7 @@
 				  <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<div class="checkbox">
-							  <label><input type="checkbox" name="selected_subjects[]" value="10"><strong>5. Biology (044)</strong></label>
+							  <label><input type="checkbox" name="selected_subjects[]" value="10" <?php echo(in_array(10,$old_selected_subjects))?'checked="checked"':''?>><strong>5. Biology (044)</strong></label>
 							</div>
 						  </div>
 				  </div>
@@ -421,7 +427,7 @@
 				 <div class="col-md-12">
 						  <div class="md-form mb-0">
 							<div class="checkbox">
-							  <label><input type="checkbox" name="selected_subjects[]" value="27"><strong>6. Physical Education (048)</strong></label>
+							  <label><input type="checkbox" name="selected_subjects[]" value="27" <?php echo(in_array(27,$old_selected_subjects))?'checked="checked"':''?>><strong>6. Physical Education (048)</strong></label>
 							</div>
 						  </div>
 				  </div>
@@ -436,18 +442,22 @@
 				
 				<div class="col-md-12">
                       <div class="md-form mb-0">
-                        <label for="student_photo" class="">1. Please Upload Child Photograph: (Maximum Size 200kb)<span style="font-size:15px;color: red;">*</span></label>
-                          <input type="file" id="student_photo" name="student_photo" class="form-control" value="" autocomplete="off" required>
+                        <label for="student_photo" class="">1. Upload Student Photograph: (format: .jpg,.png, maximum size: 200kb)<span style="font-size:15px;color: red;">*</span></label>
+                          <input type="file" id="student_photo" name="student_photo" class="form-control" required>
                       </div>
                   </div>
 				  
+				  <p id="student_photo_size"></p>
+				  
 				<div class="col-md-12">
                       <div class="md-form mb-0">
-                        <label for="student_marksheet" class="">2. Please upload Board Mark sheet: (Maximum Size 200kb)  <span style="font-size:15px;color: red;">*</span></label>
+                        <label for="student_marksheet" class="">2. Upload Board Mark sheet: (format: .jpg,.png,.pdf maximum size :200kb)  <span style="font-size:15px;color: red;">*</span></label>
                           
-						  <input type="file" id="student_marksheet" name="student_marksheet" class="form-control" value="" autocomplete="off" required>
+						  <input type="file" id="student_marksheet" name="student_marksheet" class="form-control" required>
                       </div>
                   </div>
+				  
+				  <p id="student_marksheet_size"></p>
 				  
 				 </div>
 				  
@@ -764,14 +774,65 @@ Before pressing the submit button, please ensure that the all information is cor
 	
 <script type="text/javascript">
            				
-               $("#dob").datepicker({
-					dateFormat: 'dd-mm-yy',
-					//showOtherMonths: true,
-					changeMonth: true,
-					changeYear: true,
-					maxDate:0,
-					yearRange: '1990:' + new Date().getFullYear().toString()
-				}); 
+$("#dob").datepicker({
+	dateFormat: 'dd-mm-yy',
+	//showOtherMonths: true,
+	changeMonth: true,
+	changeYear: true,
+	maxDate:0,
+	yearRange: '1990:' + new Date().getFullYear().toString()
+}); 
+
+ $('#student_photo').on('change', function() {  
+	
+	// Type validation	
+    var filePath = $('#student_photo').val(); 
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extensions .jpeg/.jpg/.png only.');
+        $('#student_photo').val('');
+        return false;
+    }
+	
+	//size validation
+	const photo_file_size =  
+	   (this.files[0].size / 1024).toFixed(2); 
+
+	if (photo_file_size > 200) { 
+		alert("File should not be greater than 200 KB"); 
+		$('#student_photo').val('');
+	} else { 
+		$("#student_photo_size").html('<b>' + 
+		   'File size: ' + photo_file_size + " KB" + '</b>'); 
+	} 
+	
+	
+	
+}); 
+
+$('#student_marksheet').on('change', function() {  
+	
+	// Type validation	
+    var filePath = $('#student_marksheet').val(); 
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extensions .jpeg/.jpg/.png/.pdf only.');
+        $('#student_marksheet').val('');
+        return false;
+    }
+	
+	//size validation
+	const marksheet_file_size =  
+	   (this.files[0].size / 1024).toFixed(2); 
+
+	if (marksheet_file_size > 200) { 
+		alert("File should not be greater than 200 KB"); 
+		$('#student_marksheet').val(''); 
+	} else { 
+		$("#student_marksheet_size").html('<b>' + 
+		   'File size: ' + marksheet_file_size + " KB" + '</b>'); 
+	} 
+}); 
 				
 
         </script>
