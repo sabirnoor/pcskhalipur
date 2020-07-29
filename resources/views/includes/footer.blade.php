@@ -17,6 +17,10 @@
 			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="{{url('contact')}}"> Contact Us</a></span></li>-->
 			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="#"> Own a School</a></span></li>
 			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="#"> FAQs.</a></span></li>
+			
+			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="{{url('term-cond')}}"> Term & Condition </a></span></li>
+			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="{{url('privacy-policy')}}"> Privacy policy</a></span></li>
+			<li><i class="fa fa-check" aria-hidden="true"></i> <span><a href="{{url('refund-policy')}}"> Refund policy</a></span></li>
 		</ul>
 	</div>
 	<!-- /col-lg-4 -->

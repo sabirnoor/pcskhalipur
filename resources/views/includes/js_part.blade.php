@@ -5,6 +5,10 @@
 <script src="{{asset('public/assets/js/bootstrap-dropdownhover.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/assets/js/jquery.easing.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/assets/js/jquery.easy-ticker.js')}}"></script> 
+<script type="text/javascript" src="{{asset('public/assets/js/validation.js')}}"></script> 
+<script src="{{ asset('public/assets/js/jquery-ui.min.js') }}"></script>        
+<script src="{{ asset('public/assets/js/jquery-ui.custom.min.js') }}"></script>
+ 
 <script type="text/javascript">
 
 	$(document).ready(function () {
