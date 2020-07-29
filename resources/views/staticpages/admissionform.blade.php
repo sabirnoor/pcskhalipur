@@ -10,7 +10,7 @@
         @show
 		
 		<style>
-		ul {
+		ul.info {
 			list-style-type: disc !important;
 			padding-left:1em !important;
 			margin-left:1em;
@@ -61,10 +61,15 @@
 
 
   <div class="row">
+  
+  @if(Session::has('msgerror'))
+		<p style="color: red;">{{ Session::get('msgerror') }}</p>
+		@endif
+		
 
       <!--Grid column-->
       <div class="col-md-12 mb-md-0 mb-5">
-          <form id="admission-form" name="admission-form" action="{{url('admission')}}" method="POST" autocomplete="off" enctype="multipart/from-data">
+          <form id="admission-form" name="admission-form" action="{{url('admission')}}" method="POST" autocomplete="off" enctype="multipart/form-data" onsubmit = "return(validate());">
             {{csrf_field()}}
             
 			  <h4>I. Personal Information</h4>
@@ -451,7 +456,7 @@
 				
 <p>DECLARATION: I / We hereby certify that the above information provided by me / us is correct and I / We understand that if the information is found to be incorrect or false, the ward shall be automatically debarred from selection / admission process without any correspondence in this regard. I / We also understand that the application / registration / short listing does not guarantee admission to my ward. I / We accept the process of admission undertaken by the school and I / We will abide by the decision taken by the school authority. I / We understand that :</p>
 
-<ul>
+<ul class="info">
     <li>This admission is purely provisional and will be confirmed on submission of documents and subject to acceptance of the candidature by CBSE / Other Boards.</li>
     <li>I hereby declare that the particulars given in respect of my son / daughter / ward are true to the best of my knowledge and I shall not request the authorities of any alteration in date of birth etc. given above.</li>
     <li>My ward will pass subjectly as well as aggregate in all the examinations held during the session.</li>
@@ -463,13 +468,14 @@
 <p>
 Before pressing the submit button, please ensure that the all information is correct. After submit this form you will not able to modify any field. Are you sure to Submit this form?</p>
 
-        
+         
+		 <div class="text-lrft text-md-left">
+              <input type="submit" name="submit" value="Submit" class="btn btn-lg btn-primary" />
+          </div>
 		
           </form>
 
-          <div class="text-lrft text-md-left submitdiv">
-              <a class="btn btn-primary submitadmission" >Submit</a>
-          </div>
+          
           <div class="status" style="text-align:center;font-size:18px; color:green;"></div>
       </div>
       <!--Grid column-->
@@ -516,8 +522,7 @@ Before pressing the submit button, please ensure that the all information is cor
     @show
     
     <script>
-      $('.submitadmission').on('click', function(event){
-        event.preventDefault();
+     function validate() {
         
 		var present_class = $('#present_class').val();
         if($.trim(present_class) === ''){
@@ -533,7 +538,7 @@ Before pressing the submit button, please ensure that the all information is cor
           return false;
         }
 		
-		var dob = $('#dob').val();
+		/*var dob = $('#dob').val();
 		if($.trim(dob) === ''){
 		  alert('Please enter date of birth.');
 		  $( "#dob" ).focus();
@@ -748,32 +753,9 @@ Before pressing the submit button, please ensure that the all information is cor
 		  alert('Please enter exam medium');
 		  $( "#exam_medium" ).focus();
 		  return false;
-		}
+		}*/
 
-        var PostData = $('#admission-form').serialize();
-		
-		
-        $.ajax({
-            type: "POST",
-            url: $('#admission-form').attr('action'),
-            dataType: 'json',
-            data: PostData,
-            beforeSend: function() { 
-                $('.submitadmission').html('Please wait...');
-            },
-            success: function(data) {
-                if (data.success) {
-                  $('#admission-form').hide();
-                  $('.submitdiv').hide();
-                  $('.status').html(data.message);
-                  $('.submitadmission').html('Submit');
-                } else {
-                    alert(data.message);
-                    $('.submitadmission').html('Submit');
-                }
-            }
-        });
-        //$('#admission-form').submit();
+        return true;
         
       });
       </script>
@@ -789,12 +771,7 @@ Before pressing the submit button, please ensure that the all information is cor
 					maxDate:0,
 					yearRange: '1990:' + new Date().getFullYear().toString()
 				}); 
-				/*
 				
-				*/
-
-				//$('[data-toggle="datepicker"]').datepicker();
-
 
         </script>
 		

@@ -23,6 +23,7 @@ use App\Quizresult;
 use App\Quizanswer;
 use App\Quizinvitation;
 use App\Studentmaster;
+use Validator;
 class DashboardController extends Controller
 {
 	
@@ -703,146 +704,119 @@ class DashboardController extends Controller
 			//pr($post);die;
 			
 			if(empty(trim($post['present_class']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter present class.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter present class.');
 			}
 			if(empty(trim($post['student_name']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter student name.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter student name.');				
 			}
 			if(empty(trim($post['dob']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter date of birth.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter date of birth.');
 			}
-			if(empty(trim($post['dob_in_words']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter date of birth in words.'));
-				exit;
+			/*if(empty(trim($post['dob_in_words']))){
+				return redirect('admission')->with('msgerror', 'Please enter date of birth in words.');
+				
 			}
 			if(empty(trim($post['nationality']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter nationality.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter nationality.');				
 			}
 			if(empty(trim($post['aadharno']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter aadhar no.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter aadhar no.');
 			}
 			if(empty(trim($post['religion']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter religion.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter religion.');
 			}
 			if(empty(trim($post['sex']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter gender.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter gender.');
 			}
 			if(empty(trim($post['social_category']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter social category.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter social category.');
 			}	
 			if(empty(trim($post['blood_group']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter blood group.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter blood group.');
 			}	
 			if(empty(trim($post['permanent_address']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter permanent address.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter permanent address.');
 			}
 			if(empty(trim($post['student_mobile']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter mobile no.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter mobile no.');
 			}
 			if(empty(trim($post['email']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter email.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter email.');
 			}	
 			if(empty(trim($post['present_address']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter present address.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter present address.');
 			}
 			if(empty(trim($post['father_name']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter father name.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter father name.');
 			}
 			if(empty(trim($post['father_qualification']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter father qualification.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter father qualification.');
 			}
 			if(empty(trim($post['father_occupation']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter father occupation.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter father occupation.');
 			}
 			if(empty(trim($post['father_mobile']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter father mobile.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter father mobile.');
 			}
 			if(empty(trim($post['mother_name']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter mother name.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter mother name.');
 			}
 			if(empty(trim($post['mother_qualification']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter mother qualification.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter mother qualification.');
 			}
 			if(empty(trim($post['mother_occupation']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter mother occupation.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter mother occupation.');
 			}
 			if(empty(trim($post['mother_mobile']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter mother mobile.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter mother mobile.');
 			}
 			if(empty(trim($post['family_income']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter family income.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter family income.');
 			}
 			if(empty(trim($post['last_school_name_address']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter last school name & address.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter last school name & address.');
 			}			
 			if(empty(trim($post['board_name']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter board name.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter board name.');
 			}
 			if(empty(trim($post['board_registration_no']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter board registration no.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter board registration no.');
 			}
 			if(empty(trim($post['board_roll_no']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter board roll no.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter board roll no.');
 			}
 			if(empty(trim($post['passing_year']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter passing year.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter passing year.');
 			}
 			if(empty(trim($post['english_marks']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter english marks.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter english marks.');
 			}
 			if(empty(trim($post['science_marks']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter science marks.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter science marks.');
 			}
 			if(empty(trim($post['math_marks']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter math marks.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter math marks.');
 			}
 			if(empty(trim($post['marks_percentage']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter marks percentage.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter marks percentage.');
 			}
 			if(empty(trim($post['exam_medium']))){
-				echo json_encode(array('success'=>false, 'message'=>'Please enter exam medium.'));
-				exit;
+				return redirect('admission')->with('msgerror', 'Please enter exam medium.');
+			}*/
+			
+			$selected_subjects = @implode(',',$post['selected_subjects']);
+			
+			if(empty($selected_subjects)){
+				return redirect('admission')->with('msgerror', 'Please select subjects.');
 			}
 			
-			
-			$dt = explode('-',$post['dob']);
+			$dt = @explode('-',$post['dob']);
 		    $dob = $dt[2].'-'.$dt[1].'-'.$dt[0]; 
 			
-			$selected_subjects = implode(',',$post['selected_subjects']);
-			
+			$admission_ref_no = date('Ymd').rand(10,99);
 			
 			$dataStudent = array(
+                'admission_ref_no' => $admission_ref_no,                
                 'present_class' => $post['present_class'],                
                 'student_name' => $post['student_name'],                
 				'Date_of_Birth' => $dob,
@@ -880,16 +854,15 @@ class DashboardController extends Controller
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
 			);
-			
+			//print_r($request->all());
 			$imageName='';
-			if ($request->has('student_photo')) { //docx,doc,pdf,PDF
+			if ($request->hasFile('student_photo')) { //echo 1; exit;
                 $rules = array(
-                    'student_photo' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:900000',
+                    'student_photo' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:200000',
                 );
                 $validator = Validator::make($post, $rules);
                 if($validator->fails()) {
-                    echo json_encode(array('success'=>false, 'message'=>'file should be jpg/png.'));
-					exit;
+                    return redirect('admission')->with('msgerror', 'Photo should be jpg/png and size should not be greater than 200kb.');
                 }
                 if(!is_dir("public/upload/student_photo/")) {
                     mkdir("public/upload/student_photo/", 0777, true);
@@ -897,28 +870,29 @@ class DashboardController extends Controller
                 $image = $request->file('student_photo');
                 $imageName = $image->getClientOriginalName();
 				
-                $file = explode('.', $imageName);
+                $file = explode('.', $imageName);  //echo 'img:  '.$imageName; exit;
                 $imageName = $file[0]. '_' . md5(microtime()) . '.' . end($file);
 				$imageName = str_replace(' ','_',$imageName);
-                if (!file_exists(upload_path() . 'student_photo/'. $imageName)) {
-                    $path = upload_path() . 'student_photo/';
+                if (!file_exists('public/upload/student_photo/'. $imageName)) {
+                    $path = 'public/upload/student_photo/';
                     $image->move($path, $imageName);
                 }
             }
-            
+			
+			
+           
             if(!empty($imageName)){
-                $data['student_photo'] = $imageName;
+                $dataStudent['student_photo'] = $imageName;
             }
 			
 			$imageName='';
-			if ($request->has('student_marksheet')) { 
+			if ($request->hasFile('student_marksheet')) { 
                 $rules = array(
-                    'student_marksheet' => 'required | mimes:docx,doc,pdf,PDF | max:900000',
+                    'student_marksheet' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:200000',
                 );
                 $validator = Validator::make($post, $rules);
                 if($validator->fails()) {
-                    echo json_encode(array('success'=>false, 'message'=>'file should be jpg/png.'));
-					exit;
+                     return redirect('admission')->with('msgerror', 'Marksheet should be jpg/png and size should not be greater than 200kb.');
                 }
                 if(!is_dir("public/upload/student_marksheet/")) {
                     mkdir("public/upload/student_marksheet/", 0777, true);
@@ -929,28 +903,33 @@ class DashboardController extends Controller
                 $file = explode('.', $imageName);
                 $imageName = $file[0]. '_' . md5(microtime()) . '.' . end($file);
 				$imageName = str_replace(' ','_',$imageName);
-                if (!file_exists(upload_path() . 'student_marksheet/'. $imageName)) {
-                    $path = upload_path() . 'student_marksheet/';
+                if (!file_exists('public/upload/student_marksheet/'. $imageName)) {
+                    $path = 'public/upload/student_marksheet/';
                     $image->move($path, $imageName);
                 }
             }
             
             if(!empty($imageName)){
-                $data['student_marksheet'] = $imageName;
+                $dataStudent['student_marksheet'] = $imageName;
             }
 			
 			$insertGetId = DB::table('student_master')->insertGetId($dataStudent);
 			
 			if($insertGetId){
-				echo json_encode(array('success'=>true, 'message'=>'Form submitted Successfully'));
-				exit;
+				
+				return redirect(url('admission-success'))->with('msg', "Congrats! Registration form submitted successfully with reference no:$admission_ref_no.");
+				
 			}else{
-				echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
-				exit;
+				//echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
+				//exit;
 			}
 			
 		}
 		return view('staticpages/admissionform');
+	}
+	
+	public function admissionsuccess(Request $request){
+		return view('staticpages/admissionsuccess');
 	}
 		
 }	
