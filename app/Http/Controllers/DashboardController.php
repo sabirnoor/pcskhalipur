@@ -704,116 +704,114 @@ class DashboardController extends Controller
 			//pr($post);die;
 			
 			if(empty(trim($post['present_class']))){
-				return redirect('admission')->with('msgerror', 'Please enter present class.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter present class.');
 			}
 			if(empty(trim($post['student_name']))){
-				return redirect('admission')->with('msgerror', 'Please enter student name.');				
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter student name.');
 			}
 			if(empty(trim($post['dob']))){
-				return redirect('admission')->with('msgerror', 'Please enter date of birth.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter date of birth.');
 			}
 			if(empty(trim($post['dob_in_words']))){
-				return redirect('admission')->with('msgerror', 'Please enter date of birth in words.');
-				
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter date of birth in words.');
 			}
 			if(empty(trim($post['nationality']))){
-				return redirect('admission')->with('msgerror', 'Please enter nationality.');				
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter nationality.');				
 			}
 			if(empty(trim($post['aadharno']))){
-				return redirect('admission')->with('msgerror', 'Please enter aadhar no.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter aadhar no.');
 			}
 			if(empty(trim($post['religion']))){
-				return redirect('admission')->with('msgerror', 'Please enter religion.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter religion.');
 			}
 			if(empty(trim($post['sex']))){
-				return redirect('admission')->with('msgerror', 'Please enter gender.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter gender.');
 			}
 			if(empty(trim($post['social_category']))){
-				return redirect('admission')->with('msgerror', 'Please enter social category.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter social category.');
 			}	
 			if(empty(trim($post['blood_group']))){
-				return redirect('admission')->with('msgerror', 'Please enter blood group.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter blood group.');
 			}	
 			if(empty(trim($post['permanent_address']))){
-				return redirect('admission')->with('msgerror', 'Please enter permanent address.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter permanent address.');
 			}
 			if(empty(trim($post['student_mobile']))){
-				return redirect('admission')->with('msgerror', 'Please enter mobile no.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter mobile no.');
 			}
 			if(empty(trim($post['email']))){
-				return redirect('admission')->with('msgerror', 'Please enter email.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter email.');
 			}	
 			if(empty(trim($post['present_address']))){
-				return redirect('admission')->with('msgerror', 'Please enter present address.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter present address.');
 			}
 			if(empty(trim($post['father_name']))){
-				return redirect('admission')->with('msgerror', 'Please enter father name.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter father name.');
 			}
 			if(empty(trim($post['father_qualification']))){
-				return redirect('admission')->with('msgerror', 'Please enter father qualification.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter father qualification.');
 			}
 			if(empty(trim($post['father_occupation']))){
-				return redirect('admission')->with('msgerror', 'Please enter father occupation.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter father occupation.');
 			}
 			if(empty(trim($post['father_mobile']))){
-				return redirect('admission')->with('msgerror', 'Please enter father mobile.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter father mobile.');
 			}
 			if(empty(trim($post['mother_name']))){
-				return redirect('admission')->with('msgerror', 'Please enter mother name.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter mother name.');
 			}
 			if(empty(trim($post['mother_qualification']))){
-				return redirect('admission')->with('msgerror', 'Please enter mother qualification.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter mother qualification.');
 			}
 			if(empty(trim($post['mother_occupation']))){
-				return redirect('admission')->with('msgerror', 'Please enter mother occupation.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter mother occupation.');
 			}
 			if(empty(trim($post['mother_mobile']))){
-				return redirect('admission')->with('msgerror', 'Please enter mother mobile.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter mother mobile.');
 			}
 			if(empty(trim($post['family_income']))){
-				return redirect('admission')->with('msgerror', 'Please enter family income.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter family income.');
 			}
 			if(empty(trim($post['last_school_name_address']))){
-				return redirect('admission')->with('msgerror', 'Please enter last school name & address.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter last school name & address.');
 			}			
 			if(empty(trim($post['board_name']))){
-				return redirect('admission')->with('msgerror', 'Please enter board name.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter board name.');
 			}
 			if(empty(trim($post['board_registration_no']))){
-				return redirect('admission')->with('msgerror', 'Please enter board registration no.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter board registration no.');
 			}
 			if(empty(trim($post['board_roll_no']))){
-				return redirect('admission')->with('msgerror', 'Please enter board roll no.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter board roll no.');
 			}
 			if(empty(trim($post['passing_year']))){
-				return redirect('admission')->with('msgerror', 'Please enter passing year.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter passing year.');
 			}
 			if(empty(trim($post['english_marks']))){
-				return redirect('admission')->with('msgerror', 'Please enter english marks.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter english marks.');
 			}
 			if(empty(trim($post['science_marks']))){
-				return redirect('admission')->with('msgerror', 'Please enter science marks.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter science marks.');
 			}
 			if(empty(trim($post['math_marks']))){
-				return redirect('admission')->with('msgerror', 'Please enter math marks.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter math marks.');
 			}
 			if(empty(trim($post['marks_percentage']))){
-				return redirect('admission')->with('msgerror', 'Please enter marks percentage.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter marks percentage.');
 			}
 			if(empty(trim($post['exam_medium']))){
-				return redirect('admission')->with('msgerror', 'Please enter exam medium.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please enter exam medium.');
 			}
 			
 			$selected_subjects = @implode(',',$post['selected_subjects']);
 			
 			if(empty($selected_subjects)){
-				return redirect('admission')->with('msgerror', 'Please select subjects.');
+				return redirect()->back()->withInput()->with('msgerror', 'Please select subjects.');
 			}
 			
 			$dt = @explode('-',$post['dob']);
-		    $dob = $dt[2].'-'.$dt[1].'-'.$dt[0]; 
-			
-			$admission_ref_no = date('Ymd').rand(10,99);
+		    $dob = $dt[2].'-'.$dt[1].'-'.$dt[0]; 			
+			$admission_ref_no = date('Ymd').rand(10,99);  //generate reference number
 			
 			$dataStudent = array(
                 'admission_ref_no' => $admission_ref_no,                
@@ -856,14 +854,16 @@ class DashboardController extends Controller
                 'updated_at' => date('Y-m-d H:i:s')
 			);
 			//print_r($request->all());
+			
+			//upload student photo
 			$imageName='';
 			if ($request->hasFile('student_photo')) { //echo 1; exit;
                 $rules = array(
-                    'student_photo' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:200000',
+                    'student_photo' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:200'
                 );
                 $validator = Validator::make($post, $rules);
                 if($validator->fails()) {
-                    return redirect('admission')->with('msgerror', 'Photo should be jpg/png and size should not be greater than 200kb.');
+                    return redirect()->back()->withInput()->with('msgerror', 'Photo should be jpg/png and size should not be greater than 200kb.');
                 }
                 if(!is_dir("public/upload/student_photo/")) {
                     mkdir("public/upload/student_photo/", 0777, true);
@@ -878,22 +878,24 @@ class DashboardController extends Controller
                     $path = 'public/upload/student_photo/';
                     $image->move($path, $imageName);
                 }
-            }
-			
+            }else{
+				return redirect()->back()->withInput()->with('msgerror', 'Photo is required.');
+			}		
 			
            
             if(!empty($imageName)){
                 $dataStudent['student_photo'] = $imageName;
             }
 			
+			//upload student marksheet
 			$imageName='';
 			if ($request->hasFile('student_marksheet')) { 
                 $rules = array(
-                    'student_marksheet' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:200000',
+                    'student_marksheet' => 'required | mimes:jpg,jpeg,png,pdf,JPG,JPEG,PNG,PDF | max:200'
                 );
                 $validator = Validator::make($post, $rules);
                 if($validator->fails()) {
-                     return redirect('admission')->with('msgerror', 'Marksheet should be jpg/png and size should not be greater than 200kb.');
+                     return redirect()->back()->withInput()->with('msgerror', 'Marksheet should be jpg/png and size should not be greater than 200kb.');
                 }
                 if(!is_dir("public/upload/student_marksheet/")) {
                     mkdir("public/upload/student_marksheet/", 0777, true);
@@ -908,21 +910,21 @@ class DashboardController extends Controller
                     $path = 'public/upload/student_marksheet/';
                     $image->move($path, $imageName);
                 }
-            }
+            }else{
+				return redirect()->back()->withInput()->with('msgerror', 'Marksheet is required.');
+			}
             
             if(!empty($imageName)){
                 $dataStudent['student_marksheet'] = $imageName;
             }
 			
+			//Finally submit student info
 			$insertGetId = DB::table('student_master')->insertGetId($dataStudent);
 			
 			if($insertGetId){
-				
 				return redirect(url('admission-success/'.$admission_ref_no));
-				
 			}else{
-				//echo json_encode(array('success'=>false, 'message'=>'Oops unable to submit! try again.'));
-				//exit;
+				return redirect()->back()->withInput()->with('msgerror', 'Oops unable to submit! try again.');
 			}
 			
 		}
