@@ -23,6 +23,10 @@
 
 $(document).ready(function(){
 
+	$('.PayNow').click(function(){
+		document.getElementById('PayNow').click();
+	});
+
 $('.numbers').keyup(function(e)
                                 {
   if (/\D/g.test(this.value))

@@ -10,7 +10,7 @@ var options = {
     "currency": "{{$response['currency']}}",
     "name": "{{$response['name']}}",
     "description": "{{$response['description']}}",
-    "image": "https://example.com/your_logo", // You can give your logo url
+    "image": "{{asset('public/assets/img/pcs-logo.png')}}", // You can give your logo url
     "order_id": "{{$response['orderId']}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
         // After payment successfully made response will come here
@@ -55,5 +55,7 @@ document.getElementById('rzp-button1').onclick = function(e){
         <input type="text" class="form-control" id="rzp_paymentid"  name="rzp_paymentid">
         <input type="text" class="form-control" id="rzp_orderid" name="rzp_orderid">
         <input type="text" class="form-control" id="rzp_signature" name="rzp_signature">
+        <input type="text" class="form-control" id="ref_no"  value="{{$ref_no}}" name="ref_no">
+        <input type="text" class="form-control" id="amount"  value="{{$amount}}" name="amount">
     <button type="submit" id="rzp-paymentresponse" class="btn btn-primary">Submit</button>
 </form>

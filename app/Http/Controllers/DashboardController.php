@@ -15,6 +15,7 @@ use DB;
 use Illuminate\Support\Facades\Input;
 // for cart
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Crypt;
 use Cart;
 use Carbon\Carbon;
 use App\Quiz;
@@ -933,7 +934,17 @@ class DashboardController extends Controller
 	
 	public function admissionsuccess(Request $request,$ref_no){
 		//echo $ref_no; exit;
-		return view('staticpages/admissionsuccess',compact('ref_no'));
+		$studentData = DB::table('student_master')->select('*')->where('admission_ref_no',$ref_no)->first();
+		$mst_class = DB::table('mst_class')->select('*')->where('class_name',$studentData->present_class)->where('type','newadmission')->first();
+
+		$encrypted = trim($mst_class->fee_amount).'/'.trim($studentData->admission_ref_no);
+		$secureCode = base64_encode(base64_encode($encrypted));
+		//pr($studentData);
+		if($studentData->IsPayment == 1){
+			die('Payment already done. please contact administrator.');
+		}
+		
+		return view('staticpages/admissionsuccess',compact('ref_no','studentData','mst_class','secureCode'));
 	}
 		
 }	

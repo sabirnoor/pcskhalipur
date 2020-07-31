@@ -63,7 +63,7 @@ Route::get('/payment-initiate',function(){
 });
 
 Route::post('/payment-initiate-request','PaymentController@Initiate');
-Route::post('/payment-complete','PaymentController@Complete');
+Route::match(['get', 'post'],'/payment-complete','PaymentController@Complete');
 
 //Admission Form
 Route::match(['get', 'post'],'/admission', array('uses' => 'DashboardController@admissionform'));

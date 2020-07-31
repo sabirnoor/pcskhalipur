@@ -50,11 +50,57 @@
 
       </h1>
 	  <div class="clearfix">&nbsp;</div>
-      
-	  
 
+    <p>Congrats! Registration form submitted successfully with reference no: <?=$ref_no?>. Please proceed to pay</p>
+    <table class="responsive" width="100%">
+      <tbody>
+        
+      <tr>
+        <td>Student Name</td>
+        <td align="right">{{$studentData->student_name}}</td>
+      </tr>
+      <tr>
+        <td>Email Id</td>
+        <td align="right">{{$studentData->email}}</td>
+      </tr>
+      <tr>
+        <td>Contact Number</td>
+        <td align="right">{{$studentData->contact_no}}</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td align="right">{{$studentData->Address}}</td>
+      </tr>
+      <tr>
+        <td>Admission Fee</td>
+        <td align="right">{{$mst_class->fee_amount}}</td>
+      </tr>
+      
+      <tr>
+        <td align="right" colspan="2">
+          <button type="button" class="btn btn-primary PayNow">Pay Online</button>
+          <button type="button" style="float: right;" class="btn btn-primary">Pay Offline</button>
+        </td>
+      </tr>
+    </tbody></table>
 		
-		<p>Congrats! Registration form submitted successfully with reference no: <?=$ref_no?>. Please proceed to pay</p>
+		<form action="{{url('/payment-initiate-request')}}" method="POST" hidden>
+          <input type="hidden" value="{{csrf_token()}}" name="_token" /> 
+          <input type="text" class="form-control" id="name"  name="name" value="{{$studentData->student_name}}">
+      
+          <input type="text" class="form-control" id="email" name="email" value="{{$studentData->email}}">
+      
+          <input type="text" class="form-control" id="contactNumber" name="contactNumber" value="{{$studentData->contact_no}}">
+      
+          <input type="text" class="form-control" id="address" name="address" value="{{$studentData->Address}}">
+      
+          <input type="text" class="form-control" id="amount" name="amount" value="{{$mst_class->fee_amount}}">
+      <input type="text" class="form-control" id="admission_ref_no" value="{{$studentData->admission_ref_no}}" name="admission_ref_no">
+      <textarea name="secureCode">{{$secureCode}}</textarea>
+      
+
+      <button type="submit" id="PayNow" class="btn btn-primary">Submit</button>
+  </form>   
  
 
 
