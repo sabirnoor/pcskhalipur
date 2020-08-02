@@ -442,7 +442,7 @@
 				
 				<div class="col-md-12">
                       <div class="md-form mb-0">
-                        <label for="student_photo" class="">1. Upload Student Photograph: (format: .jpg/.jpeg/.png, maximum size: 200kb)<span style="font-size:15px;color: red;">*</span></label>
+                        <label for="student_photo" class="">1. Upload Student Photograph: (format: .jpg/.jpeg/.png, maximum size: 2Mb)<span style="font-size:15px;color: red;">*</span></label>
                           <input type="file" id="student_photo" name="student_photo" class="form-control" required>
                       </div>
                   </div>
@@ -451,7 +451,7 @@
 				  
 				<div class="col-md-12">
                       <div class="md-form mb-0">
-                        <label for="student_marksheet" class="">2. Upload Board Mark sheet: (format: .jpg/.jpeg/.png/.pdf maximum size :200kb)  <span style="font-size:15px;color: red;">*</span></label>
+                        <label for="student_marksheet" class="">2. Upload Board Mark sheet: (format: .jpg/.jpeg/.png/.pdf maximum size :2Mb)  <span style="font-size:15px;color: red;">*</span></label>
                           
 						  <input type="file" id="student_marksheet" name="student_marksheet" class="form-control" required>
                       </div>
@@ -799,12 +799,12 @@ $("#dob").datepicker({
 	const photo_file_size =  
 	   (this.files[0].size / 1024).toFixed(2); 
 
-	if (photo_file_size > 200) { 
-		alert("File should not be greater than 200 KB"); 
+	if (photo_file_size > 2049) { 
+		alert("File should not be greater than 2 MB"); 
 		$('#student_photo').val('');
 	} else { 
 		$("#student_photo_size").html('<b>' + 
-		   'File size: ' + photo_file_size + " KB" + '</b>'); 
+		   'File size: ' + photo_file_size + " kb" + '</b>'); 
 	} 
 	
 	
@@ -827,12 +827,12 @@ $('#student_marksheet').on('change', function() {
 	const marksheet_file_size =  
 	   (this.files[0].size / 1024).toFixed(2); 
 
-	if (marksheet_file_size > 200) { 
-		alert("File should not be greater than 200 KB"); 
+	if (marksheet_file_size > 2049) { 
+		alert("File should not be greater than 2 MB"); 
 		$('#student_marksheet').val(''); 
 	} else { 
 		$("#student_marksheet_size").html('<b>' + 
-		   'File size: ' + marksheet_file_size + " KB" + '</b>'); 
+		   'File size: ' + marksheet_file_size + " kb" + '</b>'); 
 	} 
 }); 
 				

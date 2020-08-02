@@ -860,11 +860,11 @@ class DashboardController extends Controller
 			$imageName='';
 			if ($request->hasFile('student_photo')) { //echo 1; exit;
                 $rules = array(
-                    'student_photo' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:200'
+                    'student_photo' => 'required | mimes:jpg,jpeg,png,JPG,JPEG,PNG | max:2049'
                 );
                 $validator = Validator::make($post, $rules);
                 if($validator->fails()) {
-                    return redirect()->back()->withInput()->with('msgerror', 'Photo should be jpg/png and size should not be greater than 200kb.');
+                    return redirect()->back()->withInput()->with('msgerror', 'Photo should be jpg/png and size should not be greater than 2 Mb.');
                 }
                 if(!is_dir("public/upload/student_photo/")) {
                     mkdir("public/upload/student_photo/", 0777, true);
@@ -892,11 +892,11 @@ class DashboardController extends Controller
 			$imageName='';
 			if ($request->hasFile('student_marksheet')) { 
                 $rules = array(
-                    'student_marksheet' => 'required | mimes:jpg,jpeg,png,pdf,JPG,JPEG,PNG,PDF | max:200'
+                    'student_marksheet' => 'required | mimes:jpg,jpeg,png,pdf,JPG,JPEG,PNG,PDF | max:2049'
                 );
                 $validator = Validator::make($post, $rules);
                 if($validator->fails()) {
-                     return redirect()->back()->withInput()->with('msgerror', 'Marksheet should be jpg/png and size should not be greater than 200kb.');
+                     return redirect()->back()->withInput()->with('msgerror', 'Marksheet should be jpg/png and size should not be greater than 2 MB.');
                 }
                 if(!is_dir("public/upload/student_marksheet/")) {
                     mkdir("public/upload/student_marksheet/", 0777, true);

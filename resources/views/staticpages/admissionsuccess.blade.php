@@ -79,7 +79,7 @@
       <tr>
         <td align="right" colspan="2">
           <button type="button" class="btn btn-primary PayNow">Pay Online</button>
-          <button type="button" style="float: right;" class="btn btn-primary">Pay Offline</button>
+          <button type="button" onClick="alert('Please contact administrator.')" style="float: right;" class="btn btn-primary">Pay Offline</button>
         </td>
       </tr>
     </tbody></table>

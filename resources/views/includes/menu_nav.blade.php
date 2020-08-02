@@ -49,7 +49,7 @@ $action = Request::segment(1);
 					</ul>
 				</li>
 					
-				<li><a href="{{url('academics')}}" class="<?php if($action=='academics'){echo 'active';} ?>">Academics </a>   </li>
+				<li><a href="{{url('admission')}}" class="<?php if($action=='admission'){echo 'active';} ?>">Admission </a>   </li>
 				<li><a href="{{url('school-profile')}}" class="<?php if($action=='school-profile'){echo 'active';} ?>">School Profile</a></li>
 				
 			   <li class="dropdown drop-menu-mob <?php if($action=='Syllabus'){echo 'active';} ?>">
