@@ -46,9 +46,9 @@
 
     <div class="col-sm-9 con-area">
 
-      <h1 class="heading">
+      <h1 class="heading" style="font-size: 30px;">
 
-        Admission Form<br>
+        REGISTRATION CUM ADMISSION FORM<br>
 
         <img src="{{asset('public/assets/img/hed-sep.jpg')}}" alt="">
 

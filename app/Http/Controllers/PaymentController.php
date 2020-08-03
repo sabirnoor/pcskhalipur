@@ -32,7 +32,7 @@ class PaymentController extends Controller
             die('Oops somethings went wrong');
         }
         if($studentData && $mst_class){
-
+            $amount = ($mst_class->discounted_fee_amount + $mst_class->registration_fee);
             // Generate random receipt id
             $receiptId = Str::random(20);
 
@@ -43,7 +43,7 @@ class PaymentController extends Controller
             // Creating order
             $order = $api->order->create(array(
                 'receipt' => $receiptId,
-                'amount' => $mst_class->fee_amount * 100,
+                'amount' => $amount * 100,
                 'currency' => 'INR'
                 )
             );
@@ -54,7 +54,7 @@ class PaymentController extends Controller
             $response = [
                 'orderId' => $order['id'],
                 'razorpayId' => $this->razorpayId,
-                'amount' => $mst_class->fee_amount * 100,
+                'amount' => $amount * 100,
                 'name' => $request->all()['name'],
                 'currency' => 'INR',
                 'email' => $request->all()['email'],
@@ -62,7 +62,7 @@ class PaymentController extends Controller
                 'address' => $request->all()['address'],
                 'description' => 'Testing description',
             ];
-            $amount = $mst_class->fee_amount;
+            //$amount = $mst_class->fee_amount;
             // Let's checkout payment page is it working
             return view('payment/payment-page',compact('response','ref_no','amount'));
         }else{

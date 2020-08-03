@@ -56,24 +56,36 @@
       <tbody>
         
       <tr>
-        <td>Student Name</td>
+        <td><b>Student Name</b></td>
         <td align="right">{{$studentData->student_name}}</td>
       </tr>
       <tr>
-        <td>Email Id</td>
+        <td><b>Email Id</b></td>
         <td align="right">{{$studentData->email}}</td>
       </tr>
       <tr>
-        <td>Contact Number</td>
+        <td><b>Contact Number</b></td>
         <td align="right">{{$studentData->contact_no}}</td>
       </tr>
       <tr>
-        <td>Address</td>
+        <td><b>Address</b></td>
         <td align="right">{{$studentData->Address}}</td>
       </tr>
       <tr>
-        <td>Admission Fee</td>
-        <td align="right">{{$mst_class->fee_amount}}</td>
+        <td><b>Registration Fee</b></td>
+        <td align="right"><i class="fa fa-inr" aria-hidden="true"></i> +{{number_format($mst_class->registration_fee,2)}}</td>
+      </tr>
+      <tr>
+        <td><b>Admission Fee</b></td>
+        <td align="right"><i class="fa fa-inr" aria-hidden="true"></i> +{{number_format($mst_class->fee_amount,2)}}</td>
+      </tr>
+      <tr>
+        <td><b>Discount</b></td>
+        <td align="right"><i class="fa fa-inr" aria-hidden="true"></i> -{{number_format($mst_class->fee_amount - $mst_class->discounted_fee_amount,2)}}</td>
+      </tr>
+      <tr>
+        <td><b>Total Fee</b></td>
+        <td align="right"><i class="fa fa-inr" aria-hidden="true"></i> {{number_format($mst_class->discounted_fee_amount + $mst_class->registration_fee,2)}}</td>
       </tr>
       
       <tr>
@@ -94,7 +106,7 @@
       
           <input type="text" class="form-control" id="address" name="address" value="{{$studentData->Address}}">
       
-          <input type="text" class="form-control" id="amount" name="amount" value="{{$mst_class->fee_amount}}">
+          <input type="text" class="form-control" id="amount" name="amount" value="{{$mst_class->discounted_fee_amount + $mst_class->registration_fee}}">
       <input type="text" class="form-control" id="admission_ref_no" value="{{$studentData->admission_ref_no}}" name="admission_ref_no">
       <textarea name="secureCode">{{$secureCode}}</textarea>
       

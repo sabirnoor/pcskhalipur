@@ -937,7 +937,7 @@ class DashboardController extends Controller
 		$studentData = DB::table('student_master')->select('*')->where('admission_ref_no',$ref_no)->first();
 		$mst_class = DB::table('mst_class')->select('*')->where('class_name',$studentData->present_class)->where('type','newadmission')->first();
 
-		$encrypted = trim($mst_class->fee_amount).'/'.trim($studentData->admission_ref_no);
+		$encrypted = trim($mst_class->discounted_fee_amount + $mst_class->registration_fee).'/'.trim($studentData->admission_ref_no);
 		$secureCode = base64_encode(base64_encode($encrypted));
 		//pr($studentData);
 		if($studentData->IsPayment == 1){
