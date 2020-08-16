@@ -101,7 +101,7 @@
 				 
                       <div class="md-form mb-0">
                         <label for="dob" class="">Date of Birth (As per document to be uploaded) <span style="font-size:15px;color: red;">*</span></label>
-                          <input type="text" data-toggle="datepicker" id="dob" name="dob" class="form-control date_with_slash" value="{{ old('dob') }}" placeholder="dd-mm-yyyy" autocomplete="off" maxlength="10">
+                          <input type="text" data-toggle="datepicker" id="dob" name="dob" class="form-control" value="{{ old('dob') }}" placeholder="dd-mm-yyyy" autocomplete="off" maxlength="10">
                           
                       </div>
                   </div>
