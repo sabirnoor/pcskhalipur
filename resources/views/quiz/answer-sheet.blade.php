@@ -17,94 +17,80 @@
 
     <body>
 
-        {{--<div class="navbar-wrapper">
-			@include('includes.menu_nav')
-			@show  
-	</div>  --}}  
+       
 
         <!-- Carousel
     
         ================================================== -->
 
-{{--<div class="banner">
-
-  <img src="{{asset('public/assets/img/about_banner.jpg')}}" alt="..." class="img-responsive">
-
-</div>--}} 
+ 
 
 <div class="pencil-bg">
 
   <div class="container inr-page">
 
-    <div class="col-sm-6 con-area">
+    <div class="col-sm-12 con-area">
 
       <h1 class="heading">
 
-        Exam Result
+        Answer Sheet
 
         <img src="{{asset('public/assets/img/hed-sep.jpg')}}" alt="">
 
       </h1>
 	  
-	  <table class="table table-striped table-bordered">
-							<thead>
-								<!--<tr>
-									<th></th>
-									<th></th>
-								</tr-->
-							</thead>
-							<tbody>
-								<tr class="footableOdd">								
-									<td class="text-right">Result:</td>
-									<td><?php echo $result_params['final_status']; ?></td>
-								</tr>								
-								
-								<tr class="footableOdd">								
-									<td class="text-right">Score:</td>
-									<td><?php echo $result_params['user_score']; ?>/<?php echo $result_params['quiz_full_marks']; ?></td>
-								</tr>
-								
-								<tr class="footableOdd">								
-									<td class="text-right">Percentage:</td>
-									<td><?php echo $result_params['percentage']; ?>%</td>
-								</tr>
-								
-								<tr class="footableOdd">								
-									<td class="text-right">Total Questions:</td>
-									<td><?php echo $result_params['quiz_total_question']; ?></td>
-								</tr>
-								
-								<tr class="footableOdd">								
-									<td class="text-right">Questions Attempted:</td>
-									<td><?php echo $result_params['question_attempted']; ?></td>
-								</tr>
-								
-								<tr class="footableOdd">								
-									<td class="text-right">Correct Answers:</td>
-									<td><?php echo $result_params['correct_answer']; ?></td>
-								</tr>
-								
-								<tr class="footableOdd">								
-									<td class="text-right">Wrong Answers:</td>
-									<td><?php echo $result_params['wrong_answer']; ?></td>
-								</tr>
-								
-								
-								
-								
-							</tbody>
-						</table>
+	  <div class="page-content">
+	
+	<div class="row">
+		<div class="col-md-12 mb-md-0 mb-5">
+		<h1 style="color:#438eb9"><?=$quiz_details->quiz_title;?></h1>
+		<?php 
+			if($QuizquestionsList){
+
+				foreach ($QuizquestionsList as $value) {                                 
+					$user_answer='';$color='';$icon='';
+					$value = (array) $value;
+					if(isset($user_result_data_arr[$value['id']])){
+						$user_answer = $user_result_data_arr[$value['id']]['optionchosen'];
+						
+						if($value['correct_answer']==$user_result_data_arr[$value['id']]['optionchosen']){
+							$color = '#17ca17';
+							$icon = '<i class="ace-icon fa fa-check icon-only"></i>';
+						}else{
+							$color = '#f00';
+							$icon = '<i class="ace-icon fa fa-times icon-only"></i>';
+						}
+					}else{
+						$user_answer='';
+					}
+			?>
+			<h3><?php echo $value['question_title']; ?></h3>
+			<h5>Option 1: <?=$value['option1']?></h5>
+			<h5>Option 2: <?=$value['option2']?></h5>
+			<h5>Option 3: <?=$value['option3']?></h5>
+			<h5>Option 4: <?=$value['option4']?></h5>
+			
+			<h4 style="">Correct Option : Option <?=$value['correct_answer']?></h4>
+			
+			<h4 style="">Your Answer :
+			<span style="color:<?=$color?>">
+				<?php if($user_answer<>''){ echo 'Option '.$user_answer.' '.$icon; }?>
+			</h4>
+		<?php
+				}
+			}
+		?>
+		</div>
+  
+   </div>
+
+        
+
+    </div>
 	  
 	  <div class="clearfix"></div>
 	  
-	   <div class="col-md-12">
-                      <div class="md-form mb-0">
-                       <a href="<?=url('answersheet')?>" title="Answer Sheet" target="_blank">
-					   <button class="btn btn-primary">View Answer Sheet</button>
-					   </a>                      
-                      </div>
-                  </div>
-	  
+	   
       <!--Section: Contact v.2-->
 <section class="mb-4">
 
@@ -113,9 +99,6 @@
 
       <!--Grid column-->
       <div class="col-md-12 mb-md-0 mb-5">
-	  
-
-           
 		  
       </div>
       <!--Grid column-->
