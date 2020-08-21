@@ -461,7 +461,7 @@ class DashboardController extends Controller
 		if($quizid){					
 			$quiz_details = Quiz::where(array('id' => $quizid,'IsDelete' => 0))->first();
 			$student_details = Studentmaster::where(array('id'=>$studentid))->first();
-			return view('quiz/start-quiz', compact('quiz_details','student_details','already_played'));
+			return view('quiz/start-quiz', compact('quiz_details','student_details','already_played','result_details'));
 		}else{
 			return url('/');
 		}
@@ -500,7 +500,20 @@ class DashboardController extends Controller
 		$post = $request->all(); 	
 		
 		$quiz_details = Quiz::where(array('id' => $quizid))->first();
-		$total_question = Question::where(array('quizid' => $quizid,'IsDelete' => 0))->get()->count();		
+		$total_question = Question::where(array('quizid' => $quizid,'IsDelete' => 0))->get()->count();
+		
+		$current_date_time = date('Y-m-d H:i:s');
+		$quiz_begin_date_time = $quiz_details['quiz_start_date'].' '.$quiz_details['quiz_start_time'];
+		
+		
+		if(strtotime($current_date_time) >= strtotime($quiz_begin_date_time)){
+			//User can proceed
+		}
+		else{
+			echo "Wait till exam starts."; exit;
+			return redirect(url('/'));	
+		}
+		
 		//echo $total_question; exit;
 		
 		if(Session::get('Session_Offset')){
@@ -604,7 +617,7 @@ class DashboardController extends Controller
 					
 					//set flag isFinished when quiz completed
 					$data = array(						
-						'isFinished' => 1,						
+						'isFinished' => 0,	//set 1	if required				
 						'updated_at' => date('Y-m-d H:i:s')
 					);
 					$insertid = Quizresult::where('result_id', $Session_Result_Id)->update($data);	

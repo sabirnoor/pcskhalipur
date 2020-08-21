@@ -101,8 +101,16 @@
 							</tbody>
 						</table>
 	 
-	 <?php if($already_played==1){?>
+	 <?php if($already_played==1){ //echo $result_details->result_id;?>
 	 <div>You have finished this exam.</div>
+	 <!--<div class="col-md-12">
+		  <div class="md-form mb-0">
+		   <a href="<?=url('quiz-result')?>" title="Result">
+		   <button class="btn btn-primary">View Result</button>
+		   </a>                      
+		  </div>
+	  </div>-->
+				  
 	 <?php }else{?>
 	  
           <form id="quiz-form" name="quiz-form" action="{{url('startquiz')}}" method="POST" autocomplete="off">
