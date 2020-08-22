@@ -1,0 +1,37 @@
+[30-Jun-2020 13:52:27 UTC] PHP Fatal error:  Uncaught Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException: The file "/tmp/phpgW6c1Q" does not exist in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php:37
+Stack trace:
+#0 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/UploadedFile.php(66): Symfony\Component\HttpFoundation\File\File->__construct('/tmp/phpgW6c1Q', true)
+#1 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(87): Symfony\Component\HttpFoundation\File\UploadedFile->__construct('/tmp/phpgW6c1Q', 'up.php', '', 1340, 0)
+#2 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(52): Symfony\Component\HttpFoundation\FileBag->convertFileInformation(Array)
+#3 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(61): Symfony\Component\HttpFoundation\FileBag->set('ATTARI', Array)
+#4 /home/developerkaif/public_html/pcskhalispur.com/vendor/s in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php on line 37
+[30-Jun-2020 13:52:28 UTC] PHP Fatal error:  Uncaught Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException: The file "/tmp/php58t2ED" does not exist in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php:37
+Stack trace:
+#0 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/UploadedFile.php(66): Symfony\Component\HttpFoundation\File\File->__construct('/tmp/php58t2ED', true)
+#1 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(87): Symfony\Component\HttpFoundation\File\UploadedFile->__construct('/tmp/php58t2ED', 'up.php', '', 1340, 0)
+#2 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(52): Symfony\Component\HttpFoundation\FileBag->convertFileInformation(Array)
+#3 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(61): Symfony\Component\HttpFoundation\FileBag->set('data_image', Array)
+#4 /home/developerkaif/public_html/pcskhalispur.com/vend in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php on line 37
+[30-Jun-2020 13:52:31 UTC] PHP Fatal error:  Uncaught Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException: The file "/tmp/phpE1XpDh" does not exist in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php:37
+Stack trace:
+#0 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/UploadedFile.php(66): Symfony\Component\HttpFoundation\File\File->__construct('/tmp/phpE1XpDh', true)
+#1 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(87): Symfony\Component\HttpFoundation\File\UploadedFile->__construct('/tmp/phpE1XpDh', 'up.php', '', 1340, 0)
+#2 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(52): Symfony\Component\HttpFoundation\FileBag->convertFileInformation(Array)
+#3 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(61): Symfony\Component\HttpFoundation\FileBag->set('uploadimage', Array)
+#4 /home/developerkaif/public_html/pcskhalispur.com/ven in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php on line 37
+[30-Jun-2020 13:52:31 UTC] PHP Fatal error:  Uncaught Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException: The file "/tmp/phpEuaxJ0" does not exist in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php:37
+Stack trace:
+#0 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/UploadedFile.php(66): Symfony\Component\HttpFoundation\File\File->__construct('/tmp/phpEuaxJ0', true)
+#1 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(87): Symfony\Component\HttpFoundation\File\UploadedFile->__construct('/tmp/phpEuaxJ0', 'up.php', '', 1340, 0)
+#2 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(52): Symfony\Component\HttpFoundation\FileBag->convertFileInformation(Array)
+#3 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(61): Symfony\Component\HttpFoundation\FileBag->set('uploadimage', Array)
+#4 /home/developerkaif/public_html/pcskhalispur.com/ven in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php on line 37
+[30-Jun-2020 13:52:33 UTC] PHP Fatal error:  Uncaught Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException: The file "/tmp/phpu8tEJr" does not exist in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php:37
+Stack trace:
+#0 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/UploadedFile.php(66): Symfony\Component\HttpFoundation\File\File->__construct('/tmp/phpu8tEJr', true)
+#1 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(87): Symfony\Component\HttpFoundation\File\UploadedFile->__construct('/tmp/phpu8tEJr', 'up.php', '', 1340, 0)
+#2 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(52): Symfony\Component\HttpFoundation\FileBag->convertFileInformation(Array)
+#3 /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/FileBag.php(61): Symfony\Component\HttpFoundation\FileBag->set('userfile', Array)
+#4 /home/developerkaif/public_html/pcskhalispur.com/vendor in /home/developerkaif/public_html/pcskhalispur.com/vendor/symfony/http-foundation/File/File.php on line 37
+[02-Aug-2020 06:32:55 UTC] PHP Warning:  require(/home/developerkaif/public_html/pcskhalispur.com/vendor/composer/../symfony/polyfill-mbstring/bootstrap.php): failed to open stream: No such file or directory in /home/developerkaif/public_html/pcskhalispur.com/vendor/composer/autoload_real.php on line 69
+[02-Aug-2020 06:32:55 UTC] PHP Fatal error:  require(): Failed opening required '/home/developerkaif/public_html/pcskhalispur.com/vendor/composer/../symfony/polyfill-mbstring/bootstrap.php' (include_path='.:/opt/alt/php71/usr/share/pear') in /home/developerkaif/public_html/pcskhalispur.com/vendor/composer/autoload_real.php on line 69

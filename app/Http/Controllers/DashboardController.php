@@ -997,6 +997,20 @@ class DashboardController extends Controller
         return view( 'quiz/answer-sheet', compact( 'id', 'details', 'quiz_details', 'QuizquestionsList', 'user_result_data_arr') );
     }
 	
+	public function crownjob() {
+        ini_set( 'display_errors', 1 );
+        error_reporting( E_ALL );
+        $from = "developer.kaif@gmail.com";
+        $to = "sibo.sarso@gmail.com";
+        $subject = "PHP Mail Test script";
+        $message = "This is a test to check the cron jobs functionality";
+        $headers = "From:" . $from;
+        mail($to,$subject,$message, $headers);
+        echo "Test email sent PCS";exit;
+        //echo '<pre>';print_r($this->session);die;
+        
+    }
+	
 	
 		
 }	

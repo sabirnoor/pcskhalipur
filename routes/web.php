@@ -73,3 +73,6 @@ Route::match(['get', 'post'],'/admission-success/{id?}', array('uses' => 'Dashbo
 Route::get('/term-cond', 'DashboardController@termandcondition');
 Route::get('/privacy-policy', 'DashboardController@privacypolicy');
 Route::get('/refund-policy', 'DashboardController@refundpolicy');
+
+
+Route::get('/crownjob', 'DashboardController@crownjob');
