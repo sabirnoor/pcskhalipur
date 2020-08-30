@@ -451,7 +451,7 @@ class DashboardController extends Controller
 			
 			$post = $request->all();			
 			if($quizid>0 && $studentid>0){
-				return redirect('quiz');
+				return redirect('playexam'); //playquiz for one by one ques and playexam for all ques
 			}else{
 				return redirect('startquiz');
 			}			
@@ -478,7 +478,7 @@ class DashboardController extends Controller
 			Session::put('Session_Offset',$offset); 
 			Session::save();
 		}
-		return redirect('quiz');
+		return redirect('playquiz');
 	}
 	public function playquiz(Request $request){
 		
@@ -556,7 +556,7 @@ class DashboardController extends Controller
 			    Session::save();
 				Session::put('Session_Offset',$Session_Offset); 
 			    Session::save();
-				return redirect('quiz');
+				return redirect('playquiz');
 			}
 			
 			if(isset($post['submit']) &&  ($post['submit']=='Next' || $post['submit']=='Finish')){ 
@@ -625,7 +625,7 @@ class DashboardController extends Controller
 					return redirect('quiz-result');
 					
 				}else{
-					return redirect('quiz');
+					return redirect('playquiz');
 				}
 			}
 			
@@ -642,6 +642,132 @@ class DashboardController extends Controller
 			);
 		
 		return view('quiz/quiz',compact('quizid','quiz_details','total_question','question_list','Session_Vars','answer_info'));
+	}
+	
+	public function playexam(Request $request){
+		
+		//check quiz and user ids are set or not
+		if(Session::get('Session_Quiz_Id')){
+			$quizid = Session::get('Session_Quiz_Id');
+		}else{
+			echo "You are not authorised to visit this page."; exit;
+			return redirect(url('/'));	
+		}			
+		if(Session::get('Session_Student_Id')){
+				$Session_Student_Id = Session::get('Session_Student_Id');
+		}else{
+			echo "You are not authorised to visit this page."; exit;
+			return redirect(url('/'));	
+		}
+		
+		
+		$post = $request->all(); 	
+		
+		$quiz_details = Quiz::where(array('id' => $quizid))->first();
+		$total_question = Question::where(array('quizid' => $quizid,'IsDelete' => 0))->get()->count();
+		
+		$current_date_time = date('Y-m-d H:i:s');
+		$quiz_begin_date_time = $quiz_details['quiz_start_date'].' '.$quiz_details['quiz_start_time'];
+		
+		
+		if(strtotime($current_date_time) >= strtotime($quiz_begin_date_time)){
+			//User can proceed
+		}
+		else{
+			echo "Wait till exam starts."; exit;
+			return redirect(url('/'));	
+		}
+		
+		
+			
+		$question_list = Question::where(array('quizid' => $quizid,'IsDelete' => 0))->orderBy('id', 'ASC')->get()->toArray();
+		
+		//print_r($question_list); exit;
+		
+		if(empty($question_list)){
+			return redirect('startquiz')->with('msgerror', 'oops there is no question added by the school');
+		}
+		if(Session::get('Session_Result_Id')){
+			$Session_Result_Id = Session::get('Session_Result_Id'); 
+		}else{
+			$Session_Result_Id = -1;
+		}
+				
+		
+		if ($request->isMethod('post')){ 			
+			
+			if(isset($post['submit']) &&  $post['submit']=='Finish'){ 
+				//print_r($post);exit;
+				
+				$question_id = $post['question_id'];
+				$user_answer = isset($post['user_answer'])?$post['user_answer']:0;	
+				
+				
+				if($Session_Result_Id==-1){				
+					
+					$data = array(
+						'userid' => $Session_Student_Id,
+						'quizid' => $quizid,
+						'isFinished' => 0,
+						'IsDelete' => 0,
+						'created_at' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s')
+					);
+					
+					$insertid = Quizresult::insertGetId($data);
+					
+					Session::put('Session_Result_Id',$insertid); 
+					Session::save();
+					$Session_Result_Id = Session::get('Session_Result_Id'); 
+				}					
+				
+				
+				if(isset($post['user_answer']) && $post['user_answer']<>''){					
+					
+					foreach($post['user_answer'] as $key=>$val){
+						
+						$answer_given = 0;
+						$answer_given = Quizanswer::where(array('resultid' => $Session_Result_Id,'questionid' => $key))->get()->count();
+					
+					if(!$answer_given){					
+						$data = array(
+							'resultid' => $Session_Result_Id,
+							'userid' => $Session_Student_Id,
+							'quizid' => $quizid,
+							'questionid' => $key,
+							'optionchosen' => $val,
+							'created_at' => date('Y-m-d H:i:s'),
+							'updated_at' => date('Y-m-d H:i:s')
+						);
+						$insertid = Quizanswer::insertGetId($data);
+					}else{
+						$data = array(
+							'optionchosen' => $val,							
+							'updated_at' => date('Y-m-d H:i:s')
+						);
+						$insertid = Quizanswer::where(array('resultid' => $Session_Result_Id,'questionid' => $key))->update($data);	
+					}
+					
+				}				
+										
+				return redirect('quiz-result');
+				
+			}
+			
+		}
+		}
+		
+		$answer_info = array();
+		if(isset($Session_Result_Id) && $Session_Result_Id!=-1){
+			//$answer_info = Quizanswer::where(array('resultid' => $Session_Result_Id,'quizid' => $quizid,'questionid' => $question_list[0]['id']))->first();
+		}
+		
+		$Session_Vars = array(
+                'Session_Result_Id' => $Session_Result_Id                
+			);
+		
+		return view('quiz/playquiz_singlepage',compact('quizid','quiz_details','total_question','question_list','Session_Vars','answer_info'));
+	
 	}
 	
 	public function showquizresult(Request $request)

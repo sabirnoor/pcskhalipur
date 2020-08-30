@@ -53,19 +53,11 @@
       <!--Grid column-->
       <div class="col-md-12 mb-md-0 mb-5">
 	  
-	  <div id="end_counter"></div>
-	  
-	  <h3>Question: <?php echo $Session_Vars['Session_Offset']+1; ?> Of <?=$total_question?></h3>
-	  
-	  <h2><?php echo $question_list[0]['question_title']; ?></h2>
+	  <div id="end_counter"></div>	  
 	 
 	  
-          <form id="quiz-form" name="quiz-form" action="{{url('playquiz')}}" method="POST" autocomplete="off">
+          <form id="quiz-form" name="quiz-form" action="{{url('playexam')}}" method="POST" autocomplete="off">
             {{csrf_field()}}
-              
-			<input type="hidden" name="question_id" value="<?php echo $question_list[0]['id']; ?>" />
-			<input type="hidden" name="answer_id" value="<?php echo isset($answer_info['answer_id'])?$answer_info['answer_id']:''; ?>" />
-			<input type="hidden" id="resultid" value="<?php echo $Session_Vars['Session_Result_Id']; ?>" />
 			
 			<?php
 			  $quiz_end_date = '';
@@ -75,68 +67,59 @@
               $quiz_end_time = $quiz_details['quiz_end_time'];
 			  ?>
 			
-			<input type="hidden" name="qend" id="qend" value="<?php echo $quiz_end_date.' '.$quiz_end_time; ?>" /><!--June 30, 2020 20:35:00-->
+			<input type="hidden" name="qend" id="qend" value="<?php echo $quiz_end_date.' '.$quiz_end_time; ?>" /><!--June 30, 2020 20:35:00-->			
+			<input type="hidden" name="timeup" id="timeup" value="" />			
+			<input type="hidden" id="resultid" value="<?php echo $Session_Vars['Session_Result_Id']; ?>" />
 			
-			<input type="hidden" name="timeup" id="timeup" value="" />
-
-              <!--Grid row-->
-              <div class="row">
+			
+			
+			<?php $k=0; foreach($question_list as $val){ ?>
+			
+			<input type="hidden" name="question_id" value="<?php echo $val['id']; ?>" />
+			<input type="hidden" name="answer_id" value="<?php echo isset($answer_info['answer_id'])?$answer_info['answer_id']:''; ?>" />
+              
+			  <h2><?php echo $val['question_title']; ?></h2>
+              
+			  <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" id="user_answer1" value="1" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==1)?'checked="checked"':''; ?>><?php echo $question_list[0]['option1']; ?></label>
+							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?php $k++;?>" value="1"><?php echo $val['option1']; ?></label>
 					  </div>					  
                   </div>
               </div>
-              <!--Grid row-->
-			  
-			  <!--Grid row-->
+             
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" id="user_answer2" value="2" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==2)?'checked="checked"':''; ?>><?php echo $question_list[0]['option2']; ?></label>
+							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?php $k++;?>" value="2"><?php echo $val['option2']; ?></label>
 					  </div>					  
                   </div>
               </div>
-              <!--Grid row-->
-			  
-			  <!--Grid row-->
+              
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" id="user_answer3" value="3" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==3)?'checked="checked"':''; ?>><?php echo $question_list[0]['option3']; ?></label>
+							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?php $k++;?>" value="3"><?php echo $val['option3']; ?></label>
 					  </div>					  
                   </div>
               </div>
-              <!--Grid row-->
-			  
-			  <!--Grid row-->
+              
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer" id="user_answer4" value="4" <?php echo(isset($answer_info['optionchosen']) && $answer_info['optionchosen']==4)?'checked="checked"':''; ?>><?php echo $question_list[0]['option4']; ?></label>
+							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?php $k++;?>" value="4"><?php echo $val['option4']; ?></label>
 					  </div>					  
                   </div>
               </div>
-              <!--Grid row-->
+			  <?php } ?>
+              
+			
 			<div class="row">
-			 <?php if(isset($Session_Vars['Session_Offset']) && $Session_Vars['Session_Offset']>0){?>
-			<div class="col-md-2 quizbuttons" style="display:none">
-				<input class="btn btn-primary form-control" style="margin: 5px 0px;" type="submit" name="submit" value="Prev" />
-			</div>
-			<?php } ?>
-			
-			<?php if(isset($Session_Vars['Session_Offset']) && $Session_Vars['Session_Offset']==$total_question-1){?>
-			<div class="col-md-2 quizbuttons" style="display:none">
-				<input class="btn btn-primary form-control" style="margin: 5px 0px;" type="submit" name="submit" value="Finish" />
-				<!--<button class="btn btn-primary finalsubmit"  type="submit" name="submit">Finish</button>-->
-			</div>
-			<?php }else{?>
-			<div class="col-md-2 quizbuttons" style="display:none">
-				<input class="btn btn-primary form-control" style="margin: 5px 0px;" type="submit" name="submit" value="Next" />
-			</div>
-			<?php }?>
-
-              </div>
+				<div class="col-md-2 quizbuttons" style="display:none">
+					<input class="btn btn-primary form-control" style="margin: 5px 0px;" type="submit" name="submit" value="Finish" />
+					<!--<button class="btn btn-primary finalsubmit"  type="submit" name="submit">Finish</button>-->
+				</div>
+            </div>
 
           </form>
 
@@ -144,24 +127,6 @@
               <a href="<?=url('quiz-result')?>" class="btn btn-primary">Result</a>
           </div>
           <div class="status"></div>
-		  
-		  <div class="row jumpquesdiv" style="display:none">
-		  <table class="table table-striped table-bordered">
-							
-			<tbody>
-				<tr class="footableOdd">
-					<?php for($i=1;$i<=$total_question;$i++){
-						
-						?>
-					<td class="text-center"><a href="<?=url('jump-question/'.$i)?>"><?=$i?></a></td>
-					<?php 
-					if($i%12==0){echo '</tr><tr class="footableOdd">';}
-					} ?>
-				</tr>
-				</tbody>
-		  </table>
-			
-		  </div>
 		  
       </div>
       <!--Grid column-->
