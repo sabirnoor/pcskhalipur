@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-                
+        <meta name="csrf-token" content="{{ csrf_token() }}">        
         @include('includes.css_part')
         @show
 
@@ -71,19 +71,22 @@
 			<input type="hidden" name="timeup" id="timeup" value="" />			
 			<input type="hidden" id="resultid" value="<?php echo $Session_Vars['Session_Result_Id']; ?>" />
 			
+			<input type="hidden" id="action_url" value="{{url('ajaxsaveanswer')}}" />
+			
 			
 			
 			<?php $k=0; foreach($question_list as $val){ ?>
 			
 			<input type="hidden" name="question_id" value="<?php echo $val['id']; ?>" />
-			<input type="hidden" name="answer_id" value="<?php echo isset($answer_info['answer_id'])?$answer_info['answer_id']:''; ?>" />
-              
+			
+              <?php //if(isset($answer_arr[$val['id']]) && $answer_arr[$val['id']]==1){ echo 1 ; exit;} ?>
+			  
 			  <h2><?php echo $val['question_title']; ?></h2>
               
 			  <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?php $k++;?>" value="1"><?php echo $val['option1']; ?></label>
+							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?= $k++;?>" class="user_answer_cl" data-qid="<?php echo $val['id']; ?>"  value="1" <?php if(isset($answer_arr[$val['id']]) && $answer_arr[$val['id']]==1){ echo 'checked="checked"';} ?>><?php echo $val['option1']; ?> </label>
 					  </div>					  
                   </div>
               </div>
@@ -91,7 +94,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?php $k++;?>" value="2"><?php echo $val['option2']; ?></label>
+							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?= $k++;?>" class="user_answer_cl" data-qid="<?php echo $val['id']; ?>" value="2" <?php if(isset($answer_arr[$val['id']]) && $answer_arr[$val['id']]==2){ echo 'checked="checked"';} ?>><?php echo $val['option2']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -99,7 +102,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?php $k++;?>" value="3"><?php echo $val['option3']; ?></label>
+							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?= $k++;?>" class="user_answer_cl" data-qid="<?php echo $val['id']; ?>" value="3" <?php if(isset($answer_arr[$val['id']]) && $answer_arr[$val['id']]==3){ echo 'checked="checked"';} ?>><?php echo $val['option3']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -107,7 +110,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="radio">
-							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?php $k++;?>" value="4"><?php echo $val['option4']; ?></label>
+							  <label><input type="radio" name="user_answer[<?php echo $val['id']; ?>]" id="user_answer<?= $k++;?>" class="user_answer_cl" data-qid="<?php echo $val['id']; ?>" value="4" <?php if(isset($answer_arr[$val['id']]) && $answer_arr[$val['id']]==4){ echo 'checked="checked"';} ?>><?php echo $val['option4']; ?></label>
 					  </div>					  
                   </div>
               </div>
@@ -220,6 +223,49 @@ var x = setInterval(function() {
 	  $('.jumpquesdiv').css('display','block');
   }
 }, 1000);
+
+});
+
+$(document).ready(function() {	
+	$(document).on("click", ".user_answer_cl", function (e) {
+	
+	//var value = parseInt($( this ).parent().find("input").val());
+    //value = isNaN(value) ? 1 : value;
+    //$( this ).parent().find("input").val(value);
+	
+	//console.log($( this ).attr('data-qid'));
+	//console.log($( this ).val());
+	var qid = $(this).attr('data-qid');
+	var qanswer = $(this).val();
+	
+	var action_url=$('#action_url').val();
+	 $.ajax({
+            url: action_url,
+            type: 'POST',
+			data: {qid: qid,qanswer:qanswer},
+            headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    },dataType: 'json',
+            beforeSend: function () { 
+                
+            },
+            success: function (result) {				
+                if (result) {  
+				    console.log(result.message);					
+                    //$('.loader_data').html('');
+
+                }else{                    
+					console.log('something went wrong!');
+                }
+
+            },
+            error: function (result) {
+				console.log('something went wrong!');
+            }
+
+        });
+   
+   });
 
 });
 

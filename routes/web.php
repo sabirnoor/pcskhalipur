@@ -47,6 +47,7 @@ Route::match(['get', 'post'],'/playexam', array('uses' => 'DashboardController@p
 Route::match(['get', 'post'],'/quiz-result', array('uses' => 'DashboardController@showquizresult'));
 Route::match(['get', 'post'],'/jump-question/{ques_no?}', array('uses' => 'DashboardController@jumpquestion'));
 Route::match(['get', 'post'],'/answersheet', array('uses' => 'DashboardController@answersheet'));
+Route::match(['get', 'post'],'/ajaxsaveanswer', array('uses' => 'DashboardController@ajaxsaveanswer'));
 //Route::get('/logout', 'DashboardController@logout');
 
 /*
