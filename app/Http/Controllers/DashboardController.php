@@ -644,82 +644,7 @@ class DashboardController extends Controller
 		return view('quiz/quiz',compact('quizid','quiz_details','total_question','question_list','Session_Vars','answer_info'));
 	}
 	
-	public function ajaxsaveanswer(Request $request){
-		
-		//check quiz and user ids are set or not
-		if(Session::get('Session_Quiz_Id')){
-			$quizid = Session::get('Session_Quiz_Id');
-		}else{
-			echo "You are not authorised to visit this page."; exit;
-			return redirect(url('/'));	
-		}			
-		if(Session::get('Session_Student_Id')){
-				$Session_Student_Id = Session::get('Session_Student_Id');
-		}else{
-			echo "You are not authorised to visit this page."; exit;
-			return redirect(url('/'));	
-		}
-		
-		$post = $request->all();  //print_r($post); exit;
-		
-		if(Session::get('Session_Result_Id')){
-			$Session_Result_Id = Session::get('Session_Result_Id'); 
-		}else{
-			$Session_Result_Id = -1;
-		}
-		
-		if($Session_Result_Id==-1){				
-					
-			$data = array(
-				'userid' => $Session_Student_Id,
-				'quizid' => $quizid,
-				'isFinished' => 0,
-				'IsDelete' => 0,
-				'created_at' => date('Y-m-d H:i:s'),
-				'updated_at' => date('Y-m-d H:i:s')
-			);
-			
-			$insertid = Quizresult::insertGetId($data);
-			
-			Session::put('Session_Result_Id',$insertid); 
-			Session::save();
-			$Session_Result_Id = Session::get('Session_Result_Id'); 
-		}
-		
-		$answer_given = 0;
-		$answer_given = Quizanswer::where(array('resultid' => $Session_Result_Id,'questionid' => $post['qid']))->get()->count();
-		
-		// if answer is not given just add it otherwise update it
-		if(!$answer_given){					
-			$data = array(
-				'resultid' => $Session_Result_Id,
-				'userid' => $Session_Student_Id,
-				'quizid' => $quizid,
-				'questionid' => $post['qid'],
-				'optionchosen' => $post['qanswer'],
-				'created_at' => date('Y-m-d H:i:s'),
-				'updated_at' => date('Y-m-d H:i:s')
-			);
-			$insertid = Quizanswer::insertGetId($data);
-			if($insertid){
-				echo json_encode(array('success'=>true, 'message'=>'Saved Successfully!'));exit;
-			}
-		}else{	//echo $Session_Result_Id; exit;
-			$data = array(
-				'optionchosen' => $post['qanswer'],							
-				'updated_at' => date('Y-m-d H:i:s')
-			);
-			$insertid = Quizanswer::where(array('resultid' => $Session_Result_Id,'questionid' => $post['qid']))->update($data);
-			
-			if($insertid){
-				echo json_encode(array('success'=>true, 'message'=>'Updated Successfully!'));exit;	
-			}				
-		}
-		
-		echo json_encode(array('success'=>false, 'message'=>'Oops something went wrong.'));
-					
-		//print_r($post); exit;
-	}
+	
 	public function playexam(Request $request){
 		
 		//check quiz and user ids are set or not
@@ -843,9 +768,85 @@ class DashboardController extends Controller
 			);
 			
 		$answer_arr = array_column($answer_info, 'optionchosen', 'questionid');
-		//print_r($answer_info); print_r($answer_arr); exit;
+		
 		return view('quiz/playquiz_singlepage',compact('quizid','quiz_details','total_question','question_list','Session_Vars','answer_arr'));
 	
+	}
+	
+	//function to save user answer on click by ajax
+	public function ajaxsaveanswer(Request $request){
+		
+		//check quiz and user ids are set or not
+		if(Session::get('Session_Quiz_Id')){
+			$quizid = Session::get('Session_Quiz_Id');
+		}else{			
+			echo json_encode(array('success'=>false, 'message'=>'You are not authorised to visit this page.'));exit;	
+		}			
+		if(Session::get('Session_Student_Id')){
+				$Session_Student_Id = Session::get('Session_Student_Id');
+		}else{			
+			echo json_encode(array('success'=>false, 'message'=>'You are not authorised to visit this page.'));exit;
+		}
+		
+		$post = $request->all();  
+		
+		if(Session::get('Session_Result_Id')){
+			$Session_Result_Id = Session::get('Session_Result_Id'); 
+		}else{
+			$Session_Result_Id = -1;
+		}
+		
+		if($Session_Result_Id==-1){				
+					
+			$data = array(
+				'userid' => $Session_Student_Id,
+				'quizid' => $quizid,
+				'isFinished' => 0,
+				'IsDelete' => 0,
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			
+			$insertid = Quizresult::insertGetId($data);
+			
+			Session::put('Session_Result_Id',$insertid); 
+			Session::save();
+			$Session_Result_Id = Session::get('Session_Result_Id'); 
+		}
+		
+		$answer_given = 0;
+		$answer_given = Quizanswer::where(array('resultid' => $Session_Result_Id,'questionid' => $post['qid']))->get()->count();
+		
+		// if answer is not given just add it otherwise update it
+		if(!$answer_given){					
+			$data = array(
+				'resultid' => $Session_Result_Id,
+				'userid' => $Session_Student_Id,
+				'quizid' => $quizid,
+				'questionid' => $post['qid'],
+				'optionchosen' => $post['qanswer'],
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			$insertid = Quizanswer::insertGetId($data);
+			if($insertid){
+				echo json_encode(array('success'=>true, 'message'=>'Saved Successfully!'));exit;
+			}
+		}else{	
+			$data = array(
+				'optionchosen' => $post['qanswer'],							
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			$insertid = Quizanswer::where(array('resultid' => $Session_Result_Id,'questionid' => $post['qid']))->update($data);
+			
+			if($insertid){
+				echo json_encode(array('success'=>true, 'message'=>'Updated Successfully!'));exit;	
+			}				
+		}
+		
+		echo json_encode(array('success'=>false, 'message'=>'Oops something went wrong.'));
+					
+		//print_r($post); exit;
 	}
 	
 	public function showquizresult(Request $request)
