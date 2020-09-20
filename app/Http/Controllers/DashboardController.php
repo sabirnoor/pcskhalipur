@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Uploadflash;
 use App\Syllabusmaster;
+use App\Schedulemaster;
 use App\Noticeboard;
 use App\Uploadgallery;
 use App\Birthday;
@@ -118,6 +119,12 @@ class DashboardController extends Controller
 		$Syllabusmaster = Syllabusmaster::SyllabusClassList();
 		//echo '<pre>';print_r($Syllabusmaster);die;
 		return view('staticpages/Syllabus', compact('Syllabusmaster'));
+	}
+	
+	public function Schedule(Request $request){
+		$Schedulemaster = Schedulemaster::ScheduleClassList();
+		//echo '<pre>';print_r($Schedulemaster);die;
+		return view('staticpages/Schedule', compact('Schedulemaster'));
 	}
 	
 	public function result(Request $request){
