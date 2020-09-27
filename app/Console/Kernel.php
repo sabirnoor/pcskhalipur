@@ -23,8 +23,8 @@ class Kernel extends ConsoleKernel {
 	 * @return void
 	 */
 	protected function schedule(Schedule $schedule) {
-		//$schedule->command('ExamNotification:cron')->everyMinute();
-		$schedule->command('ExamNotification:cron')->weekly()->sundays()->at('07:00');
+		$schedule->command('ExamNotification:cron')->daily();
+		//$schedule->command('ExamNotification:cron')->weekly()->saturdays()->at('20:25');
 		//$schedule->command('inspire')->weekly()->saturdays()->at('22:58');
 		//$schedule->command('ExamNotification:cron')->dailyAt('22:44');
 	}
