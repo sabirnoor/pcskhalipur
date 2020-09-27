@@ -56,6 +56,7 @@ $action = Request::segment(1);
 					<a href="academics.html" data-toggle="dropdown" class="dropdown-toggle <?php if($action=='Syllabus'){echo 'active';} ?>">Academics <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="{{url('Syllabus')}}">Syllabus</a></li>
+						<li><a href="{{url('Schedule')}}">Schedule</a></li>
 						<li><a href="{{url('result')}}">Result</a></li>
 						<li><a href="/">Sample Paper</a></li>
 						<li><a href="/">Routine</a></li>

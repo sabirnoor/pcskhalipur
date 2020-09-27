@@ -29,6 +29,7 @@ Route::get('/franchise-enquiry', 'DashboardController@franchiseenquiry');
 Route::get('/downloads', 'DashboardController@downloads');
 Route::get('/mandatory-disclosure', 'DashboardController@mandatorydisclosure');
 Route::get('/Syllabus', 'DashboardController@Syllabus');
+Route::get('/Schedule', 'DashboardController@Schedule');
 Route::get('/result', 'DashboardController@result');
 Route::get('/contact', 'DashboardController@contact');
 Route::get('/photo-gallery', 'DashboardController@photogallery');
