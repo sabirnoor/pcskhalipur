@@ -624,7 +624,7 @@ class DashboardController extends Controller
 					
 					//set flag isFinished when quiz completed
 					$data = array(						
-						'isFinished' => 0,	//set 1	if required				
+						'isFinished' => 1,	//set 1	if required				
 						'updated_at' => date('Y-m-d H:i:s')
 					);
 					$insertid = Quizresult::where('result_id', $Session_Result_Id)->update($data);	
