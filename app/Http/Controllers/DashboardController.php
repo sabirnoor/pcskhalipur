@@ -716,7 +716,7 @@ class DashboardController extends Controller
 					$data = array(
 						'userid' => $Session_Student_Id,
 						'quizid' => $quizid,
-						'isFinished' => 0,
+						'isFinished' => 1,
 						'IsDelete' => 0,
 						'created_at' => date('Y-m-d H:i:s'),
 						'updated_at' => date('Y-m-d H:i:s')
@@ -727,6 +727,13 @@ class DashboardController extends Controller
 					Session::put('Session_Result_Id',$insertid); 
 					Session::save();
 					$Session_Result_Id = Session::get('Session_Result_Id'); 
+				}else{
+					//set flag isFinished when quiz completed
+					$data = array(						
+						'isFinished' => 1,	//set 1	if required				
+						'updated_at' => date('Y-m-d H:i:s')
+					);
+					$insertid = Quizresult::where('result_id', $Session_Result_Id)->update($data);
 				}					
 				
 				
