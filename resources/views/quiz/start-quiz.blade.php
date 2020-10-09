@@ -147,6 +147,14 @@
 		  
 		   <?php }?>
 		   
+		   <div class="col-md-12">
+			  <div class="md-form mb-0">
+			   <a href="<?=url('quiz-result')?>" title="Result">
+			   <button class="btn btn-primary">View Result</button>
+			   </a>                      
+			  </div>
+		  </div>
+			   
 		  
            <!--<div class="text-lrft text-md-left submitdiv">
               <a class="btn btn-primary submitfeedback" >Submit</a>
