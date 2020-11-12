@@ -51,6 +51,11 @@ Route::match(['get', 'post'],'/answersheet', array('uses' => 'DashboardControlle
 Route::match(['get', 'post'],'/ajaxsaveanswer', array('uses' => 'DashboardController@ajaxsaveanswer'));
 //Route::get('/logout', 'DashboardController@logout');
 
+
+//Result Section
+Route::match(['get', 'post'], '/examgroup/{id?}', array('uses' => 'DashboardController@examgroup'));
+Route::match(['get', 'post'], '/resultlistbygroup/{id?}', array('uses' => 'DashboardController@resultlistbygroup'));
+
 /*
 |--------------------------------------------------------------------------
 | API Routing

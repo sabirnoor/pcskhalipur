@@ -25,6 +25,7 @@ use App\Quizresult;
 use App\Quizanswer;
 use App\Quizinvitation;
 use App\Studentmaster;
+use App\Quizgroup;
 use Validator;
 class DashboardController extends Controller
 {
@@ -1229,6 +1230,96 @@ class DashboardController extends Controller
         //echo '<pre>';print_r($this->session);die;
         
     }
+	
+	public function examgroup(Request $request, $id = null) {
+
+		$QuizGroupList = Quizgroup::where(array('IsDelete' => 0))->get()->toArray();
+		//echo 1; exit;
+		return view('result/quiz-group-list', compact('QuizGroupList', 'id'));
+	}
+	
+	public function resultlistbygroup(Request $request, $id = null) {
+		//echo 1; exit;
+		$post = $request->all();
+		//abort(404);
+		//print_r($post); exit; 
+		$admission_no = '';
+		if(isset($post['admission_no'])){
+			$admission_no = $post['admission_no'];
+		}		
+				
+		$QuizGroupData = Quizgroup::where(array('IsDelete' => 0,'id' => $id))->first();
+		
+		//print_r($QuizGroupData); exit;
+		
+		if(isset($admission_no) && $admission_no<>''){
+			$StudentmasterData = Studentmaster::getStudentInfoByAdmissionNo($admission_no);
+		}else{
+			$StudentmasterData = null;
+		}
+		
+		//$collection = collect([1, 2, 3, 4]);
+
+		//echo $StudentmasterList->count();
+		
+		//print_r($StudentmasterData); exit;
+		
+		return view('result/resultlist-by-group', compact('StudentmasterData', 'id', 'admission_no','QuizGroupData'));
+	}
+	
+	public static function find_quiz_score($user_id, $quizgroup_id, $subject_id) {
+
+		$data = DB::table('quiz_result as qr')
+			->select('qr.result_id')
+			->join('quiz as q', 'qr.quizid', '=', 'q.id', 'LEFT')
+			->where('qr.userid', $user_id)
+			->where('q.quizgroup_id', $quizgroup_id)
+			->where('q.subject_id', $subject_id)
+			->get()->toArray();
+		//print_r($data);exit;
+
+		$user_score = 0;
+
+		if (isset($data[0]->result_id)) {
+
+			$result_id = $data[0]->result_id;
+			$result_data = Quizresult::get_result_data($result_id);
+
+			if ($result_data) {
+				foreach ($result_data as $value) {
+					$value = (array) $value;
+					if (isset($value['optionchosen'])) {
+						if ($value['optionchosen'] == $value['correct_answer']) {
+
+							$user_score += $value['score'];
+						}
+
+					}
+				}
+			}
+		}
+		return $user_score;
+	}
+	
+	public static function find_quiz_full_marks($user_id, $quizgroup_id, $subject_id) {
+		$full_marks = 0;
+		$data = DB::table('quiz_result as qr')
+			->select('qr.result_id','qr.quizid')
+			->join('quiz as q', 'qr.quizid', '=', 'q.id', 'LEFT')
+			->where('qr.userid', $user_id)
+			->where('q.quizgroup_id', $quizgroup_id)
+			->where('q.subject_id', $subject_id)
+			->first();
+			if(isset($data->quizid) && $data->quizid>0){
+				$quiz_details = Quiz::where(array('id'=>$data->quizid))->first();				
+			}
+			if(isset($quiz_details->quiz_max_marks) && $quiz_details->quiz_max_marks<>''){
+				$full_marks = $quiz_details->quiz_max_marks;				
+			}
+			
+		//print_r($full_marks);exit;
+		return $full_marks;
+	}
 	
 	
 		
