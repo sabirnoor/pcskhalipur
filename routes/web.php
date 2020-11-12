@@ -53,7 +53,7 @@ Route::match(['get', 'post'],'/ajaxsaveanswer', array('uses' => 'DashboardContro
 
 
 //Result Section
-Route::match(['get', 'post'], '/examgroup/{id?}', array('uses' => 'DashboardController@examgroup'));
+Route::match(['get', 'post'], '/allexam/{id?}', array('uses' => 'DashboardController@examgroup'));
 Route::match(['get', 'post'], '/resultlistbygroup/{id?}', array('uses' => 'DashboardController@resultlistbygroup'));
 
 /*

@@ -39,20 +39,19 @@ namespace App\Http\Controllers;
 
   <div class="container inr-page">
 
-    <div class="col-sm-6 con-area">
+    <div class="col-sm-12 con-area">
 
       <h1 class="heading">
 
         Exam: <?php echo $QuizGroupData->quiz_group_title;?>
 
-        <img src="{{asset('public/assets/img/hed-sep.jpg')}}" alt="">
 
       </h1>
 	  
 	  <form method="get" action="{{url('resultlistbygroup/'.$id)}}">
 	   <div class="form-group">
-				<label class="col-sm-4 control-label no-padding-right" for="admission_no"> Enter Admission No. </label>
-				<div class="col-sm-8">
+				<label class="col-sm-2 control-label no-padding-right" for="admission_no"> Enter Admission No. </label>
+				<div class="col-sm-10">
 					<input type="text" class="col-xs-10 col-sm-5" id="admission_no" name="admission_no" value="<?php if(isset($admission_no) && $admission_no<>''){ echo $admission_no;}?>">
 					<button type="submit">Submit</button>	
 				</div>
