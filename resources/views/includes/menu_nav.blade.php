@@ -58,6 +58,7 @@ $action = Request::segment(1);
 						<li><a href="{{url('Syllabus')}}">Syllabus</a></li>
 						<li><a href="{{url('Schedule')}}">Schedule</a></li>
 						<li><a href="{{url('result')}}">Result</a></li>
+						<!--<li><a href="{{url('allexam')}}">Report Card</a></li>-->
 						<li><a href="/">Sample Paper</a></li>
 						<li><a href="/">Routine</a></li>
 					 

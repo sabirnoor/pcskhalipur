@@ -1301,7 +1301,7 @@ class DashboardController extends Controller
 		return $user_score;
 	}
 	
-	public static function find_quiz_full_marks($user_id, $quizgroup_id, $subject_id) {
+	public static function find_quiz_full_marks_old($user_id, $quizgroup_id, $subject_id) {
 		$full_marks = 0;
 		$data = DB::table('quiz_result as qr')
 			->select('qr.result_id','qr.quizid')
@@ -1318,6 +1318,25 @@ class DashboardController extends Controller
 			}
 			
 		//print_r($full_marks);exit;
+		return $full_marks;
+	}
+	
+	public static function find_quiz_full_marks($quizgroup_id, $subject_id) {
+		$full_marks = 0;
+		$quiz_details = DB::table('quiz')
+			->select('id','quiz_max_marks')
+			->where('quizgroup_id', $quizgroup_id)
+			->where('subject_id', $subject_id)
+			->where('IsDelete', 0)
+			->first();
+			//if(isset($data->id) && $data->id>0){
+				//$quiz_details = Quiz::where(array('id'=>$data->id))->first();				
+			//}
+			if(isset($quiz_details->quiz_max_marks) && $quiz_details->quiz_max_marks<>''){
+				$full_marks = $quiz_details->quiz_max_marks;				
+			}
+			
+		//print_r($quiz_details);exit;
 		return $full_marks;
 	}
 	

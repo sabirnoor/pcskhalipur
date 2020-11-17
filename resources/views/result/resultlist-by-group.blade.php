@@ -41,12 +41,10 @@ namespace App\Http\Controllers;
 
     <div class="col-sm-12 con-area">
 
-      <h1 class="heading">
-
-        Exam: <?php echo $QuizGroupData->quiz_group_title;?>
-
-
-      </h1>
+      <h1 class="heading" style=""><u>PUBLIC CENTRAL SCHOOL</u> </h1>
+      <h2 class="" style="text-align:center"> <u>NH-322, GANDHI CHOWK, KHALISPUR, DIST-SAMASTIPUR(BIHAR)</u> </h2>
+      <h3 class="" style="text-align:center"> AFFILIATION NO-330396 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SCHOOL CODE-65379 </h3>
+       <h2 class="" style="text-align:center"><u> EXAM NAME: <?php echo $QuizGroupData->quiz_group_title;?> </u></h2>
 	  
 	  <form method="get" action="{{url('resultlistbygroup/'.$id)}}">
 	   <div class="form-group">
@@ -78,6 +76,12 @@ namespace App\Http\Controllers;
 		
 	  </table>
 	  
+	  <?php 
+							
+		$ssc_full_marks = DashboardController::find_quiz_full_marks($id,5);
+		$evs_full_marks = DashboardController::find_quiz_full_marks($id,26);
+							
+	?>
 	  <table id="groupresult-table" class="table table-striped table-bordered table-hover">
 
                         <thead>
@@ -87,8 +91,14 @@ namespace App\Http\Controllers;
                                 <th>Hindi</th>
                                 <th>Math</th>
                                 <th>Sc.</th>
-                                <th>S.SC.</th>         
-                                <th>EVS</th> 
+								
+								<?php if($ssc_full_marks>0){?>
+								<th>S.SC.</th>
+								<?php }else{?>
+								<th>EVS</th>
+								<?php }?>
+                                         
+                               
                                 
 
                             </tr>
@@ -101,13 +111,16 @@ namespace App\Http\Controllers;
 							<tr>
                            
                             <td><b>Full Marks</b> </td>
-                            <td><?php echo DashboardController::find_quiz_full_marks($StudentmasterData->id,$id,2);?></td>
-                            <td><?php echo DashboardController::find_quiz_full_marks($StudentmasterData->id,$id,1);?></td>
-							<td><?php echo DashboardController::find_quiz_full_marks($StudentmasterData->id,$id,3);?></td>
-							<td><?php echo DashboardController::find_quiz_full_marks($StudentmasterData->id,$id,4);?></td>
-							<td><?php echo DashboardController::find_quiz_full_marks($StudentmasterData->id,$id,5);?></td>
-							<td><?php echo DashboardController::find_quiz_full_marks($StudentmasterData->id,$id,26);?></td>
-                            
+                            <td><?php echo DashboardController::find_quiz_full_marks($id,2);?></td>
+                            <td><?php echo DashboardController::find_quiz_full_marks($id,1);?></td>
+							<td><?php echo DashboardController::find_quiz_full_marks($id,3);?></td>
+							<td><?php echo DashboardController::find_quiz_full_marks($id,4);?></td>
+							
+							<?php if($ssc_full_marks>0){?>
+							<td><?php echo $ssc_full_marks;?></td>
+							<?php }else{?>
+							<td><?php echo $evs_full_marks;?></td>
+                            <?php }?>
                             
 							</tr>							
 								
@@ -119,9 +132,14 @@ namespace App\Http\Controllers;
                             <td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,1);?></td>
 							<td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,3);?></td>
 							<td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,4);?></td>
+							
+							<?php 
+							
+							if($ssc_full_marks>0){?>
 							<td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,5);?></td>
+							<?php }else{?>
 							<td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,26);?></td>
-                            
+                             <?php }?>
                             
 							</tr>
 
