@@ -41,16 +41,28 @@ namespace App\Http\Controllers;
 
     <div class="col-sm-12 con-area">
 
-      <h1 class="heading" style=""><u>PUBLIC CENTRAL SCHOOL</u> </h1>
+      <!--<h1 class="heading" style=""><u>PUBLIC CENTRAL SCHOOL</u> </h1>
       <h2 class="" style="text-align:center"> <u>NH-322, GANDHI CHOWK, KHALISPUR, DIST-SAMASTIPUR(BIHAR)</u> </h2>
-      <h3 class="" style="text-align:center"> AFFILIATION NO-330396 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SCHOOL CODE-65379 </h3>
+      <h3 class="" style="text-align:center"> AFFILIATION NO-330396 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SCHOOL CODE-65379 </h3>-->
+	  
+	  <h1 class="heading" style=""><u>GYANDEEP PUBLIC SCHOOL</u> </h1>
+      <h2 class="" style="text-align:center"> <u>BALKRISHNAPUR, MARWA, P.O. & P.S. - VIDYAPATINAGAR, DIST-SAMASTIPUR(BIHAR)</u> </h2>
+	  
        <h2 class="" style="text-align:center"><u> EXAM NAME: <?php echo $QuizGroupData->quiz_group_title;?> </u></h2>
 	  
 	  <form method="get" action="{{url('resultlistbygroup/'.$id)}}">
 	   <div class="form-group">
 				<label class="col-sm-2 control-label no-padding-right" for="admission_no"> Enter Admission No. </label>
-				<div class="col-sm-10">
-					<input type="text" class="col-xs-10 col-sm-5" id="admission_no" name="admission_no" value="<?php if(isset($admission_no) && $admission_no<>''){ echo $admission_no;}?>">
+				<div class="col-sm-3">
+					<input type="text" class="col-xs-5 col-sm-5" id="admission_no" name="admission_no" value="<?php if(isset($admission_no) && $admission_no<>''){ echo $admission_no;}?>">
+					
+				</div>
+				<div class="col-sm-2">
+					OR					
+				</div>
+				<label class="col-sm-2 control-label no-padding-right" for="admission_no">  Enter Student ID </label>
+				<div class="col-sm-3">
+					<input type="text" class="col-xs-5 col-sm-5" id="studentid" name="studentid" value="<?php if(isset($studentid) && $studentid<>''){ echo $studentid;}?>">
 					<button type="submit">Submit</button>	
 				</div>
 			</div>
@@ -77,10 +89,30 @@ namespace App\Http\Controllers;
 	  </table>
 	  
 	  <?php 
-							
+		//Full Marks					
+		$eng_full_marks = DashboardController::find_quiz_full_marks($id,2);
+		$hindi_full_marks = DashboardController::find_quiz_full_marks($id,1);
+		$math_full_marks = DashboardController::find_quiz_full_marks($id,3);
+		$science_full_marks = DashboardController::find_quiz_full_marks($id,4);
+		
 		$ssc_full_marks = DashboardController::find_quiz_full_marks($id,5);
 		$evs_full_marks = DashboardController::find_quiz_full_marks($id,26);
-							
+		
+		// Marks Obtained
+		$eng_obtained_marks = DashboardController::find_quiz_score($StudentmasterData->id,$id,2);
+		$hindi_obtained_marks = DashboardController::find_quiz_score($StudentmasterData->id,$id,1);
+		$math_obtained_marks = DashboardController::find_quiz_score($StudentmasterData->id,$id,3);
+		$science_obtained_marks = DashboardController::find_quiz_score($StudentmasterData->id,$id,4);
+		
+		$ssc_obtained_marks = DashboardController::find_quiz_score($StudentmasterData->id,$id,5);
+		$evs_obtained_marks = DashboardController::find_quiz_score($StudentmasterData->id,$id,26);
+		
+		if($eng_obtained_marks>$eng_full_marks){$eng_obtained_marks = $eng_full_marks;}
+		if($hindi_obtained_marks>$hindi_full_marks){$hindi_obtained_marks = $hindi_full_marks;}
+		if($math_obtained_marks>$math_full_marks){$math_obtained_marks = $math_full_marks;}
+		if($science_obtained_marks>$science_full_marks){$science_obtained_marks = $science_full_marks;}
+		if($ssc_obtained_marks>$ssc_full_marks){$ssc_obtained_marks = $ssc_full_marks;}
+		if($evs_obtained_marks>$evs_full_marks){$evs_obtained_marks = $evs_full_marks;}
 	?>
 	  <table id="groupresult-table" class="table table-striped table-bordered table-hover">
 
@@ -90,20 +122,10 @@ namespace App\Http\Controllers;
                                 <th>Eng.</th>
                                 <th>Hindi</th>
                                 <th>Math</th>
-                                <th>Sc.</th>
-								
-								<?php if($ssc_full_marks>0){?>
-								<th>S.SC.</th>
-								<?php }else{?>
+                                <!--<th>Sc.</th>-->
 								<th>EVS</th>
-								<?php }?>
-                                         
-                               
-                                
-
                             </tr>
-
-                             </thead>
+                        </thead>
 
                         <tbody>
                            
@@ -111,38 +133,28 @@ namespace App\Http\Controllers;
 							<tr>
                            
                             <td><b>Full Marks</b> </td>
-                            <td><?php echo DashboardController::find_quiz_full_marks($id,2);?></td>
-                            <td><?php echo DashboardController::find_quiz_full_marks($id,1);?></td>
-							<td><?php echo DashboardController::find_quiz_full_marks($id,3);?></td>
-							<td><?php echo DashboardController::find_quiz_full_marks($id,4);?></td>
+                            <td><?php echo $eng_full_marks;?></td>
+                            <td><?php echo $hindi_full_marks;?></td>
+							<td><?php echo $math_full_marks;?></td>
+							<!--<td>< ?php echo $science_full_marks;?></td>-->							
 							
-							<?php if($ssc_full_marks>0){?>
-							<td><?php echo $ssc_full_marks;?></td>
-							<?php }else{?>
 							<td><?php echo $evs_full_marks;?></td>
-                            <?php }?>
+                            
                             
 							</tr>							
 								
-
                             <tr>
                            
                             <td><b>Marks Obtained</b> </td>
-                            <td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,2);?></td>
-                            <td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,1);?></td>
-							<td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,3);?></td>
-							<td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,4);?></td>
-							
-							<?php 
-							
-							if($ssc_full_marks>0){?>
-							<td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,5);?></td>
-							<?php }else{?>
-							<td><?php echo DashboardController::find_quiz_score($StudentmasterData->id,$id,26);?></td>
-                             <?php }?>
+                            <td><?php echo $eng_obtained_marks;?></td>
+                            <td><?php echo $hindi_obtained_marks;?></td>
+							<td><?php echo $math_obtained_marks;?></td>
+							<!--<td>< ?php echo $science_obtained_marks;?></td>-->
+														
+							<td><?php echo $evs_obtained_marks;?></td>
+                             
                             
 							</tr>
-
 								
                         </tbody>
 
@@ -152,8 +164,6 @@ namespace App\Http\Controllers;
 	  <?php }else{ if(isset($admission_no) && $admission_no<>''){ echo '<div class="text-danger">No records found.</div>';} }?>
 								
 		
-		
-			
 	  
 	  <div class="clearfix"></div>
 	  

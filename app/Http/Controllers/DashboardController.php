@@ -1246,13 +1246,20 @@ class DashboardController extends Controller
 		$admission_no = '';
 		if(isset($post['admission_no'])){
 			$admission_no = $post['admission_no'];
+		}
+		$studentid = '';
+		if(isset($post['studentid'])){
+			$studentid = $post['studentid'];
 		}		
 				
 		$QuizGroupData = Quizgroup::where(array('IsDelete' => 0,'id' => $id))->first();
 		
 		//print_r($QuizGroupData); exit;
 		
-		if(isset($admission_no) && $admission_no<>''){
+		
+		if(isset($studentid) && $studentid<>''){
+			$StudentmasterData = Studentmaster::where(array('id'=>$studentid))->first();
+		}elseif(isset($admission_no) && $admission_no<>''){
 			$StudentmasterData = Studentmaster::getStudentInfoByAdmissionNo($admission_no);
 		}else{
 			$StudentmasterData = null;
@@ -1264,7 +1271,7 @@ class DashboardController extends Controller
 		
 		//print_r($StudentmasterData); exit;
 		
-		return view('result/resultlist-by-group', compact('StudentmasterData', 'id', 'admission_no','QuizGroupData'));
+		return view('result/resultlist-by-group', compact('StudentmasterData', 'id', 'admission_no','studentid','QuizGroupData'));
 	}
 	
 	public static function find_quiz_score($user_id, $quizgroup_id, $subject_id) {
