@@ -41,12 +41,12 @@ namespace App\Http\Controllers;
 
     <div class="col-sm-12 con-area">
 
-      <!--<h1 class="heading" style=""><u>PUBLIC CENTRAL SCHOOL</u> </h1>
+      <h1 class="heading" style=""><u>PUBLIC CENTRAL SCHOOL</u> </h1>
       <h2 class="" style="text-align:center"> <u>NH-322, GANDHI CHOWK, KHALISPUR, DIST-SAMASTIPUR(BIHAR)</u> </h2>
-      <h3 class="" style="text-align:center"> AFFILIATION NO-330396 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SCHOOL CODE-65379 </h3>-->
+      <h3 class="" style="text-align:center"> AFFILIATION NO-330396 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SCHOOL CODE-65379 </h3>
 	  
-	  <h1 class="heading" style=""><u>GYANDEEP PUBLIC SCHOOL</u> </h1>
-      <h2 class="" style="text-align:center"> <u>BALKRISHNAPUR, MARWA, P.O. & P.S. - VIDYAPATINAGAR, DIST-SAMASTIPUR(BIHAR)</u> </h2>
+	  <!--<h1 class="heading" style=""><u>GYANDEEP PUBLIC SCHOOL</u> </h1>
+      <h2 class="" style="text-align:center"> <u>BALKRISHNAPUR, MARWA, P.O. & P.S. - VIDYAPATINAGAR, DIST-SAMASTIPUR(BIHAR)</u> </h2>-->
 	  
        <h2 class="" style="text-align:center"><u> EXAM NAME: <?php echo $QuizGroupData->quiz_group_title;?> </u></h2>
 	  
@@ -107,6 +107,7 @@ namespace App\Http\Controllers;
 		$ssc_obtained_marks = DashboardController::find_quiz_score($StudentmasterData->id,$id,5);
 		$evs_obtained_marks = DashboardController::find_quiz_score($StudentmasterData->id,$id,26);
 		
+		//Obtained Marks can not be greater than Full Marks
 		if($eng_obtained_marks>$eng_full_marks){$eng_obtained_marks = $eng_full_marks;}
 		if($hindi_obtained_marks>$hindi_full_marks){$hindi_obtained_marks = $hindi_full_marks;}
 		if($math_obtained_marks>$math_full_marks){$math_obtained_marks = $math_full_marks;}
@@ -122,8 +123,8 @@ namespace App\Http\Controllers;
                                 <th>Eng.</th>
                                 <th>Hindi</th>
                                 <th>Math</th>
-                                <!--<th>Sc.</th>-->
-								<th>EVS</th>
+                                <th>Sc.</th>
+								 <th>S.Sc.</th>
                             </tr>
                         </thead>
 
@@ -136,9 +137,9 @@ namespace App\Http\Controllers;
                             <td><?php echo $eng_full_marks;?></td>
                             <td><?php echo $hindi_full_marks;?></td>
 							<td><?php echo $math_full_marks;?></td>
-							<!--<td>< ?php echo $science_full_marks;?></td>-->							
+							<td><?php echo $science_full_marks;?></td>						
 							
-							<td><?php echo $evs_full_marks;?></td>
+							<td><?php echo $ssc_full_marks;?></td>	
                             
                             
 							</tr>							
@@ -149,9 +150,9 @@ namespace App\Http\Controllers;
                             <td><?php echo $eng_obtained_marks;?></td>
                             <td><?php echo $hindi_obtained_marks;?></td>
 							<td><?php echo $math_obtained_marks;?></td>
-							<!--<td>< ?php echo $science_obtained_marks;?></td>-->
+							<td><?php echo $science_obtained_marks;?></td>
 														
-							<td><?php echo $evs_obtained_marks;?></td>
+							<td><?php echo $ssc_obtained_marks;?></td>
                              
                             
 							</tr>
